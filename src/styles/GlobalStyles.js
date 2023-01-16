@@ -8,6 +8,7 @@ const light = {
   cards: '#FFFFFF',
   borders: '#E0E0E0',
   secondaryText: '#828282',
+  brandColor: '#2F80ED',
 };
 
 const GlobalStyle = createGlobalStyle`

@@ -1,29 +1,38 @@
 import React from 'react';
-import {StyledForm} from './styles';
+import {FormContainer} from './styles';
 import {AiOutlineGoogle, AiFillFacebook} from 'react-icons/ai';
+import {Link} from 'react-router-dom';
 import logo from '@icons/tweeter.svg';
-function Form({children, title, desc}) {
+function Form({children, title, desc, text, linkTxt, path, formRef}) {
   return (
-    <StyledForm>
+    <FormContainer>
       <section className="title">
         <img alt="logo" src={logo} />
         <h2>{title}</h2>
         {desc && <span>{desc}</span>}
       </section>
-      <section className="fields">{children}</section>
+      <form className="fields" ref={formRef}>
+        {children}
+      </form>
       <section className="social-media">
-        <span></span>
+        <span>Or continue with these social profile</span>
         <ul>
           <li>
-            <AiOutlineGoogle />
+            <button>
+              <AiOutlineGoogle />
+            </button>
           </li>
           <li>
-            <AiFillFacebook />
+            <button>
+              <AiFillFacebook />
+            </button>
           </li>
         </ul>
-        <span></span>
+        <span>
+          {text} <Link to={path}>{linkTxt}</Link>
+        </span>
       </section>
-    </StyledForm>
+    </FormContainer>
   );
 }
 
