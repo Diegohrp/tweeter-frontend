@@ -4,22 +4,29 @@ import {SignupContainer} from './styles';
 import {FaUserAlt} from 'react-icons/fa';
 import {MdEmail} from 'react-icons/md';
 import {RiLockPasswordFill} from 'react-icons/ri';
+import {createAccount} from '@services/user.service';
 
 function SignUp() {
   const form = React.useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('hola');
     const formData = new FormData(form.current);
     const data = {
       name: formData.get('name'),
-      lastname: formData.get('lastname'),
+      last_name: formData.get('lastname'),
       email: formData.get('email'),
       username: formData.get('username'),
       password: formData.get('password'),
     };
-    console.log(data);
+
+    //Send the data to the backend
+    try {
+      const response = await createAccount(data);
+      console.log(response);
+    } catch (err) {
+      console.log(err.response.data);
+    }
   };
   return (
     <SignupContainer>
