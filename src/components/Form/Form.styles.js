@@ -24,10 +24,11 @@ const FormContainer = styled.article`
       font-family: ${titleFont};
       font-size: 1.8rem;
       margin-top: 10px;
+      margin-bottom: 5px;
     }
     span {
       font-size: 1.2rem;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
   }
   .fields {

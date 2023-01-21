@@ -14,7 +14,7 @@ import {Modal} from '../../components/Modal/Modal';
 import {MdError} from 'react-icons/md';
 import {IoCheckmarkCircleSharp} from 'react-icons/io5';
 
-const errorMsg = {
+export const errorMsg = {
   name: 'Name must be at least 3 alphabetic characters and less than 30.',
   lastName:
     'Last name must be at least 3 alphabetic characters and less than 40.',

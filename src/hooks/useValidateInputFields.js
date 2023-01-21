@@ -7,6 +7,7 @@ const actionTypes = {
   checkUsername: 'CHECK_USERNAME',
   checkPassword: 'CHECK_PASSWORD',
   errorSubmitSignUp: 'ERROR_SUBMIT_SIGNUP',
+  errorSubmitLogin: 'ERROR_SUBMIT_LOGIN',
 };
 //Change the state of each field
 const ReducerObj = (state, payload) => ({
@@ -31,11 +32,15 @@ const ReducerObj = (state, payload) => ({
     password: payload,
   },
   [actionTypes.errorSubmitSignUp]: {
-    name: state.name.valid === true ? state.name : payload,
-    lastName: state.lastName.valid === true ? state.lastName : payload,
-    email: state.email.valid === true ? state.email : payload,
-    username: state.username.valid === true ? state.username : payload,
-    password: state.password.valid === true ? state.password : payload,
+    name: state.name?.valid === true ? state.name : payload,
+    lastName: state.lastName?.valid === true ? state.lastName : payload,
+    email: state.email?.valid === true ? state.email : payload,
+    username: state.username?.valid === true ? state.username : payload,
+    password: state.password?.valid === true ? state.password : payload,
+  },
+  [actionTypes.errorSubmitLogin]: {
+    email: state.email?.valid === true ? state.email : payload,
+    password: state.password?.valid === true ? state.password : payload,
   },
 });
 //Returns the change of the state in the corresponding field
@@ -111,6 +116,11 @@ function useValidateInputFields(initialState) {
       type: actionTypes.errorSubmitSignUp,
       payload: {value: '', valid: false},
     });
+  const onErrorSubmitLogin = () =>
+    dispatch({
+      type: actionTypes.errorSubmitLogin,
+      payload: {value: '', valid: false},
+    });
 
   return {
     state,
@@ -120,6 +130,7 @@ function useValidateInputFields(initialState) {
     onChangeUserName,
     onChangePassword,
     onErrorSubmitSignUp,
+    onErrorSubmitLogin,
   };
 }
 
