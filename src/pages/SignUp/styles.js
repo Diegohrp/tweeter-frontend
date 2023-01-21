@@ -7,4 +7,6 @@ const SignupContainer = styled.main`
   place-items: center;
 `;
 
-export {SignupContainer};
+const InputContainer = styled.div``;
+
+export {SignupContainer, InputContainer};

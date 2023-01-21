@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormContainer} from './styles';
+import {FormContainer} from './Form.styles';
 import {AiOutlineGoogle, AiFillFacebook} from 'react-icons/ai';
 import {Link} from 'react-router-dom';
 import logo from '@icons/tweeter.svg';

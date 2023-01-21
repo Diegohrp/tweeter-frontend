@@ -5,6 +5,9 @@ const endPoints = {
   users: {
     signup: `${API}/${VERSION}/users/signup`,
   },
+  auth: {
+    login: `${API}/${VERSION}/auth/login`,
+  },
 };
 
 export {endPoints};

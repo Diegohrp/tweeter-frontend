@@ -9,6 +9,8 @@ const light = {
   borders: '#E0E0E0',
   secondaryText: '#828282',
   brandColor: '#2F80ED',
+  errorColor: '#CB4335',
+  successColor: '#00913f',
 };
 
 const GlobalStyle = createGlobalStyle`
