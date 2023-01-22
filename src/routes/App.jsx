@@ -6,15 +6,18 @@ import {Routes} from 'react-router-dom';
 import {SignUp} from '../pages/SignUp';
 import {Login} from '../pages/Login';
 import {Home} from '../pages/Home';
+import {Layout} from '../containers/Layout/Layout';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/signup" element={<SignUp />} />
-        <Route exact path="/login" element={<Login />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/login" element={<Login />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }
