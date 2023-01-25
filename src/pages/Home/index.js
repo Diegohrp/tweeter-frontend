@@ -1,7 +1,7 @@
 import React from 'react';
-
+import {MakePost} from '../../components/MakePost/MakePost';
 function Home() {
-  return <h2>Home</h2>;
+  return <MakePost />;
 }
 
 export {Home};

@@ -8,6 +8,9 @@ const endPoints = {
   auth: {
     login: `${API}/${VERSION}/auth/login`,
   },
+  posts: {
+    post: `${API}/${VERSION}/posts`,
+  },
 };
 
 export {endPoints};

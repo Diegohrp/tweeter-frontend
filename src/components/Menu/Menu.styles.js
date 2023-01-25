@@ -8,6 +8,7 @@ const MenuContainer = styled.article`
   right: 20px;
   border-radius: 12px;
   background-color: ${(props) => props.theme.cards};
+  z-index: 1;
   ul {
     border-radius: 12px;
     display: flex;
