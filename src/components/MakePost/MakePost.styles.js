@@ -25,24 +25,11 @@ const MakePostContainer = styled.article`
   & > div:nth-child(2) {
     display: flex;
     align-items: flex-start;
-
     img {
       width: 40px;
       height: 40px;
       border-radius: 5px;
       margin-right: 12px;
-    }
-    textarea {
-      width: 90%;
-
-      padding-top: 10px;
-      padding-bottom: 5px;
-      overflow-y: hidden;
-      font-family: ${textFont};
-      font-size: 1.5rem;
-      outline: none;
-      border: none;
-      resize: none;
     }
   }
   picture {
@@ -106,4 +93,21 @@ const TweetButton = styled(GeneralButton)`
   }
 `;
 
-export {MakePostContainer, UploadImgButton, TweetButton};
+const PostTextContent = styled.section`
+  width: 90%;
+  min-height: 40px;
+  height: auto;
+  font-family: ${textFont};
+  font-size: 1.5rem;
+  position: relative;
+
+  label {
+    font-family: ${textFont};
+    font-size: 1.5rem;
+    position: absolute;
+    top: 10px;
+    color: ${(props) => props.theme.secondaryText};
+  }
+`;
+
+export {MakePostContainer, UploadImgButton, TweetButton, PostTextContent};

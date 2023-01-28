@@ -1,14 +1,18 @@
 import React from 'react';
+//styles
 import {
   MakePostContainer,
   UploadImgButton,
   TweetButton,
+  PostTextContent,
 } from './MakePost.styles';
+//icons
 import {MdOutlineInsertPhoto, MdPublic} from 'react-icons/md';
-import TextareaAutosize from 'react-textarea-autosize';
+//Components
 import {PrivacyMenu} from '../PrivacyMenu/PrivacyMenu';
-
 import profileImg from '../../assets/img/profile.jpg';
+import {PostTextInput} from '../PostTextInput/PostTextInput';
+
 import {sendData} from '../../services/post.service';
 
 const privacyIds = {
@@ -19,6 +23,7 @@ const privacyIds = {
 function MakePost() {
   //States for the tweet data
   const [postContent, setPostContent] = React.useState('');
+  console.log(postContent);
   const [imgData, setImgData] = React.useState(null);
   const [privacy, setPrivacy] = React.useState({
     Icon: MdPublic,
@@ -30,26 +35,25 @@ function MakePost() {
   //state for tweet button
   const [disabled, setDisabled] = React.useState(true);
 
-  //Disable/Eneable tweet button
-  React.useEffect(() => {
-    if ((postContent || imgData) && postContent.length <= 280) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [postContent, imgData]);
+  //Ref for the Editor component from draft-js in PostTextInput component
+  const editorRef = React.useRef(null);
+  const focusEditor = () => editorRef.current.focus();
 
-  const handleOnChange = (e) => {
-    setPostContent(e.target.value);
-  };
-
-  const toogleMenu = () => {
-    setMenu(!menu);
-  };
-
+  //To open-close the privacy optons of the post and choose one
+  const toogleMenu = () => setMenu(!menu);
   const choosePrivacy = (option) => {
     setPrivacy(option);
     toogleMenu();
+  };
+
+  const onChangePostContent = (textContent) => {
+    const fakePlaceholder = document.getElementById('post-input-placeholder');
+    if (textContent) {
+      fakePlaceholder.style.visibility = 'hidden';
+    } else {
+      fakePlaceholder.style.visibility = 'visible';
+    }
+    setPostContent(textContent);
   };
 
   const previewImg = (e) => {
@@ -85,6 +89,15 @@ function MakePost() {
     }
   };
 
+  //Disable/Eneable tweet button
+  React.useEffect(() => {
+    if ((postContent || imgData) && postContent.length <= 280) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [postContent, imgData]);
+
   return (
     <MakePostContainer>
       <div>
@@ -92,14 +105,18 @@ function MakePost() {
       </div>
       <div>
         <img src={profileImg} alt="user image" />
-        <TextareaAutosize
-          name="txt"
-          placeholder="What's happening?"
-          onChange={handleOnChange}
-          value={postContent}
-          maxLength="280"
-        />
+        <PostTextContent>
+          <label id="post-input-placeholder" onClick={focusEditor}>
+            What's happening?
+          </label>
+          <PostTextInput
+            focusEditor={focusEditor}
+            editorRef={editorRef}
+            onChangePostContent={onChangePostContent}
+          />
+        </PostTextContent>
       </div>
+
       <picture>
         <img id="preview-img" alt="Preview image" />
       </picture>
