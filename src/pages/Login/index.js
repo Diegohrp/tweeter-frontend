@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form} from '../../components/Form/Form';
+import {Form} from '../../containers/Form/Form';
 import {LoginContainer} from './styles';
 import {MdEmail} from 'react-icons/md';
 import {MdError} from 'react-icons/md';

@@ -8,9 +8,9 @@ const config = {
   },
 };
 
-async function sendData(body) {
-  const response = await axios.post(endPoints.posts.post, body, config);
-  return response;
+async function sendPostData(body) {
+  const {data} = await axios.post(endPoints.posts.post, body, config);
+  return data;
 }
 
-export {sendData};
+export {sendPostData};

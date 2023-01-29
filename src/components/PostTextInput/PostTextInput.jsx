@@ -11,11 +11,20 @@ const plugins = [hashtagPlugin];
 
 const text = '';
 
-function PostTextInput({focusEditor, editorRef, onChangePostContent}) {
+function PostTextInput({
+  focusEditor,
+  editorRef,
+  onChangePostContent,
+  postContent,
+}) {
   const [editor, setEditor] = React.useState(createEditorStateWithText(text));
 
   const onChange = (eState) => {
-    onChangePostContent(eState.getCurrentContent().getPlainText());
+    //To avoid changing the state of postContent when only focusing the Editor component
+    const currentPostContent = eState.getCurrentContent().getPlainText();
+    if (currentPostContent !== postContent) {
+      onChangePostContent(currentPostContent);
+    }
     setEditor(eState);
   };
 

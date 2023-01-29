@@ -9,11 +9,14 @@ import {
 //icons
 import {MdOutlineInsertPhoto, MdPublic} from 'react-icons/md';
 //Components
-import {PrivacyMenu} from '../PrivacyMenu/PrivacyMenu';
+import {PrivacyMenu} from '../../components/PrivacyMenu/PrivacyMenu';
 import profileImg from '../../assets/img/profile.jpg';
-import {PostTextInput} from '../PostTextInput/PostTextInput';
+import {PostTextInput} from '../../components/PostTextInput/PostTextInput';
 
-import {sendData} from '../../services/post.service';
+import {sendPostData} from '../../services/post.service';
+
+//plugin
+import {extractHashtagsWithIndices} from '@draft-js-plugins/hashtag';
 
 const privacyIds = {
   Everyone: 1,
@@ -23,8 +26,8 @@ const privacyIds = {
 function MakePost() {
   //States for the tweet data
   const [postContent, setPostContent] = React.useState('');
-  console.log(postContent);
   const [imgData, setImgData] = React.useState(null);
+  const [hashtags, setHashtags] = React.useState([]);
   const [privacy, setPrivacy] = React.useState({
     Icon: MdPublic,
     txt: 'Everyone',
@@ -48,12 +51,13 @@ function MakePost() {
 
   const onChangePostContent = (textContent) => {
     const fakePlaceholder = document.getElementById('post-input-placeholder');
-    if (textContent) {
-      fakePlaceholder.style.visibility = 'hidden';
-    } else {
-      fakePlaceholder.style.visibility = 'visible';
-    }
+    const tags = extractHashtagsWithIndices(textContent);
+
+    fakePlaceholder.style.visibility = textContent ? 'hidden' : 'visible';
+    const hashtagsArray = tags ? tags.map((obj) => obj.hashtag) : [];
+
     setPostContent(textContent);
+    setHashtags(hashtagsArray);
   };
 
   const previewImg = (e) => {
@@ -81,9 +85,13 @@ function MakePost() {
     formData.append('user_id', 1);
     formData.append('privacy_id', privacyIds[privacy.txt]);
     formData.append('image', imgData);
+    if (hashtags.length > 0) {
+      formData.append('hashtags', hashtags);
+      console.log(hashtags);
+    }
     try {
-      const res = await sendData(formData);
-      console.log(res);
+      const response = await sendPostData(formData);
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -113,6 +121,7 @@ function MakePost() {
             focusEditor={focusEditor}
             editorRef={editorRef}
             onChangePostContent={onChangePostContent}
+            postContent={postContent}
           />
         </PostTextContent>
       </div>
