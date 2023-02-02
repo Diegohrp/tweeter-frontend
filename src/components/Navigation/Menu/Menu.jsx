@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {IoPersonCircleSharp} from 'react-icons/io5';
 import {MdGroup, MdLogout} from 'react-icons/md';
 
-function Menu() {
+const Menu = () => {
   return (
     <MenuContainer>
       <ul>
@@ -27,6 +27,6 @@ function Menu() {
       </ul>
     </MenuContainer>
   );
-}
+};
 
 export {Menu};

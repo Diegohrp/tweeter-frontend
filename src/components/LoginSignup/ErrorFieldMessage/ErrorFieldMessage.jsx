@@ -1,8 +1,8 @@
 import React from 'react';
 import {ErrorLabel} from './ErrorFieldMessage.styles';
 
-function ErrorFieldMessage({message}) {
+const ErrorFieldMessage = ({message}) => {
   return <ErrorLabel>{message}</ErrorLabel>;
-}
+};
 
 export {ErrorFieldMessage};

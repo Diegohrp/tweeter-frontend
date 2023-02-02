@@ -13,6 +13,7 @@ const light = {
   brandColor: '#2F80ED',
   errorColor: '#CB4335',
   successColor: '#00913f',
+  placeholderColor: '#b1b1b1',
 };
 
 const GlobalStyle = createGlobalStyle`

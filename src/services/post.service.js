@@ -1,15 +1,9 @@
 import axios from 'axios';
 import {endPoints} from './api/endpoints';
-
-const config = {
-  headers: {
-    accept: '*/*',
-    'Content-Type': 'multipart/form-data',
-  },
-};
+import {headersMulti} from './headers';
 
 async function sendPostData(body) {
-  const {data} = await axios.post(endPoints.posts.post, body, config);
+  const {data} = await axios.post(endPoints.posts.post, body, headersMulti);
   return data;
 }
 

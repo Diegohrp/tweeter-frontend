@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {textFont, titleFont} from '../../styles/GlobalStyles';
+import {textFont, titleFont} from '@styles/GlobalStyles';
 
 const MenuContainer = styled.article`
   position: absolute;

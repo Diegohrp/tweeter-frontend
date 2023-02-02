@@ -1,7 +1,7 @@
 import React from 'react';
 import {MenuContainer} from './PrivacyMenu.styles';
 import {MdGroup, MdPublic} from 'react-icons/md';
-function PrivacyMenu({choosePrivacy}) {
+const PrivacyMenu = ({choosePrivacy}) => {
   return (
     <MenuContainer>
       <div>
@@ -28,5 +28,5 @@ function PrivacyMenu({choosePrivacy}) {
       </ul>
     </MenuContainer>
   );
-}
+};
 export {PrivacyMenu};

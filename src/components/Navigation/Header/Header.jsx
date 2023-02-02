@@ -1,12 +1,12 @@
 import React from 'react';
 import {StyledHeader, ProfileSection} from './Header.styles';
 import {MdArrowDropDown} from 'react-icons/md';
-import logoMobileImg from '../../assets/icons/tweeter-small.svg';
-import logoDesktopImg from '../../assets/icons/tweeter.svg';
-import profileImg from '../../assets/img/profile.jpg';
+import logoMobileImg from '@icons/tweeter-small.svg';
+import logoDesktopImg from '@icons/tweeter.svg';
+import profileImg from '@images/profile.jpg';
 import {NavLink} from 'react-router-dom';
 
-function Header({toggleMenu, routes, markLink}) {
+const Header = ({toggleMenu, routes, markLink}) => {
   return (
     <StyledHeader>
       <picture>
@@ -38,6 +38,6 @@ function Header({toggleMenu, routes, markLink}) {
       </ProfileSection>
     </StyledHeader>
   );
-}
+};
 
 export {Header};

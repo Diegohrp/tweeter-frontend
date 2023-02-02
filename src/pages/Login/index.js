@@ -1,18 +1,28 @@
 import React from 'react';
-import {Form} from '../../containers/Form/Form';
+import {useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookie';
+//Styles
 import {LoginContainer} from './styles';
+//Icons
 import {MdEmail} from 'react-icons/md';
 import {MdError} from 'react-icons/md';
 import {RiLockPasswordFill} from 'react-icons/ri';
-import {FormInput} from '../../components/FormInput/FormInput';
-import {useValidateInputFields} from '../../hooks/useValidateInputFields';
-import {errorMsg} from '../SignUp';
+//Containers
+import {Form} from '../../containers/Form/Form';
+//Components
+import {FormInput} from '../../components/LoginSignup/FormInput/FormInput';
+import {Loading} from '../../components/Request/Loading/Loading';
+import {Modal} from '../../components/common/Modal/Modal';
+import {RequestMessage} from '../../components/Request/RequestMessage/RequestMessage';
+//hooks
 import {useRequest} from '../../hooks/useRequest';
+import {useValidateInputFields} from '../../hooks/useValidateInputFields';
+//Services
 import {login} from '../../services/user.service';
-import {Loading} from '../../components/Loading/Loading';
-import {Modal} from '../../components/Modal/Modal';
-import {RequestMessage} from '../../components/RequestMessage/RequestMessage';
-import {useNavigate} from 'react-router-dom';
+//Text error messages
+import {errorMsg} from '../SignUp';
+
+import {headersJson} from '../../services/headers';
 
 const initialState = {
   email: {value: '', valid: null},
@@ -26,7 +36,12 @@ function Login() {
   //Form ref
   const form = React.useRef(null);
   //Manages state for the request
-  const {loading, error, response, closeErrorModal, makeRequest} = useRequest();
+  const {
+    state: {loading, response, error},
+    closeErrorModal,
+    sendDataRequest,
+  } = useRequest();
+
   //react-dom hook to redirect the user to the home if they're authenticated
   const navigate = useNavigate();
 
@@ -44,12 +59,16 @@ function Login() {
         password: formData.get('password'),
       };
 
-      await makeRequest(login, data);
+      const response = await sendDataRequest(login, data);
+      console.log(response);
     }
   };
 
   React.useEffect(() => {
     if (response) {
+      const {token} = response;
+      Cookies.set('token', token, {expires: 1800});
+      headersJson.headers.Authorization = Cookies.get('token');
       navigate('/');
     }
   }, [response]);

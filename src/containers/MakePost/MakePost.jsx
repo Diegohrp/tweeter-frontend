@@ -9,11 +9,11 @@ import {
 //icons
 import {MdOutlineInsertPhoto, MdPublic} from 'react-icons/md';
 //Components
-import {PrivacyMenu} from '../../components/PrivacyMenu/PrivacyMenu';
-import profileImg from '../../assets/img/profile.jpg';
-import {PostTextInput} from '../../components/PostTextInput/PostTextInput';
+import {PrivacyMenu} from '@components/Posts/PrivacyMenu/PrivacyMenu';
+import profileImg from '@images/profile.jpg';
+import {PostTextInput} from '@components/Posts/PostTextInput/PostTextInput';
 
-import {sendPostData} from '../../services/post.service';
+import {sendPostData} from '@services/post.service';
 
 //plugin
 import {extractHashtagsWithIndices} from '@draft-js-plugins/hashtag';
@@ -126,9 +126,9 @@ function MakePost() {
         </PostTextContent>
       </div>
 
-      <picture>
+      <figure>
         <img id="preview-img" alt="Preview image" />
-      </picture>
+      </figure>
       <div>
         <UploadImgButton>
           <input

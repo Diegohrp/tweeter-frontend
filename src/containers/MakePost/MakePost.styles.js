@@ -32,7 +32,7 @@ const MakePostContainer = styled.article`
       margin-right: 12px;
     }
   }
-  picture {
+  figure {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -106,7 +106,7 @@ const PostTextContent = styled.section`
     font-size: 1.5rem;
     position: absolute;
     top: 10px;
-    color: ${(props) => props.theme.secondaryText};
+    color: ${(props) => props.theme.placeholderColor};
   }
 `;
 

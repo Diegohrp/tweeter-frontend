@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {ModalBg} from './Modal.styles';
 
-function Modal({children, isOpen}) {
+const Modal = ({children, isOpen}) => {
   if (isOpen) {
     return ReactDOM.createPortal(
       <ModalBg>{children}</ModalBg>,
@@ -10,6 +10,6 @@ function Modal({children, isOpen}) {
     );
   }
   return null;
-}
+};
 
 export {Modal};

@@ -7,7 +7,6 @@ import {SignUp} from '../pages/SignUp';
 import {Login} from '../pages/Login';
 import {Home} from '../pages/Home';
 import {Layout} from '../containers/Layout/Layout';
-import {PostTextInput} from '../components/PostTextInput/PostTextInput';
 
 function App() {
   return (

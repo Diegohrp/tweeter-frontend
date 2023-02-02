@@ -2,7 +2,7 @@ import React from 'react';
 import {InputContainer, StyledInput} from './FormInput.styles';
 import {ErrorFieldMessage} from '../ErrorFieldMessage/ErrorFieldMessage';
 
-function FormInput({
+const FormInput = ({
   Icon,
   type,
   placeholder,
@@ -11,7 +11,7 @@ function FormInput({
   valid,
   onChange,
   errorMsg,
-}) {
+}) => {
   return (
     <InputContainer>
       <StyledInput isValid={valid}>
@@ -27,6 +27,6 @@ function FormInput({
       {valid != null && !valid && <ErrorFieldMessage message={errorMsg} />}
     </InputContainer>
   );
-}
+};
 
 export {FormInput};

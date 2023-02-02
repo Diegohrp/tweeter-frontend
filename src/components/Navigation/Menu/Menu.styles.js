@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {textFont} from '../../styles/GlobalStyles';
+import {textFont} from '../../../styles/GlobalStyles';
 
 const MenuContainer = styled.article`
   width: 222px;

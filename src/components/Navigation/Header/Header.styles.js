@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import {titleFont} from '../../styles/GlobalStyles';
+import {titleFont} from '../../../styles/GlobalStyles';
 const StyledHeader = styled.header`
-  position: relative;
+  position: sticky;
   background-color: ${(props) => props.theme.cards};
   width: 100%;
   height: 68.3px;
@@ -10,6 +10,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   padding: 0 20px;
 
+  z-index: 1;
   img {
     height: 31.5px;
   }

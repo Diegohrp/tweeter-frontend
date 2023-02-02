@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {titleFont} from '../../styles/GlobalStyles';
+import {titleFont} from '@styles/GlobalStyles';
 const StyledMessage = styled.article`
   width: min(80%, 300px);
   height: 180px;

@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {NavBar} from './MobileNavBar.styles';
 
-function MobileNavBar({routes, markLink}) {
+const MobileNavBar = ({routes, markLink}) => {
   return (
     <NavBar>
       {routes.map(({to, Icon}) => (
@@ -14,6 +14,6 @@ function MobileNavBar({routes, markLink}) {
       ))}
     </NavBar>
   );
-}
+};
 
 export {MobileNavBar};

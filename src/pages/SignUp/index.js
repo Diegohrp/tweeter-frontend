@@ -6,11 +6,11 @@ import {MdEmail} from 'react-icons/md';
 import {RiLockPasswordFill} from 'react-icons/ri';
 import {createAccount} from '@services/user.service';
 import {useValidateInputFields} from '../../hooks/useValidateInputFields';
-import {FormInput} from '../../components/FormInput/FormInput';
-import {RequestMessage} from '../../components/RequestMessage/RequestMessage';
+import {FormInput} from '../../components/LoginSignup/FormInput/FormInput';
+import {RequestMessage} from '../../components/Request/RequestMessage/RequestMessage';
 import {useRequest} from '../../hooks/useRequest';
-import {Loading} from '../../components/Loading/Loading';
-import {Modal} from '../../components/Modal/Modal';
+import {Loading} from '../../components/Request/Loading/Loading';
+import {Modal} from '../../components/common/Modal/Modal';
 import {MdError} from 'react-icons/md';
 import {IoCheckmarkCircleSharp} from 'react-icons/io5';
 
@@ -36,10 +36,8 @@ const initialState = {
 function SignUp() {
   const form = React.useRef(null);
   const {
-    loading,
-    error,
-    response,
-    makeRequest,
+    state: {loading, response, error},
+    sendDataRequest,
     closeErrorModal,
     closeSuccessModal,
   } = useRequest();
@@ -72,7 +70,7 @@ function SignUp() {
       };
       //Send the data to the backend
       //Uses user.service "createAccount"
-      await makeRequest(createAccount, data);
+      await sendDataRequest(createAccount, data);
     }
   };
   return (

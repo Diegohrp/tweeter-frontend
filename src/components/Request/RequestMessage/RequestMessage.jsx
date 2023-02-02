@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyledMessage} from './RequestMessage.styles';
 import {IoMdClose} from 'react-icons/io';
-function RequestMessage({message, closeModal, type, Icon}) {
+const RequestMessage = ({message, closeModal, type, Icon}) => {
   return (
     <StyledMessage type={type}>
       <button onClick={closeModal}>
@@ -11,6 +11,6 @@ function RequestMessage({message, closeModal, type, Icon}) {
       <p>{message}</p>
     </StyledMessage>
   );
-}
+};
 
 export {RequestMessage};

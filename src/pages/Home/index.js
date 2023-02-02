@@ -1,7 +1,14 @@
 import React from 'react';
 import {MakePost} from '../../containers/MakePost/MakePost';
+import {PostCard} from '../../components/Posts/PostCard/PostCard';
 function Home() {
-  return <MakePost />;
+  return (
+    <main style={{overflowY: 'scroll', height: '80vh'}}>
+      <MakePost />
+      <PostCard />
+      <PostCard />
+    </main>
+  );
 }
 
 export {Home};

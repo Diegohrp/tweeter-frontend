@@ -1,7 +1,7 @@
 import React from 'react';
-import {Header} from '../../components/Header/Header';
-import {Menu} from '../../components/Menu/Menu';
-import {MobileNavBar} from '../../components/MobileNavBar/MobileNavBar';
+import {Header} from '@components/Navigation/Header/Header';
+import {Menu} from '@components/Navigation/Menu/Menu';
+import {MobileNavBar} from '@components/Navigation/MobileNavBar/MobileNavBar';
 import {MdHome, MdExplore, MdBookmark} from 'react-icons/md';
 import {useTheme} from 'styled-components';
 
