@@ -2,19 +2,19 @@ import React from 'react';
 //styles
 import {
   MakePostContainer,
-  UploadImgButton,
   TweetButton,
   PostTextContent,
 } from './MakePost.styles';
 //icons
-import {MdOutlineInsertPhoto, MdPublic} from 'react-icons/md';
+import {MdPublic} from 'react-icons/md';
 //Components
 import {PrivacyMenu} from '@components/Posts/PrivacyMenu/PrivacyMenu';
 import profileImg from '@images/profile.jpg';
 import {PostTextInput} from '@components/Posts/PostTextInput/PostTextInput';
-
+import {ImgButton} from '@components/common/ImgButton/ImgButton';
+import {ImgPreview} from '@components/common/ImgPreview/ImgPreview';
+//services
 import {sendPostData} from '@services/post.service';
-
 //plugin
 import {extractHashtagsWithIndices} from '@draft-js-plugins/hashtag';
 
@@ -38,6 +38,9 @@ function MakePost() {
   //state for tweet button
   const [disabled, setDisabled] = React.useState(true);
 
+  //Ref for the ImgPreview component
+  const previewImg = React.useRef(null);
+
   //Ref for the Editor component from draft-js in PostTextInput component
   const editorRef = React.useRef(null);
   const focusEditor = () => editorRef.current.focus();
@@ -58,25 +61,6 @@ function MakePost() {
 
     setPostContent(textContent);
     setHashtags(hashtagsArray);
-  };
-
-  const previewImg = (e) => {
-    //Get an object from the input type file with the following structure
-    const file = e.target.files; //{0:File,length:value}
-    //Verify if a file has been chosen in the input
-    if (file.length > 0) {
-      //Select the HTML element img that will show the chosen img
-      const preview = document.getElementById('preview-img');
-
-      const fileReader = new FileReader();
-      //When an event of uploading is detected, assign the url to the img element
-      //e.target.result returns a temporal url with the img data
-      fileReader.onload = (e) => (preview.src = e.target.result);
-      //file[0] = 0:File, contains the img data
-      fileReader.readAsDataURL(file[0]);
-      preview.style.display = 'block';
-      setImgData(file[0]);
-    }
   };
 
   const makePost = async () => {
@@ -126,22 +110,10 @@ function MakePost() {
         </PostTextContent>
       </div>
 
-      <figure>
-        <img id="preview-img" alt="Preview image" />
-      </figure>
+      <ImgPreview setImgData={setImgData} imgRef={previewImg} />
+
       <div>
-        <UploadImgButton>
-          <input
-            type="file"
-            name="uploadImg"
-            id="uploadImg"
-            accept="image/*"
-            onChange={previewImg}
-          />
-          <label>
-            <MdOutlineInsertPhoto />
-          </label>
-        </UploadImgButton>
+        <ImgButton color="brand" setImgData={setImgData} imgRef={previewImg} />
         <button onClick={toogleMenu}>
           <privacy.Icon />
           {privacy.txt}

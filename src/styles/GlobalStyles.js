@@ -14,6 +14,7 @@ const light = {
   errorColor: '#CB4335',
   successColor: '#00913f',
   placeholderColor: '#b1b1b1',
+  comments: '#FAFAFA',
 };
 
 const GlobalStyle = createGlobalStyle`

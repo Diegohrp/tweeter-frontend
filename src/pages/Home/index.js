@@ -6,7 +6,6 @@ function Home() {
     <main style={{overflowY: 'scroll', height: '80vh'}}>
       <MakePost />
       <PostCard />
-      <PostCard />
     </main>
   );
 }

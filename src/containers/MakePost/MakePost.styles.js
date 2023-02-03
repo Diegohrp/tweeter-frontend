@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import {textFont, titleFont} from '../../styles/GlobalStyles';
-import {PhotoButton} from '../../styles/Generals/PhotoButton.styles';
-import {GeneralButton} from '../../styles/Generals/Button.styles';
+import {textFont, titleFont} from '@styles/GlobalStyles';
+import {GeneralButton} from '@styles/Generals/Button.styles';
 
 const MakePostContainer = styled.article`
   margin: 20px auto;
@@ -32,19 +31,7 @@ const MakePostContainer = styled.article`
       margin-right: 12px;
     }
   }
-  figure {
-    width: 100%;
-    display: flex;
-    justify-content: center;
 
-    #preview-img {
-      margin-top: 20px;
-      width: 85%;
-      border-radius: 8px;
-      object-fit: contain;
-      display: none;
-    }
-  }
   & > div:nth-child(4) {
     display: flex;
     align-items: center;
@@ -71,12 +58,6 @@ const MakePostContainer = styled.article`
   @media (min-width: 700px) {
     padding-left: 20px;
     padding-right: 20px;
-  }
-`;
-
-const UploadImgButton = styled(PhotoButton)`
-  label {
-    color: ${(props) => props.theme.brandColor};
   }
 `;
 
@@ -110,4 +91,4 @@ const PostTextContent = styled.section`
   }
 `;
 
-export {MakePostContainer, UploadImgButton, TweetButton, PostTextContent};
+export {MakePostContainer, TweetButton, PostTextContent};
