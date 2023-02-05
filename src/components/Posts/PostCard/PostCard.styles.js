@@ -2,13 +2,11 @@ import styled from 'styled-components';
 import {textFont} from '@styles/GlobalStyles';
 
 const Card = styled.article`
-  margin: 20px auto;
-  width: min(95%, 745px);
+  /* margin: 0px auto;
+  width: min(95%, 745px); */
+  width: 100%;
   min-height: 155px;
-  padding: 20px 20px 0 20px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-  background-color: ${(props) => props.theme.cards};
+  padding: 20px 20px 0px 20px;
   display: flex;
   flex-direction: column;
 `;
@@ -63,7 +61,7 @@ const Details = styled.div`
 const Buttons = styled.div`
   width: 100%;
   height: 50px;
-  margin: 9px 0;
+  margin-top: 9px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;

@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 
 const CommentContainer = styled.section`
-  margin: 20px auto;
-  width: min(95%, 745px);
-  min-height: 69px;
-  height: auto;
-  padding: 9.3px 20px 19px 20px;
+  width: 100%;
+  padding: 10px 20px 0 20px;
   display: flex;
   align-items: flex-start;
-  border-radius: 0 0 8px 8px;
-  background-color: ${(props) => props.theme.cards};
+`;
+
+const CommentContentContainer = styled.div`
+  width: 100%;
+  margin-left: 16px;
 `;
 
 const CommentPrompt = styled.div`
-  width: 90%;
-  margin-left: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.background};
   background-color: ${(props) => props.theme.comments};
@@ -28,4 +30,21 @@ const CommentPrompt = styled.div`
   }
 `;
 
-export {CommentContainer, CommentPrompt};
+const SendButton = styled.button`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0 12px 8px 0;
+  color: ${(props) => props.theme.primaryText};
+  &:disabled {
+    color: ${(props) => props.theme.placeholderColor};
+  }
+`;
+
+export {CommentContainer, CommentContentContainer, CommentPrompt, SendButton};

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button} from './InteractionButton.styles';
 
-const InteractionButton = ({Icon, text}) => {
+const InteractionButton = ({Icon, text, onClick}) => {
   return (
-    <Button>
+    <Button onClick={onClick}>
       <Icon />
       <span>{text}</span>
     </Button>

@@ -23,6 +23,7 @@ const ImgPreviewContainer = styled.figure`
     cursor: pointer;
   }
   img {
+    margin-bottom: 10px;
     margin-top: 20px;
     width: 80%;
     border-radius: 8px;

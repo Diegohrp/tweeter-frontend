@@ -8,15 +8,23 @@ const hashTagPlugin = createHashtagPlugin();
 const plugins = [hashTagPlugin];
 const text = '';
 
-function CommentTextInput({editorRef, onFocus}) {
+function CommentTextInput({editorRef, onFocus, onKeyDown, onChangeComment}) {
   const [editor, setEditor] = React.useState(createEditorStateWithText(text));
-  console.log(editor.getCurrentContent().getPlainText());
+
   const onChange = (editorState) => {
+    const curretContent = editor.getCurrentContent().getPlainText();
+    const nextContent = editorState.getCurrentContent().getPlainText();
+    if (curretContent != nextContent) {
+      onChangeComment(nextContent);
+    }
     setEditor(editorState);
   };
 
   return (
-    <div className={editorStyles.editor} onFocus={onFocus}>
+    <div
+      className={editorStyles.editor}
+      onFocus={onFocus}
+      onKeyDown={onKeyDown}>
       <Editor
         onChange={onChange}
         editorState={editor}

@@ -3,7 +3,7 @@ import {PhotoButton} from './ImgButton.styles';
 import {MdOutlineInsertPhoto} from 'react-icons/md';
 
 //color: brand or gray
-function ImgButton({color, imgRef, setImgData}) {
+function ImgButton({color, imgRef, setImgData, style}) {
   const previewImg = (e) => {
     //Get an object from the input type file with the following structure
     const file = e.target.files; //{0:File,length:value}
@@ -28,7 +28,7 @@ function ImgButton({color, imgRef, setImgData}) {
     }
   };
   return (
-    <PhotoButton>
+    <PhotoButton style={style}>
       <input
         type="file"
         name="uploadImg"

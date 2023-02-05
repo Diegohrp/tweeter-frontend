@@ -98,9 +98,9 @@ function MakePost() {
       <div>
         <img src={profileImg} alt="user image" />
         <PostTextContent>
-          <label id="post-input-placeholder" onClick={focusEditor}>
+          <span id="post-input-placeholder" onClick={focusEditor}>
             What's happening?
-          </label>
+          </span>
           <PostTextInput
             focusEditor={focusEditor}
             editorRef={editorRef}

@@ -82,7 +82,8 @@ const PostTextContent = styled.section`
   font-size: 1.5rem;
   position: relative;
 
-  label {
+  span#post-input-placeholder {
+    font-weight: 500;
     font-family: ${textFont};
     font-size: 1.5rem;
     position: absolute;
