@@ -59,18 +59,18 @@ const ProfileSection = styled.section`
     margin-left: 11px;
     cursor: pointer;
   }
-  img {
-    width: 36px;
-    height: 36px;
-    border-radius: 5px;
+  figure {
     display: none;
   }
   button.mobile {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     display: flex;
     img {
-      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      margin-right: 12px;
     }
   }
   button.desktop {
@@ -95,7 +95,7 @@ const ProfileSection = styled.section`
       font-size: 2rem;
       color: ${(props) => props.theme.titlesColor};
     }
-    img {
+    figure {
       display: block;
       margin-left: 11px;
     }

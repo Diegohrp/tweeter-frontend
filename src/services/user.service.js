@@ -21,7 +21,6 @@ async function login(body) {
 }
 
 async function getProfilePhoto() {
-  console.log(headersJson);
   const {data} = await axios.get(endPoints.users.photo, headersJson);
   return data;
 }

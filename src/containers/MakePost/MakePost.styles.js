@@ -24,10 +24,7 @@ const MakePostContainer = styled.article`
   & > div:nth-child(2) {
     display: flex;
     align-items: flex-start;
-    img {
-      width: 40px;
-      height: 40px;
-      border-radius: 5px;
+    figure {
       margin-right: 12px;
     }
   }

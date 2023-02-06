@@ -4,8 +4,9 @@ const SmallProfile = styled.figure`
   width: 40px;
   height: 40px;
   display: flex;
+  align-items: center;
 
-  img {
+  a img {
     width: 40px;
     height: 40px;
     border-radius: 5px;

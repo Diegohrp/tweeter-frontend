@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 //styles
 import {
   MakePostContainer,
@@ -13,6 +14,7 @@ import profileImg from '@images/profile.jpg';
 import {PostTextInput} from '@components/Posts/PostTextInput/PostTextInput';
 import {ImgButton} from '@components/common/ImgButton/ImgButton';
 import {ImgPreview} from '@components/common/ImgPreview/ImgPreview';
+import {SmallProfileImg} from '@components/common/SmallProfileImg/SmallProfileImg';
 //services
 import {sendPostData} from '@services/post.service';
 //plugin
@@ -24,6 +26,9 @@ const privacyIds = {
 };
 
 function MakePost() {
+  //user photo image
+  const userPhoto = useSelector((state) => state.user.photo);
+
   //States for the tweet data
   const [postContent, setPostContent] = React.useState('');
   const [imgData, setImgData] = React.useState(null);
@@ -96,7 +101,7 @@ function MakePost() {
         <h2>Tweet something</h2>
       </div>
       <div>
-        <img src={profileImg} alt="user image" />
+        <SmallProfileImg image={userPhoto} />
         <PostTextContent>
           <span id="post-input-placeholder" onClick={focusEditor}>
             What's happening?
