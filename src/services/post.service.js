@@ -1,10 +1,15 @@
 import axios from 'axios';
 import {endPoints} from './api/endpoints';
-import {headersMulti} from './headers';
+import {headersJson, headersMulti} from './headers';
 
 async function sendPostData(body) {
   const {data} = await axios.post(endPoints.posts.post, body, headersMulti);
   return data;
 }
 
-export {sendPostData};
+async function getHomePosts() {
+  const {data} = await axios.get(endPoints.posts.getHome, headersJson);
+  return data;
+}
+
+export {sendPostData, getHomePosts};

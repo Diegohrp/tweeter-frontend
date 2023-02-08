@@ -7,7 +7,6 @@ import {StyledHeader, ProfileSection} from './Header.styles';
 import {MdArrowDropDown} from 'react-icons/md';
 import logoMobileImg from '@icons/tweeter-small.svg';
 import logoDesktopImg from '@icons/tweeter.svg';
-
 //components
 import {SmallProfileImg} from '@components/common/SmallProfileImg/SmallProfileImg';
 //services
@@ -16,6 +15,8 @@ import {getProfilePhoto} from '@services/user.service';
 import {useRequest} from '../../../hooks/useRequest';
 //acction creator
 import {setUserImgAction} from '../../../actions/creators/user.creators';
+//Images
+import profileTemporal from '@images/profile-default.svg';
 
 //This component gets the img URL for the SmallImg component
 //and adds the data to the global state
@@ -23,7 +24,7 @@ import {setUserImgAction} from '../../../actions/creators/user.creators';
 const Header = ({toggleMenu, routes, markLink}) => {
   //custom hook to make a request
   const {
-    state: {response},
+    state: {response, loading},
     getDataReques,
   } = useRequest();
   //Global state from redux and dispatcher
@@ -59,9 +60,10 @@ const Header = ({toggleMenu, routes, markLink}) => {
 
       <ProfileSection>
         <button className="mobile" onClick={toggleMenu}>
-          {response && <img src={response.photo} alt="profile image" />}
+          <img src={response?.photo || profileTemporal} alt="profile image" />
         </button>
-        {response && <SmallProfileImg image={response.photo} />}
+
+        <SmallProfileImg image={response?.photo} />
         <p>Xanthe Neal</p>
         <button className="desktop" onClick={toggleMenu}>
           <MdArrowDropDown />

@@ -1,4 +1,6 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
+import {logoutUserAction} from '../actions/creators/user.creators';
 
 const actionTypes = {
   onLoading: 'LOADING',
@@ -49,6 +51,8 @@ const initialState = {
 };
 
 function useRequest() {
+  const reduxDispatch = useDispatch();
+
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const closeErrorModal = () => {
@@ -61,7 +65,12 @@ function useRequest() {
   const parseError = (err) => {
     let errorMsg;
     if (err?.response?.data) {
+      //client error
       errorMsg = `${err?.response?.data?.error}: ${err?.response?.data?.message}`;
+      if (err.response.request.status === 401) {
+        //Unauthorized, the user doesn't have a valid token
+        reduxDispatch(logoutUserAction());
+      }
     } else {
       errorMsg = err.message;
     }

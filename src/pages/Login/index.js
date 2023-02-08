@@ -1,6 +1,7 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import Cookies from 'js-cookie';
+import {useDispatch} from 'react-redux';
 //Styles
 import {LoginContainer} from './styles';
 //Icons
@@ -23,6 +24,7 @@ import {login} from '../../services/user.service';
 import {errorMsg} from '../SignUp';
 
 import {headersJson} from '../../services/headers';
+import {authUserAction} from '../../actions/creators/user.creators';
 
 const initialState = {
   email: {value: '', valid: null},
@@ -30,6 +32,8 @@ const initialState = {
 };
 
 function Login() {
+  //Redux dispatch to update the golabl state user:isAuth
+  const dispatch = useDispatch();
   //Cutoms hook to validate input fields
   const {state, onChangeEmail, onChangePassword, onErrorSubmitLogin} =
     useValidateInputFields(initialState);
@@ -58,9 +62,9 @@ function Login() {
         email: formData.get('email'),
         password: formData.get('password'),
       };
-
-      const response = await sendDataRequest(login, data);
-      console.log(response);
+      //send data to the backend
+      //the response is stored in the state "response" from useRequest custom hook
+      await sendDataRequest(login, data);
     }
   };
 
@@ -68,7 +72,11 @@ function Login() {
     if (response) {
       const {token} = response;
       Cookies.set('token', token, {expires: 1800});
-      headersJson.headers.Authorization = Cookies.get('token');
+      //update the bearer token in the headers object to send the token in each request
+      headersJson.headers.Authorization = `Bearer ${Cookies.get('token')}`;
+      //A token was received, so change the global state (from redux) isAuth to true
+      dispatch(authUserAction(true));
+      //Redirect user to home
       navigate('/');
     }
   }, [response]);

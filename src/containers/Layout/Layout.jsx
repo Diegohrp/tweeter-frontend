@@ -1,4 +1,6 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
+
 import {Header} from '@components/Navigation/Header/Header';
 import {Menu} from '@components/Navigation/Menu/Menu';
 import {MobileNavBar} from '@components/Navigation/MobileNavBar/MobileNavBar';
@@ -12,6 +14,9 @@ const routes = [
 ];
 
 function Layout({children}) {
+  //Global state from redux to render the component if the user is auth
+  const userAuth = useSelector((state) => state.user.isAuth);
+
   const [menu, setMenu] = React.useState(false);
   const theme = useTheme();
 
@@ -24,14 +29,18 @@ function Layout({children}) {
     setMenu(!menu);
   };
 
-  return (
-    <>
-      <Header toggleMenu={ToggleMenu} routes={routes} markLink={markLink} />
-      {menu && <Menu />}
-      {children}
-      <MobileNavBar routes={routes} markLink={markLink} />
-    </>
-  );
+  if (userAuth) {
+    return (
+      <>
+        <Header toggleMenu={ToggleMenu} routes={routes} markLink={markLink} />
+        {menu && <Menu />}
+        {children}
+        <MobileNavBar routes={routes} markLink={markLink} />
+      </>
+    );
+  }
+
+  return children;
 }
 
 export {Layout};

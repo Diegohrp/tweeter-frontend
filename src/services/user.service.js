@@ -1,14 +1,6 @@
 import axios from 'axios';
 import {endPoints} from './api/endpoints';
-import Cookies from 'js-cookie';
-const headersJson = {
-  headers: {
-    accept: '*/*',
-    'Content-Type': 'application/json',
-    'api-key': process.env.API_KEY,
-    Authorization: `Bearer ${Cookies.get('token')}`,
-  },
-};
+import {headersJson} from './headers';
 
 async function createAccount(body) {
   const response = await axios.post(endPoints.users.signup, body, headersJson);
