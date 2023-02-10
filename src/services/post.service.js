@@ -7,8 +7,11 @@ async function sendPostData(body) {
   return data;
 }
 
-async function getHomePosts() {
-  const {data} = await axios.get(endPoints.posts.getHome, headersJson);
+async function getHomePosts(limit, offset) {
+  const {data} = await axios.get(
+    endPoints.posts.getHome(limit, offset),
+    headersJson
+  );
   return data;
 }
 

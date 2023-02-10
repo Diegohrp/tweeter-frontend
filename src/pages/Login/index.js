@@ -91,7 +91,9 @@ function Login() {
           message={error}
         />
       </Modal>
-      {loading && !error && !response && <Loading />}
+      {loading && !error && !response && (
+        <Loading style={{position: 'absolute'}} />
+      )}
 
       <Form
         title="Login"

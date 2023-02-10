@@ -11,7 +11,8 @@ const endPoints = {
   },
   posts: {
     post: `${API}/${VERSION}/posts`,
-    getHome: `${API}/${VERSION}/posts/home`,
+    getHome: (limit, offset) =>
+      `${API}/${VERSION}/posts/home?limit=${limit}&offset=${offset}`,
   },
 };
 

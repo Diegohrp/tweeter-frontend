@@ -24,7 +24,7 @@ import profileTemporal from '@images/profile-default.svg';
 const Header = ({toggleMenu, routes, markLink}) => {
   //custom hook to make a request
   const {
-    state: {response, loading},
+    state: {response},
     getDataReques,
   } = useRequest();
   //Global state from redux and dispatcher

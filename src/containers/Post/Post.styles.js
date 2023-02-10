@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const PostContainer = styled.section`
-  margin: 0px auto;
-  width: min(95%, 745px);
+  width: 100%;
+  min-height: 155px;
+  margin-bottom: 24px;
   padding-bottom: 25px;
   border-radius: 8px;
   background-color: ${(props) => props.theme.cards};

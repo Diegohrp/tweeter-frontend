@@ -29,12 +29,12 @@ const Author = styled.div`
   }
 `;
 const TextContent = styled.p`
-  margin-top: 22px;
-  margin-bottom: 19px;
+  margin-top: 15px;
   font-size: 1.6rem;
   color: ${(props) => props.theme.primaryText};
 `;
 const ImgContent = styled.figure`
+  margin-top: 15px;
   img {
     width: 100%;
     border-radius: 8px;

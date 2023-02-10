@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 const SmallProfile = styled.figure`
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
 
   a img {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 5px;
     margin-right: 12px;
   }

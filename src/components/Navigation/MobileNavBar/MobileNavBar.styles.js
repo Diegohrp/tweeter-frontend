@@ -7,7 +7,7 @@ const NavBar = styled.nav`
   justify-content: space-evenly;
   align-items: center;
   font-size: 3rem;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   background-color: ${(props) => props.theme.cards};
   a {

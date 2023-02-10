@@ -14,7 +14,17 @@ import {FiHeart, FiBookmark} from 'react-icons/fi';
 import {SmallProfileImg} from '../../common/SmallProfileImg/SmallProfileImg';
 import {InteractionButton} from '../InteractionButton/InteractionButton';
 
-const PostCard = ({showMakeComment}) => {
+const PostCard = ({
+  showMakeComment,
+  author,
+  userPhoto,
+  date,
+  textContent,
+  imgContent,
+  numLikes,
+  numComments,
+  numRetweets,
+}) => {
   const buttons = [
     {icon: MdOutlineModeComment, txt: 'Comment', action: showMakeComment},
     {icon: MdOutlineCached, txt: 'Retweet'},
@@ -25,26 +35,22 @@ const PostCard = ({showMakeComment}) => {
   return (
     <Card>
       <Author>
-        <SmallProfileImg />
+        <SmallProfileImg image={userPhoto} />
         <div>
-          <h2>Mikaela Stanley</h2>
-          <span>24 August at 20:43</span>
+          <h2>{author}</h2>
+          <span>{date}</span>
         </div>
       </Author>
-      <TextContent>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-        cupiditate perferendis consectetur!
-      </TextContent>
-      <ImgContent>
-        <img
-          src="https://res.cloudinary.com/dpimpzyh4/image/upload/v1674950833/tweeter/posts/1674950830130_bob.jfif.jpg"
-          alt="post image"
-        />
-      </ImgContent>
+      <TextContent>{textContent}</TextContent>
+      {imgContent && (
+        <ImgContent>
+          <img src={imgContent} alt="post image" />
+        </ImgContent>
+      )}
       <Details>
-        <button>449 Comments</button>
-        <button>59 Retweets</button>
-        <button>23 Saved</button>
+        <button>{`${numLikes} Likes`} </button>
+        <button>{`${numComments} Comments`}</button>
+        <button>{`${numRetweets} Retweets`}</button>
       </Details>
       <Buttons>
         {buttons.map((button) => (

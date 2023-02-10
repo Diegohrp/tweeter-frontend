@@ -16,7 +16,7 @@ import {ImgPreview} from '@components/common/ImgPreview/ImgPreview';
 
 function MakeComment() {
   //State that stores the content of the comment input
-  const [commentContent, setCommentContent] = React.useState(null);
+  const [commentContent, setCommentContent] = React.useState('');
   //State for the image
   const [imgData, setImgData] = React.useState(null);
   const imgRef = React.useRef(null);
