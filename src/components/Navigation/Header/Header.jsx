@@ -10,11 +10,11 @@ import logoDesktopImg from '@icons/tweeter.svg';
 //components
 import {SmallProfileImg} from '@components/common/SmallProfileImg/SmallProfileImg';
 //services
-import {getProfilePhoto} from '@services/user.service';
+import {getBasicUserInfo} from '@services/user.service';
 //custom hooks
 import {useRequest} from '../../../hooks/useRequest';
 //acction creator
-import {setUserImgAction} from '../../../actions/creators/user.creators';
+import {setUserBasicInfoAction} from '../../../actions/creators/user.creators';
 //Images
 import profileTemporal from '@images/profile-default.svg';
 
@@ -33,9 +33,16 @@ const Header = ({toggleMenu, routes, markLink}) => {
 
   React.useEffect(() => {
     if (!response && !userPhoto) {
-      getDataReques(getProfilePhoto);
+      getDataReques(getBasicUserInfo);
     } else {
-      dispatch(setUserImgAction(response.photo));
+      dispatch(
+        setUserBasicInfoAction({
+          userId: response.id,
+          name: response.name,
+          lastName: response.last_name,
+          photo: response.photo,
+        })
+      );
     }
   }, [response]);
 
@@ -64,7 +71,7 @@ const Header = ({toggleMenu, routes, markLink}) => {
         </button>
 
         <SmallProfileImg image={response?.photo} />
-        <p>Xanthe Neal</p>
+        <p>{`${response?.name} ${response?.last_name}`}</p>
         <button className="desktop" onClick={toggleMenu}>
           <MdArrowDropDown />
         </button>

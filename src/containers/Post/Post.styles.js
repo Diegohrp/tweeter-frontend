@@ -10,4 +10,22 @@ const PostContainer = styled.section`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
 `;
 
-export {PostContainer};
+const Retweeted = styled.div`
+  margin-bottom: 10px;
+  margin-left: 5px;
+  a {
+    height: 20px;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: ${(props) => props.theme.secondaryText};
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 1.8rem;
+      margin-right: 2px;
+    }
+  }
+`;
+
+export {PostContainer, Retweeted};

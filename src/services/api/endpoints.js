@@ -4,7 +4,7 @@ const VERSION = process.env.API_VERSION;
 const endPoints = {
   users: {
     signup: `${API}/${VERSION}/users/signup`,
-    photo: `${API}/${VERSION}/users/photo`,
+    basicInfo: `${API}/${VERSION}/users/basic-info`,
   },
   auth: {
     login: `${API}/${VERSION}/auth/login`,

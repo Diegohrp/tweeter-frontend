@@ -1,7 +1,7 @@
 import {userActionTypes} from '../types/user.types';
 
-export const setUserImgAction = (payload) => ({
-  type: userActionTypes.getuserImg,
+export const setUserBasicInfoAction = (payload) => ({
+  type: userActionTypes.setBasicUserInfo,
   payload,
 });
 

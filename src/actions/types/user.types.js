@@ -1,5 +1,5 @@
 const userActionTypes = {
-  getuserImg: 'GET_USER_IMAGE',
+  setBasicUserInfo: 'SET_USER_INFO',
   authUser: 'AUTH_USER',
   logoutUser: 'LOGOUT',
 };

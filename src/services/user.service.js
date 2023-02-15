@@ -12,9 +12,9 @@ async function login(body) {
   return response;
 }
 
-async function getProfilePhoto() {
-  const {data} = await axios.get(endPoints.users.photo, headersJson);
+async function getBasicUserInfo() {
+  const {data} = await axios.get(endPoints.users.basicInfo, headersJson);
   return data;
 }
 
-export {createAccount, login, getProfilePhoto};
+export {createAccount, login, getBasicUserInfo};
