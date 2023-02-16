@@ -12,7 +12,18 @@ const Button = styled.button`
   outline: none;
   border-radius: 8px;
   cursor: pointer;
-  color: ${(props) => props.theme.primaryText};
+  color: ${(props) => {
+    switch (props.interaction) {
+      case 'Retweeted':
+        return props.theme.retweetedColor;
+      case 'Liked':
+        return props.theme.likedColor;
+      case 'Saved':
+        return props.theme.savedColor;
+      default:
+        return props.theme.secondaryText;
+    }
+  }};
   &:hover {
     background-color: ${(props) => props.theme.background};
   }
@@ -21,6 +32,11 @@ const Button = styled.button`
   }
   span {
     display: none;
+  }
+  &:disabled {
+    cursor: auto;
+    background-color: transparent;
+    color: ${(props) => props.theme.placeholderColor};
   }
   @media (min-width: 700px) {
     span {

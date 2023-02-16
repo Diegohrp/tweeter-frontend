@@ -8,39 +8,61 @@ import {CommentsList} from '../CommentsList/CommentsList';
 import {useObserver} from '../../hooks/useObserver';
 import {Link} from 'react-router-dom';
 //icons
-import {MdOutlineCached} from 'react-icons/md';
-import Cookies from 'js-cookie';
+import {MdOutlineModeComment, MdOutlineCached} from 'react-icons/md';
+import {FiHeart, FiBookmark} from 'react-icons/fi';
 import {useSelector} from 'react-redux';
-/*
-  props:{
-    author,
-    userPhoto,
-    date,
-    textContent,
-    imgContent,
-    numLikes,
-    numComments,
-    numRetweets,
-  }
- */
+
 function Post(props) {
+  //Global state fron redux to get the userId
+  const userId = useSelector((state) => state.user.userId);
+
   //State to show or hide the makeComment component
   const [showComment, setShowComment] = React.useState(false);
+
+  //State to change the word and color in buttons
+  const [retweeted, setRetweeted] = React.useState(
+    props.whoRetweetedId === userId
+  );
+  const [liked, setLiked] = React.useState(props.liked);
+  const [saved, setSaved] = React.useState(props.saved);
+
+  //Make requests with the DB to add/remove a like, bookmark or retweet
+  const toggleLike = () => {
+    setLiked(!liked);
+  };
+
+  const toggleRetweet = () => {
+    setRetweeted(!retweeted);
+  };
+
+  const toggleBookMark = () => {
+    setSaved(!saved);
+  };
+
+  //interaction buttons
+  const buttons = [
+    {icon: MdOutlineModeComment, txt: 'Comment', action: setShowComment},
+    {
+      icon: MdOutlineCached,
+      txt: retweeted ? 'Retweeted' : 'Retweet',
+      action: toggleRetweet,
+      disabled: props.authorId === userId,
+    },
+    {icon: FiHeart, txt: liked ? 'Liked' : 'Like', action: toggleLike},
+    {icon: FiBookmark, txt: saved ? 'Saved' : 'Save', action: toggleBookMark},
+  ];
 
   //custom hook to use intersection observer and implement a lazy loading
   const {element, show} = useObserver();
 
-  //Global state fron redux to get the userId
-  const userId = useSelector((state) => state.user.userId);
-
   return (
     <>
-      {props.who_retweeted && (
+      {props.whoRetweeted && (
         <Retweeted>
           <Link to="">
             <MdOutlineCached />
             {`${
-              props.who_retweeted_id === userId ? 'You' : props.who_retweeted
+              props.whoRetweetedId === userId ? 'You' : props.whoRetweeted
             } retweeted`}
           </Link>
         </Retweeted>
@@ -48,10 +70,7 @@ function Post(props) {
       <PostContainer ref={element}>
         {show && (
           <>
-            <PostCard
-              showMakeComment={() => setShowComment(!showComment)}
-              {...props}
-            />
+            <PostCard buttons={buttons} {...props} />
             {showComment && <MakeComment />}
             {showComment && <CommentsList />}
           </>

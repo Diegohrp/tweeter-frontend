@@ -8,14 +8,10 @@ import {
   Buttons,
 } from './PostCard.styles';
 
-import {MdOutlineModeComment, MdOutlineCached} from 'react-icons/md';
-import {FiHeart, FiBookmark} from 'react-icons/fi';
-
 import {SmallProfileImg} from '../../common/SmallProfileImg/SmallProfileImg';
 import {InteractionButton} from '../InteractionButton/InteractionButton';
 
 const PostCard = ({
-  showMakeComment,
   author,
   userPhoto,
   date,
@@ -24,14 +20,8 @@ const PostCard = ({
   numLikes,
   numComments,
   numRetweets,
+  buttons,
 }) => {
-  const buttons = [
-    {icon: MdOutlineModeComment, txt: 'Comment', action: showMakeComment},
-    {icon: MdOutlineCached, txt: 'Retweet'},
-    {icon: FiHeart, txt: 'Like'},
-    {icon: FiBookmark, txt: 'Save'},
-  ];
-
   return (
     <Card>
       <Author>
@@ -59,6 +49,7 @@ const PostCard = ({
             Icon={button.icon}
             text={button.txt}
             onClick={button?.action}
+            disabled={button?.disabled}
           />
         ))}
       </Buttons>

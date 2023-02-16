@@ -32,6 +32,7 @@ function PostsList({requestFn}) {
           homePosts.map((post) => (
             <Post
               key={`home-post-${post.id}${post?.who_retweeted_id}`}
+              authorId={post.user_id}
               author={`${post.name} ${post.last_name}`}
               userPhoto={post.photo}
               date={post.created_at}
@@ -40,8 +41,10 @@ function PostsList({requestFn}) {
               numLikes={post.num_likes}
               numComments={post.num_comments}
               numRetweets={post.num_retweets}
-              who_retweeted={post.who_retweeted}
-              who_retweeted_id={post.who_retweeted_id}
+              whoRetweeted={post.who_retweeted}
+              whoRetweetedId={post.who_retweeted_id}
+              liked={post.liked}
+              saved={post.saved}
             />
           ))}
       </PostsListContainer>
