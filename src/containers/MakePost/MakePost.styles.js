@@ -12,7 +12,7 @@ const MakePostContainer = styled.article`
   background-color: ${(props) => props.theme.cards};
   position: relative;
 
-  & > div:first-child {
+  & > div.title {
     margin-bottom: 8.6px;
     border-bottom: 1px solid ${(props) => props.theme.borders};
     h2 {
@@ -21,7 +21,7 @@ const MakePostContainer = styled.article`
       margin-bottom: 7.4px;
     }
   }
-  & > div:nth-child(2) {
+  & > div.post-content {
     display: flex;
     align-items: flex-start;
     figure {
@@ -29,7 +29,7 @@ const MakePostContainer = styled.article`
     }
   }
 
-  & > div:nth-child(4) {
+  & > div.buttons {
     display: flex;
     align-items: center;
     margin-top: 34px;

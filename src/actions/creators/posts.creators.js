@@ -4,3 +4,8 @@ export const setHomePostsAction = (payload) => ({
   type: postActionTypes.sethomePosts,
   payload,
 });
+
+export const SetUserPostAction = (payload) => ({
+  type: postActionTypes.setUserPost,
+  payload,
+});

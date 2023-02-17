@@ -9,15 +9,14 @@ import hashtagStyles from './hashtagStyles.module.css';
 const hashtagPlugin = createHashtagPlugin({theme: hashtagStyles});
 const plugins = [hashtagPlugin];
 
-const text = '';
-
 function PostTextInput({
   focusEditor,
   editorRef,
   onChangePostContent,
   postContent,
+  cleanValue,
 }) {
-  const [editor, setEditor] = React.useState(createEditorStateWithText(text));
+  const [editor, setEditor] = React.useState(createEditorStateWithText(''));
 
   const onChange = (eState) => {
     //To avoid changing the state of postContent when only focusing the Editor component
@@ -27,6 +26,10 @@ function PostTextInput({
     }
     setEditor(eState);
   };
+
+  React.useEffect(() => {
+    setEditor(createEditorStateWithText(''));
+  }, [cleanValue]);
 
   return (
     <div className={editorStyles.editor} onFocus={focusEditor}>

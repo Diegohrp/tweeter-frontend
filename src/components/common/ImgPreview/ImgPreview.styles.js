@@ -22,11 +22,13 @@ const ImgPreviewContainer = styled.figure`
     border-radius: 50%;
     cursor: pointer;
   }
+
   img {
+    width: 80%;
     margin-bottom: 10px;
     margin-top: 20px;
-    width: 80%;
     border-radius: 8px;
+    max-height: 80%;
     object-fit: contain;
     display: none;
   }

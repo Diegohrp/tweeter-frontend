@@ -3,22 +3,16 @@ import {ImgPreviewContainer} from './ImgPreview.styles';
 import {MdClose} from 'react-icons/md';
 
 const ImgPreview = ({setImgData, imgRef}) => {
-  const [button, setButton] = React.useState(false);
-
   const removeImg = () => {
     const preview = imgRef.current;
     preview.style.display = 'none';
     preview.src = '';
     setImgData(null);
-    setButton(false);
   };
 
-  const OnLoad = (e) => {
-    setButton(true);
-  };
   return (
-    <ImgPreviewContainer onLoad={OnLoad}>
-      {button && (
+    <ImgPreviewContainer>
+      {imgRef.current?.style.display === 'block' && (
         <button onClick={removeImg}>
           <MdClose />
         </button>

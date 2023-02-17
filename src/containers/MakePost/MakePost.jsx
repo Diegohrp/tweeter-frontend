@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 //styles
 import {
   MakePostContainer,
@@ -10,24 +10,37 @@ import {
 import {MdPublic} from 'react-icons/md';
 //Components
 import {PrivacyMenu} from '@components/Posts/PrivacyMenu/PrivacyMenu';
-import profileImg from '@images/profile.jpg';
 import {PostTextInput} from '@components/Posts/PostTextInput/PostTextInput';
 import {ImgButton} from '@components/common/ImgButton/ImgButton';
 import {ImgPreview} from '@components/common/ImgPreview/ImgPreview';
 import {SmallProfileImg} from '@components/common/SmallProfileImg/SmallProfileImg';
+import {Loading} from '@components/Request/Loading/Loading';
 //services
 import {sendPostData} from '@services/post.service';
 //plugin
 import {extractHashtagsWithIndices} from '@draft-js-plugins/hashtag';
+import {SetUserPostAction} from '../../actions/creators/posts.creators';
+import {useRequest} from '../../hooks/useRequest';
 
 const privacyIds = {
   Everyone: 1,
   'People you follow': 2,
 };
 
-function MakePost() {
-  //user photo image
+function MakePost({offset, setOffset}) {
+  //user photo image from redux
   const userPhoto = useSelector((state) => state.user.photo);
+  //userId from redux
+  const userId = useSelector((state) => state.user.userId);
+  const userName = useSelector((state) => state.user.name);
+  const userLastName = useSelector((state) => state.user.lastName);
+
+  const {
+    state: {loading, response, error},
+    sendDataRequest,
+  } = useRequest();
+
+  const dispatch = useDispatch();
 
   //States for the tweet data
   const [postContent, setPostContent] = React.useState('');
@@ -45,10 +58,31 @@ function MakePost() {
 
   //Ref for the ImgPreview component
   const previewImg = React.useRef(null);
+  //Ref for the placeholder
+  const fakePlaceholder = React.useRef(null);
 
   //Ref for the Editor component from draft-js in PostTextInput component
   const editorRef = React.useRef(null);
   const focusEditor = () => editorRef.current.focus();
+
+  const [cleanTxt, setCleanTxt] = React.useState(false);
+  const cleanTweet = () => {
+    //Show placeholder
+    fakePlaceholder.current.style.visibility = 'visible';
+    //Clean textContent from editor
+    setPostContent('');
+    setCleanTxt(!cleanTxt);
+    //Clean img data and hide previewImg
+    previewImg.current.style.display = 'none';
+    previewImg.current.src = '';
+    setImgData(null);
+    //Hashtags and privacy to default values
+    setHashtags([]);
+    setPrivacy({
+      Icon: MdPublic,
+      txt: 'Everyone',
+    });
+  };
 
   //To open-close the privacy optons of the post and choose one
   const toogleMenu = () => setMenu(!menu);
@@ -58,10 +92,10 @@ function MakePost() {
   };
 
   const onChangePostContent = (textContent) => {
-    const fakePlaceholder = document.getElementById('post-input-placeholder');
     const tags = extractHashtagsWithIndices(textContent);
-
-    fakePlaceholder.style.visibility = textContent ? 'hidden' : 'visible';
+    fakePlaceholder.current.style.visibility = textContent
+      ? 'hidden'
+      : 'visible';
     const hashtagsArray = tags ? tags.map((obj) => obj.hashtag) : [];
 
     setPostContent(textContent);
@@ -71,19 +105,13 @@ function MakePost() {
   const makePost = async () => {
     const formData = new FormData();
     formData.append('content', postContent);
-    formData.append('user_id', 1);
+    formData.append('user_id', userId);
     formData.append('privacy_id', privacyIds[privacy.txt]);
     formData.append('image', imgData);
     if (hashtags.length > 0) {
       formData.append('hashtags', hashtags);
-      console.log(hashtags);
     }
-    try {
-      const response = await sendPostData(formData);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
+    await sendDataRequest(sendPostData, formData);
   };
 
   //Disable/Eneable tweet button
@@ -95,41 +123,75 @@ function MakePost() {
     }
   }, [postContent, imgData]);
 
+  //Add the current post to the state in redux
+  React.useEffect(() => {
+    if (response) {
+      dispatch(
+        SetUserPostAction({
+          id: response.insertId,
+          name: userName,
+          last_name: userLastName,
+          photo: userPhoto,
+          created_at: 'Just now',
+          content: response.content,
+          num_likes: 0,
+          num_comments: 0,
+          num_retweets: 0,
+          privacy_id: response.privacy_id,
+          image: response?.image,
+        })
+      );
+      cleanTweet();
+      setOffset(offset + 1);
+    }
+  }, [response]);
+
   return (
-    <MakePostContainer>
-      <div>
-        <h2>Tweet something</h2>
-      </div>
-      <div>
-        <SmallProfileImg image={userPhoto} />
-        <PostTextContent>
-          <span id="post-input-placeholder" onClick={focusEditor}>
-            What's happening?
-          </span>
-          <PostTextInput
-            focusEditor={focusEditor}
-            editorRef={editorRef}
-            onChangePostContent={onChangePostContent}
-            postContent={postContent}
+    <>
+      <MakePostContainer>
+        {loading && <Loading />}
+        <div className="title">
+          <h2>Tweet something</h2>
+        </div>
+        <div className="post-content">
+          <SmallProfileImg image={userPhoto} />
+          <PostTextContent>
+            <span
+              id="post-input-placeholder"
+              ref={fakePlaceholder}
+              onClick={focusEditor}>
+              What's happening?
+            </span>
+            <PostTextInput
+              focusEditor={focusEditor}
+              editorRef={editorRef}
+              onChangePostContent={onChangePostContent}
+              postContent={postContent}
+              cleanValue={cleanTxt}
+            />
+          </PostTextContent>
+        </div>
+
+        <ImgPreview setImgData={setImgData} imgRef={previewImg} />
+
+        <div className="buttons">
+          <ImgButton
+            color="brand"
+            setImgData={setImgData}
+            imgRef={previewImg}
           />
-        </PostTextContent>
-      </div>
+          <button onClick={toogleMenu}>
+            <privacy.Icon />
+            {privacy.txt}
+          </button>
+        </div>
+        {menu && <PrivacyMenu choosePrivacy={choosePrivacy} />}
 
-      <ImgPreview setImgData={setImgData} imgRef={previewImg} />
-
-      <div>
-        <ImgButton color="brand" setImgData={setImgData} imgRef={previewImg} />
-        <button onClick={toogleMenu}>
-          <privacy.Icon />
-          {privacy.txt}
-        </button>
-      </div>
-      {menu && <PrivacyMenu choosePrivacy={choosePrivacy} />}
-
-      <TweetButton id="tweet-button" onClick={makePost} disabled={disabled}>
-        Tweet
-      </TweetButton>
-    </MakePostContainer>
+        <TweetButton id="tweet-button" onClick={makePost} disabled={disabled}>
+          Tweet
+        </TweetButton>
+      </MakePostContainer>
+    </>
   );
 }
 

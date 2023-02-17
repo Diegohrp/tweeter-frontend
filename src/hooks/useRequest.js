@@ -81,7 +81,7 @@ function useRequest() {
     try {
       dispatch({type: actionTypes.onLoading});
       const res = await request(data);
-      dispatch({type: actionTypes.onSuccess, payload: res.data});
+      dispatch({type: actionTypes.onSuccess, payload: res});
     } catch (err) {
       dispatch({type: actionTypes.onError, payload: parseError(err)});
     }

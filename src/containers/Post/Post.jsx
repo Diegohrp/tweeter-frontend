@@ -39,9 +39,13 @@ function Post(props) {
     setSaved(!saved);
   };
 
+  const toogleCommentSection = () => {
+    setShowComment(!showComment);
+  };
+
   //interaction buttons
   const buttons = [
-    {icon: MdOutlineModeComment, txt: 'Comment', action: setShowComment},
+    {icon: MdOutlineModeComment, txt: 'Comment', action: toogleCommentSection},
     {
       icon: MdOutlineCached,
       txt: retweeted ? 'Retweeted' : 'Retweet',
