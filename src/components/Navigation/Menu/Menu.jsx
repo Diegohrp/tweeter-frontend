@@ -6,13 +6,15 @@ import {MdGroup, MdLogout} from 'react-icons/md';
 import Cookies from 'js-cookie';
 import {useDispatch} from 'react-redux';
 import {logoutUserAction} from '../../../actions/creators/user.creators';
+import {cleanPostsAction} from '../../../actions/creators/posts.creators';
 
 function Menu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const logout = () => {
+  const logout = async () => {
     Cookies.remove('token');
+    dispatch(cleanPostsAction());
     dispatch(logoutUserAction()); //state.user.isAuth = false
     navigate('/login');
   };

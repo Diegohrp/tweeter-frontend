@@ -5,6 +5,7 @@ import {getHomePosts} from '../../services/post.service';
 import {setHomePostsAction} from '../../actions/creators/posts.creators';
 import {Loading} from '../../components/Request/Loading/Loading';
 import {useScrollRequest} from '../../hooks/useScrollRequest';
+import {Main} from './styles';
 
 function Home() {
   const {limit, offset, setOffset, loading, onScroll} = useScrollRequest(
@@ -13,15 +14,15 @@ function Home() {
   );
 
   return (
-    <main style={{overflowY: 'scroll', height: '80vh'}} onScroll={onScroll}>
+    <Main onScroll={onScroll}>
       <MakePost offset={offset} setOffset={setOffset} />
       <PostsList requestFn={() => getHomePosts(limit, 0)} />
       {loading && (
-        <div style={{position: 'relative', margin: '0 auto', width: '40px'}}>
+        <div className="loader">
           <Loading />
         </div>
       )}
-    </main>
+    </Main>
   );
 }
 

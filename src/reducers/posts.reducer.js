@@ -10,6 +10,8 @@ const postsReducer = (state = initialState, action) => {
       return {...state, home: [...state.home, ...action.payload]};
     case postActionTypes.setUserPost:
       return {...state, home: [action.payload, ...state.home]};
+    case postActionTypes.cleanPosts:
+      return initialState;
     default:
       return state;
   }

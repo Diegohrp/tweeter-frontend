@@ -9,3 +9,7 @@ export const SetUserPostAction = (payload) => ({
   type: postActionTypes.setUserPost,
   payload,
 });
+
+export const cleanPostsAction = () => ({
+  type: postActionTypes.cleanPosts,
+});

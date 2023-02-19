@@ -25,14 +25,14 @@ function Layout({children}) {
     color: isActive ? theme.brandColor : theme.secondaryText,
   });
 
-  const ToggleMenu = () => {
+  const toggleMenu = () => {
     setMenu(!menu);
   };
 
   if (userAuth) {
     return (
       <>
-        <Header toggleMenu={ToggleMenu} routes={routes} markLink={markLink} />
+        <Header toggleMenu={toggleMenu} routes={routes} markLink={markLink} />
         {menu && <Menu />}
         {children}
         <MobileNavBar routes={routes} markLink={markLink} />
