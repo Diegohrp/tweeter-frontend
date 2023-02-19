@@ -29,7 +29,6 @@ function useScrollRequest(getDataService, setDataAction) {
     }
   };
   React.useEffect(() => {
-    console.log(offset);
     if (response) {
       dispatch(setDataAction(response));
       setEndScroll(false);

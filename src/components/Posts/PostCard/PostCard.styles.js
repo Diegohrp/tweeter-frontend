@@ -32,6 +32,11 @@ const TextContent = styled.p`
   margin-top: 15px;
   font-size: 1.6rem;
   color: ${(props) => props.theme.primaryText};
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.brandColor};
+    margin-right: 5px;
+  }
 `;
 const ImgContent = styled.figure`
   margin-top: 15px;

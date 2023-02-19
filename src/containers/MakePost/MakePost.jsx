@@ -132,7 +132,7 @@ function MakePost({offset, setOffset}) {
           name: userName,
           last_name: userLastName,
           photo: userPhoto,
-          created_at: 'Just now',
+          created_at: null,
           content: response.content,
           num_likes: 0,
           num_comments: 0,

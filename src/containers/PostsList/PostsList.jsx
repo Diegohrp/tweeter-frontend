@@ -5,6 +5,7 @@ import {PostsListContainer} from './PostsList.styles';
 import {Post} from '../Post/Post';
 import {setHomePostsAction} from '../../actions/creators/posts.creators';
 import {Loading} from '@components/Request/Loading/Loading';
+import {formatPostDate} from '../../utils/formatDate';
 
 function PostsList({requestFn}) {
   //Global state from redux and dispatcher
@@ -35,7 +36,7 @@ function PostsList({requestFn}) {
               authorId={post.user_id}
               author={`${post.name} ${post.last_name}`}
               userPhoto={post.photo}
-              date={post.created_at}
+              date={formatPostDate(post.created_at)}
               textContent={post.content}
               imgContent={post.image}
               numLikes={post.num_likes}

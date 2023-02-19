@@ -25,6 +25,7 @@ function App() {
           />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/hashtags/:hash" element={<h2>HASHTAGS</h2>} />
         </Routes>
       </Layout>
     </BrowserRouter>
