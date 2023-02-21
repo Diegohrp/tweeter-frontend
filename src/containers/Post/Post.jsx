@@ -11,6 +11,8 @@ import {Link} from 'react-router-dom';
 import {MdOutlineModeComment, MdOutlineCached} from 'react-icons/md';
 import {FiHeart, FiBookmark} from 'react-icons/fi';
 import {useSelector} from 'react-redux';
+//services
+import {likePost, removeLikePost} from '../../services/post.service';
 
 function Post(props) {
   //Global state fron redux to get the userId
@@ -26,9 +28,23 @@ function Post(props) {
   const [liked, setLiked] = React.useState(props.liked);
   const [saved, setSaved] = React.useState(props.saved);
 
+  //state to increment numLikes, numComments and numRetweets
+  const [numLikes, setNumLikes] = React.useState(props.numLikes);
+
   //Make requests with the DB to add/remove a like, bookmark or retweet
-  const toggleLike = () => {
-    setLiked(!liked);
+  const toggleLike = async () => {
+    try {
+      if (liked) {
+        await removeLikePost(props.postId);
+        setNumLikes(numLikes - 1);
+      } else {
+        await likePost({postId: props.postId});
+        setNumLikes(numLikes + 1);
+      }
+      setLiked(!liked);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   const toggleRetweet = () => {
@@ -74,7 +90,7 @@ function Post(props) {
       <PostContainer ref={element}>
         {show && (
           <>
-            <PostCard buttons={buttons} {...props} />
+            <PostCard buttons={buttons} {...props} numLikes={numLikes} />
             {showComment && <MakeComment />}
             {showComment && <CommentsList />}
           </>

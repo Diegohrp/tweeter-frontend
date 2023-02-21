@@ -33,6 +33,7 @@ function PostsList({requestFn}) {
           homePosts.map((post) => (
             <Post
               key={`home-post-${post.id}${post?.who_retweeted_id}`}
+              postId={post.id}
               authorId={post.user_id}
               author={`${post.name} ${post.last_name}`}
               userPhoto={post.photo}

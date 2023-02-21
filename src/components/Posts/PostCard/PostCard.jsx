@@ -24,6 +24,7 @@ const PostCard = ({
   numRetweets,
   buttons,
 }) => {
+  //Formats textt when there is a hashtag
   const printHashtags = (lineText) => {
     const hashtagRegex = /^#(\w+)*$/;
     const lineTextArray = lineText

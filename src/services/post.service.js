@@ -15,4 +15,17 @@ async function getHomePosts(limit, offset) {
   return data;
 }
 
-export {sendPostData, getHomePosts};
+async function likePost(body) {
+  const {data} = await axios.post(endPoints.posts.likePost, body, headersJson);
+  return data;
+}
+
+async function removeLikePost(postId) {
+  const {data} = await axios.delete(
+    `${endPoints.posts.likePost}/${postId}`,
+    headersJson
+  );
+  return data;
+}
+
+export {sendPostData, getHomePosts, likePost, removeLikePost};
