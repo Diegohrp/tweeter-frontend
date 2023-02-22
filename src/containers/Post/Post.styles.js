@@ -16,7 +16,7 @@ const Retweeted = styled.div`
   a {
     height: 20px;
     font-size: 1.4rem;
-    font-weight: 300;
+    font-weight: 500;
     color: ${(props) => props.theme.secondaryText};
     text-decoration: none;
     display: flex;

@@ -14,6 +14,8 @@ const endPoints = {
     getHome: (limit, offset) =>
       `${API}/${VERSION}/posts/home?limit=${limit}&offset=${offset}`,
     likePost: `${API}/${VERSION}/posts/like-post`,
+    retweet: `${API}/${VERSION}/posts/retweets`,
+    bookmarks: `${API}/${VERSION}/posts/bookmarks`,
   },
 };
 

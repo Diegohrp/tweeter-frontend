@@ -32,7 +32,7 @@ function PostsList({requestFn}) {
         {!loading &&
           homePosts.map((post) => (
             <Post
-              key={`home-post-${post.id}${post?.who_retweeted_id}`}
+              key={`home-post-${post.id}${post?.who_retweeted_id}${post.user_id}`}
               postId={post.id}
               authorId={post.user_id}
               author={`${post.name} ${post.last_name}`}

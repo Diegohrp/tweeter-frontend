@@ -12,7 +12,12 @@ import {MdOutlineModeComment, MdOutlineCached} from 'react-icons/md';
 import {FiHeart, FiBookmark} from 'react-icons/fi';
 import {useSelector} from 'react-redux';
 //services
-import {likePost, removeLikePost} from '../../services/post.service';
+import {
+  addInteraction,
+  removeInteraction,
+  addBookmark,
+  removeBookmark,
+} from '../../services/post.service';
 
 function Post(props) {
   //Global state fron redux to get the userId
@@ -30,15 +35,16 @@ function Post(props) {
 
   //state to increment numLikes, numComments and numRetweets
   const [numLikes, setNumLikes] = React.useState(props.numLikes);
+  const [numRetweets, setNumRetweets] = React.useState(props.numRetweets);
 
   //Make requests with the DB to add/remove a like, bookmark or retweet
   const toggleLike = async () => {
     try {
       if (liked) {
-        await removeLikePost(props.postId);
+        await removeInteraction(props.postId, 'likePost');
         setNumLikes(numLikes - 1);
       } else {
-        await likePost({postId: props.postId});
+        await addInteraction({postId: props.postId}, 'likePost');
         setNumLikes(numLikes + 1);
       }
       setLiked(!liked);
@@ -47,11 +53,33 @@ function Post(props) {
     }
   };
 
-  const toggleRetweet = () => {
-    setRetweeted(!retweeted);
+  const toggleRetweet = async () => {
+    try {
+      if (retweeted) {
+        await removeInteraction(props.postId, 'retweet');
+        setNumRetweets(numRetweets - 1);
+      } else {
+        await addInteraction({postId: props.postId}, 'retweet');
+        setNumRetweets(numRetweets + 1);
+      }
+      setRetweeted(!retweeted);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
-  const toggleBookMark = () => {
+  const toggleBookMark = async () => {
+    try {
+      if (saved) {
+        await removeBookmark(saved);
+        setSaved(null);
+      } else {
+        const bookmarkId = await addBookmark(props.postId);
+        setSaved(bookmarkId);
+      }
+    } catch (err) {
+      console.error(err);
+    }
     setSaved(!saved);
   };
 

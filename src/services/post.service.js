@@ -15,17 +15,41 @@ async function getHomePosts(limit, offset) {
   return data;
 }
 
-async function likePost(body) {
-  const {data} = await axios.post(endPoints.posts.likePost, body, headersJson);
-  return data;
-}
-
-async function removeLikePost(postId) {
-  const {data} = await axios.delete(
-    `${endPoints.posts.likePost}/${postId}`,
+async function addInteraction(body, interaction) {
+  const {data} = await axios.post(
+    endPoints.posts[interaction],
+    body,
     headersJson
   );
   return data;
 }
 
-export {sendPostData, getHomePosts, likePost, removeLikePost};
+async function removeInteraction(postId, interaction) {
+  const {data} = await axios.delete(
+    `${endPoints.posts[interaction]}/${postId}`,
+    headersJson
+  );
+  return data;
+}
+
+async function addBookmark(postId) {
+  const {data} = await axios.post(`${endPoints.posts.bookmarks}`, headersJson);
+  return data;
+}
+
+async function removeBookmark(bookmarkId) {
+  const {data} = await axios.delete(
+    `${endPoints.posts.bookmarks}/${bookmarkId}`,
+    headersJson
+  );
+  return data;
+}
+
+export {
+  sendPostData,
+  getHomePosts,
+  addInteraction,
+  removeInteraction,
+  addBookmark,
+  removeBookmark,
+};
