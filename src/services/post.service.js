@@ -33,7 +33,11 @@ async function removeInteraction(postId, interaction) {
 }
 
 async function addBookmark(postId) {
-  const {data} = await axios.post(`${endPoints.posts.bookmarks}`, headersJson);
+  const {data} = await axios.post(
+    `${endPoints.posts.bookmarks}`,
+    {postId},
+    headersJson
+  );
   return data;
 }
 

@@ -80,7 +80,6 @@ function Post(props) {
     } catch (err) {
       console.error(err);
     }
-    setSaved(!saved);
   };
 
   const toogleCommentSection = () => {
