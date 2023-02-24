@@ -17,6 +17,9 @@ const endPoints = {
     retweet: `${API}/${VERSION}/posts/retweets`,
     bookmarks: `${API}/${VERSION}/posts/bookmarks`,
   },
+  comments: {
+    makeComment: `${API}/${VERSION}/comments`,
+  },
 };
 
 export {endPoints};

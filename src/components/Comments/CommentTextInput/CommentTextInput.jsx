@@ -6,10 +6,15 @@ import editorStyles from './editorStyles.module.css';
 
 const hashTagPlugin = createHashtagPlugin();
 const plugins = [hashTagPlugin];
-const text = '';
 
-function CommentTextInput({editorRef, onFocus, onKeyDown, onChangeComment}) {
-  const [editor, setEditor] = React.useState(createEditorStateWithText(text));
+function CommentTextInput({
+  editorRef,
+  onFocus,
+  onKeyDown,
+  onChangeComment,
+  cleanTxt,
+}) {
+  const [editor, setEditor] = React.useState(createEditorStateWithText(''));
 
   const onChange = (editorState) => {
     const curretContent = editor.getCurrentContent().getPlainText();
@@ -19,6 +24,10 @@ function CommentTextInput({editorRef, onFocus, onKeyDown, onChangeComment}) {
     }
     setEditor(editorState);
   };
+
+  React.useEffect(() => {
+    setEditor(createEditorStateWithText(''));
+  }, [cleanTxt]);
 
   return (
     <div
