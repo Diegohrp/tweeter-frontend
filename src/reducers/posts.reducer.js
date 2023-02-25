@@ -12,6 +12,17 @@ const postsReducer = (state = initialState, action) => {
       return {...state, home: [action.payload, ...state.home]};
     case postActionTypes.cleanPosts:
       return initialState;
+    case postActionTypes.loadPostComments:
+      const currentPostId = state.home.findIndex(
+        (post) => post.id === action.payload.postId
+      );
+      const newHomePosts = [...state.home];
+      newHomePosts[currentPostId] = {
+        ...newHomePosts[currentPostId],
+        comments: action.payload.comments,
+      };
+      return {...state, home: newHomePosts};
+
     default:
       return state;
   }

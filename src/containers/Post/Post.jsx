@@ -119,7 +119,7 @@ function Post(props) {
           <>
             <PostCard buttons={buttons} {...props} numLikes={numLikes} />
             {showComment && <MakeComment postId={props.postId} />}
-            {showComment && <CommentsList />}
+            {showComment && <CommentsList postId={props.postId} />}
           </>
         )}
       </PostContainer>

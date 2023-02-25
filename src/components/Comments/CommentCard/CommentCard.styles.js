@@ -65,4 +65,13 @@ const Interactions = styled.div`
   }
 `;
 
-export {CommentContainer, Content, Interactions};
+const ImgContent = styled.figure`
+  margin-top: 15px;
+  img {
+    width: 50%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+`;
+
+export {CommentContainer, Content, Interactions, ImgContent};

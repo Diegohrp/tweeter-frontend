@@ -19,6 +19,8 @@ const endPoints = {
   },
   comments: {
     makeComment: `${API}/${VERSION}/comments`,
+    loadComments: (postId, limit, offset) =>
+      `${API}/${VERSION}/comments/${postId}?limit=${limit}&offset=${offset}`,
   },
 };
 

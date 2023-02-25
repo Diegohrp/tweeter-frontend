@@ -4,7 +4,7 @@ import {GeneralButton} from '@styles/Generals/Button.styles';
 
 const MakePostContainer = styled.article`
   margin: 20px auto;
-  width: min(95%, 745px);
+  width: 95%;
   min-height: 155px;
   border-radius: 12px;
   padding: 11px 14px 15.5px;
@@ -55,6 +55,7 @@ const MakePostContainer = styled.article`
   @media (min-width: 700px) {
     padding-left: 20px;
     padding-right: 20px;
+    width: 50%;
   }
 `;
 

@@ -1,33 +1,41 @@
 import React from 'react';
 //styles
-import {CommentContainer, Interactions, Content} from './CommentCard.styles';
+import {
+  CommentContainer,
+  Interactions,
+  Content,
+  ImgContent,
+} from './CommentCard.styles';
 //components
 import {SmallProfileImg} from '@components/common/SmallProfileImg/SmallProfileImg';
 import {Link} from 'react-router-dom';
 //icons
 import {FiHeart} from 'react-icons/fi';
 
-function CommentCard() {
+function CommentCard({author, userPhoto, content, image, numLikes, date}) {
+  console.log(image);
   return (
     <CommentContainer>
-      <SmallProfileImg />
+      <SmallProfileImg image={userPhoto} />
       <div>
         <Content>
           <div>
-            <Link to="/login">Waqar Bloom</Link>
-            <span>24 August at 20:43</span>
+            <Link to="/login">{author}</Link>
+            <span>{date}</span>
           </div>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-            quod at eveniet dolor.
-          </p>
+          <p>{content}</p>
         </Content>
+        {image && (
+          <ImgContent>
+            <img src={image} alt="comment image" />
+          </ImgContent>
+        )}
         <Interactions>
           <button>
             <FiHeart />
             Like
           </button>
-          <span>12k likes</span>
+          <span>{`${numLikes} likes`}</span>
         </Interactions>
       </div>
     </CommentContainer>

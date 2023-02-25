@@ -87,7 +87,7 @@ function MakeComment({postId}) {
   }, [commentContent, imgData]);
 
   React.useEffect(() => {
-    console.log(response);
+    /* console.log(response); */
   }, [response]);
 
   return (

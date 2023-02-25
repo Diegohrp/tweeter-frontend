@@ -13,3 +13,13 @@ export const SetUserPostAction = (payload) => ({
 export const cleanPostsAction = () => ({
   type: postActionTypes.cleanPosts,
 });
+
+export const loadPostCommentsAction = (payload) => ({
+  type: postActionTypes.loadPostComments,
+  payload,
+});
+
+export const setUserCommentAction = (payload) => ({
+  type: postActionTypes.setUserComment,
+  payload,
+});
