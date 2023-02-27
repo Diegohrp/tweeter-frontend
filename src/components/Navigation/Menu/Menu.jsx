@@ -8,12 +8,16 @@ import {useDispatch} from 'react-redux';
 import {logoutUserAction} from '../../../actions/creators/user.creators';
 import {cleanPostsAction} from '../../../actions/creators/posts.creators';
 
+import {headersJson, headersMulti} from '../../../services/headers';
+
 function Menu() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logout = async () => {
     Cookies.remove('token');
+    delete headersJson.headers.Authorization;
+    delete headersMulti.headers.Authorization;
     dispatch(cleanPostsAction());
     dispatch(logoutUserAction()); //state.user.isAuth = false
     navigate('/login');

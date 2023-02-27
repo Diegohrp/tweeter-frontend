@@ -16,17 +16,24 @@ import {ImgPreview} from '@components/common/ImgPreview/ImgPreview';
 import {Loading} from '../../components/Request/Loading/Loading';
 
 import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+
 //hooks
 import {useRequest} from '../../hooks/useRequest';
 //services
 import {makeComment} from '../../services/comment.service';
 
+import {setUserCommentAction} from '../../actions/creators/posts.creators';
+
 function MakeComment({postId}) {
-  //Global style from redux to get the user profile photo
+  const dispatch = useDispatch();
+  //Global style from redux to get the user profile photo, name and lastName
   const userPhoto = useSelector((state) => state.user.photo);
+  const name = useSelector((state) => state.user.name);
+  const last_name = useSelector((state) => state.user.lastName);
 
   const {
-    state: {loading, response},
+    state: {loading, response, error},
     sendDataRequest,
   } = useRequest();
 
@@ -67,14 +74,12 @@ function MakeComment({postId}) {
     setCleanTxt(!cleanTxt);
   };
 
-  const sendComment = (e) => {
+  const sendComment = async () => {
     const formData = new FormData();
     formData.append('post_id', postId);
     formData.append('content', commentContent);
     formData.append('image', imgData);
-    console.log({commentContent, imgData});
-    sendDataRequest(makeComment, formData);
-    cleanComment();
+    await sendDataRequest(makeComment, formData);
   };
 
   //Disable/Eneable send button
@@ -87,7 +92,24 @@ function MakeComment({postId}) {
   }, [commentContent, imgData]);
 
   React.useEffect(() => {
-    /* console.log(response); */
+    if (response) {
+      dispatch(
+        setUserCommentAction({
+          comment: {
+            id: response.insertId,
+            content: response.content,
+            image: response?.image,
+            num_likes: 0,
+            created_at: null,
+            name,
+            last_name,
+            photo: userPhoto,
+          },
+          postId,
+        })
+      );
+      cleanComment();
+    }
   }, [response]);
 
   return (

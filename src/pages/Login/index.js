@@ -23,7 +23,7 @@ import {login} from '../../services/user.service';
 //Text error messages
 import {errorMsg} from '../SignUp';
 
-import {headersJson} from '../../services/headers';
+import {headersJson, headersMulti} from '../../services/headers';
 import {authUserAction} from '../../actions/creators/user.creators';
 
 const initialState = {
@@ -74,6 +74,7 @@ function Login() {
       Cookies.set('token', token, {expires: 1800});
       //update the bearer token in the headers object to send the token in each request
       headersJson.headers.Authorization = `Bearer ${Cookies.get('token')}`;
+      headersMulti.headers.Authorization = `Bearer ${Cookies.get('token')}`;
       //A token was received, so change the global state (from redux) isAuth to true
       dispatch(authUserAction(true));
       //Redirect user to home

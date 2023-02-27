@@ -13,7 +13,6 @@ import {Link} from 'react-router-dom';
 import {FiHeart} from 'react-icons/fi';
 
 function CommentCard({author, userPhoto, content, image, numLikes, date}) {
-  console.log(image);
   return (
     <CommentContainer>
       <SmallProfileImg image={userPhoto} />

@@ -3,7 +3,12 @@ import {headersMulti, headersJson} from './headers';
 import {endPoints} from './api/endpoints';
 
 async function makeComment(body) {
-  await axios.post(endPoints.comments.makeComment, body, headersMulti);
+  const {data} = await axios.post(
+    endPoints.comments.makeComment,
+    body,
+    headersMulti
+  );
+  return data;
 }
 
 async function loadComments(postId, limit, offset) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListContainer} from './CommentsList.styles';
+import {ListContainer, LoadMoreButton} from './CommentsList.styles';
 import {CommentCard} from '../../components/Comments/CommentCard/CommentCard';
 
 import {useRequest} from '../../hooks/useRequest';
@@ -33,22 +33,26 @@ function CommentsList({postId}) {
   }, [response]);
 
   return (
-    <ListContainer>
+    <>
       {loading && <Loading />}
-      {!loading &&
-        comments &&
-        comments.map((comment) => (
-          <CommentCard
-            key={comment.id}
-            author={`${comment.name} ${comment.last_name}`}
-            userPhoto={comment.photo}
-            content={comment.content}
-            image={comment?.image}
-            numLikes={comment.num_likes}
-            date={formatPostDate(comment.created_at)}
-          />
-        ))}
-    </ListContainer>
+      {!loading && comments && comments?.length > 0 && (
+        <ListContainer className="COSA">
+          {comments.map((comment) => (
+            <CommentCard
+              key={comment.id}
+              author={`${comment.name} ${comment.last_name}`}
+              userPhoto={comment.photo}
+              content={comment.content}
+              image={comment?.image}
+              numLikes={comment.num_likes}
+              date={formatPostDate(comment.created_at)}
+            />
+          ))}
+
+          <LoadMoreButton>Load more comments</LoadMoreButton>
+        </ListContainer>
+      )}
+    </>
   );
 }
 
