@@ -5,7 +5,7 @@ const initialState = {
 };
 
 const postsReducer = (state = initialState, action) => {
-  let currentPostId;
+  let currentPostIndex;
   let newHomePosts;
 
   switch (action.type) {
@@ -19,26 +19,27 @@ const postsReducer = (state = initialState, action) => {
       return initialState;
 
     case postActionTypes.loadPostComments:
-      currentPostId = state.home.findIndex(
-        (post) => post.id === action.payload.postId
-      );
+      currentPostIndex = action.payload.currentPostIndex;
       newHomePosts = [...state.home];
-      newHomePosts[currentPostId] = {
-        ...newHomePosts[currentPostId],
-        comments: action.payload.comments,
+
+      newHomePosts[currentPostIndex] = {
+        ...newHomePosts[currentPostIndex],
+        comments: [
+          ...(newHomePosts[currentPostIndex].comments || []),
+          ...action.payload.comments,
+        ],
       };
       return {...state, home: newHomePosts};
 
     case postActionTypes.setUserComment:
-      currentPostId = state.home.findIndex(
-        (post) => post.id === action.payload.postId
-      );
+      currentPostIndex = action.payload.currentPostIndex;
+      console.log(currentPostIndex);
       newHomePosts = [...state.home];
-      newHomePosts[currentPostId] = {
-        ...newHomePosts[currentPostId],
+      newHomePosts[currentPostIndex] = {
+        ...newHomePosts[currentPostIndex],
         comments: [
           action.payload.comment,
-          ...newHomePosts[currentPostId].comments,
+          ...newHomePosts[currentPostIndex].comments,
         ],
       };
       return {...state, home: newHomePosts};

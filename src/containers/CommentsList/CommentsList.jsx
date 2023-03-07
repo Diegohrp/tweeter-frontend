@@ -12,31 +12,45 @@ import {Loading} from '../../components/Request/Loading/Loading';
 
 import {formatPostDate} from '../../utils/formatDate';
 
-function CommentsList({postId}) {
+function CommentsList({postId, retweet, offset, limit, setOffset}) {
+  /* console.log(retweet); */
+  //Custom hook to make requsts
   const {
     state: {loading, response},
     getDataReques,
   } = useRequest();
 
+  //redux useDipatch
   const dispatch = useDispatch();
 
+  //global states from redux
   const homePosts = useSelector((state) => state.posts.home);
-  const currentPostId = homePosts.findIndex((post) => post.id === postId);
-  const comments = homePosts[currentPostId]?.comments;
+  const currentPostIndex = homePosts.findIndex(
+    (post) => post.id === postId && post.retweet_id === retweet
+  );
+
+  const comments = homePosts[currentPostIndex]?.comments;
+
+  //limit and offset for the request
+
+  const requestComments = () => {
+    getDataReques(() => loadComments(postId, limit, offset));
+  };
 
   React.useEffect(() => {
     if (!comments && !response) {
-      getDataReques(() => loadComments(postId, 4, 0));
+      requestComments();
     } else if (response) {
-      dispatch(loadPostCommentsAction({postId, comments: response}));
+      setOffset(offset + limit);
+      dispatch(loadPostCommentsAction({currentPostIndex, comments: response}));
     }
   }, [response]);
 
   return (
     <>
       {loading && <Loading />}
-      {!loading && comments && comments?.length > 0 && (
-        <ListContainer className="COSA">
+      {comments && comments?.length > 0 && (
+        <ListContainer>
           {comments.map((comment) => (
             <CommentCard
               key={comment.id}
@@ -49,7 +63,11 @@ function CommentsList({postId}) {
             />
           ))}
 
-          <LoadMoreButton>Load more comments</LoadMoreButton>
+          {(response?.length > 0 || response === null) && (
+            <LoadMoreButton onClick={requestComments}>
+              Load more comments
+            </LoadMoreButton>
+          )}
         </ListContainer>
       )}
     </>

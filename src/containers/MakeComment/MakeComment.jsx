@@ -25,12 +25,17 @@ import {makeComment} from '../../services/comment.service';
 
 import {setUserCommentAction} from '../../actions/creators/posts.creators';
 
-function MakeComment({postId}) {
+function MakeComment({postId, retweet, numComments, setNumComments}) {
   const dispatch = useDispatch();
   //Global style from redux to get the user profile photo, name and lastName
   const userPhoto = useSelector((state) => state.user.photo);
   const name = useSelector((state) => state.user.name);
   const last_name = useSelector((state) => state.user.lastName);
+  const currentPostIndex = useSelector((state) =>
+    state.posts.home.findIndex(
+      (post) => post.id === postId && post.retweet_id === retweet
+    )
+  );
 
   const {
     state: {loading, response, error},
@@ -105,10 +110,11 @@ function MakeComment({postId}) {
             last_name,
             photo: userPhoto,
           },
-          postId,
+          currentPostIndex,
         })
       );
       cleanComment();
+      setNumComments(numComments + 1);
     }
   }, [response]);
 

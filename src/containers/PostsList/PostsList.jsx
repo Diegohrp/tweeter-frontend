@@ -45,6 +45,7 @@ function PostsList({requestFn}) {
               numLikes={post.num_likes}
               numComments={post.num_comments}
               numRetweets={post.num_retweets}
+              retweetId={post.retweet_id}
               whoRetweeted={post.who_retweeted}
               whoRetweetedId={post.who_retweeted_id}
               liked={post.liked}

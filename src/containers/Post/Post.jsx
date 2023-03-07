@@ -36,6 +36,11 @@ function Post(props) {
   //state to increment numLikes, numComments and numRetweets
   const [numLikes, setNumLikes] = React.useState(props.numLikes);
   const [numRetweets, setNumRetweets] = React.useState(props.numRetweets);
+  const [numComments, setNumComments] = React.useState(props.numComments);
+
+  //Offset and limit to get comments
+  const limit = 4;
+  const [offset, setOffset] = React.useState(0);
 
   //Make requests with the DB to add/remove a like, bookmark or retweet
   const toggleLike = async () => {
@@ -117,9 +122,30 @@ function Post(props) {
       <PostContainer ref={element}>
         {show && (
           <>
-            <PostCard buttons={buttons} {...props} numLikes={numLikes} />
-            {showComment && <MakeComment postId={props.postId} />}
-            {showComment && <CommentsList postId={props.postId} />}
+            <PostCard
+              buttons={buttons}
+              {...props}
+              numLikes={numLikes}
+              numRetweets={numRetweets}
+              numComments={numComments}
+            />
+            {showComment && (
+              <MakeComment
+                postId={props.postId}
+                retweet={props.retweetId}
+                setNumComments={setNumComments}
+                numComments={numComments}
+              />
+            )}
+            {showComment && (
+              <CommentsList
+                postId={props.postId}
+                retweet={props.retweetId}
+                offset={offset}
+                setOffset={setOffset}
+                limit={limit}
+              />
+            )}
           </>
         )}
       </PostContainer>
