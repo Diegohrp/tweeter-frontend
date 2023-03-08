@@ -25,7 +25,14 @@ import {makeComment} from '../../services/comment.service';
 
 import {setUserCommentAction} from '../../actions/creators/posts.creators';
 
-function MakeComment({postId, retweet, numComments, setNumComments}) {
+function MakeComment({
+  postId,
+  retweet,
+  numComments,
+  setNumComments,
+  offset,
+  setOffset,
+}) {
   const dispatch = useDispatch();
   //Global style from redux to get the user profile photo, name and lastName
   const userPhoto = useSelector((state) => state.user.photo);
@@ -115,6 +122,7 @@ function MakeComment({postId, retweet, numComments, setNumComments}) {
       );
       cleanComment();
       setNumComments(numComments + 1);
+      setOffset(offset + 1);
     }
   }, [response]);
 

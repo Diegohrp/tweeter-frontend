@@ -33,7 +33,6 @@ const postsReducer = (state = initialState, action) => {
 
     case postActionTypes.setUserComment:
       currentPostIndex = action.payload.currentPostIndex;
-      console.log(currentPostIndex);
       newHomePosts = [...state.home];
       newHomePosts[currentPostIndex] = {
         ...newHomePosts[currentPostIndex],

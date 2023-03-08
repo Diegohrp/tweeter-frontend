@@ -135,6 +135,8 @@ function Post(props) {
                 retweet={props.retweetId}
                 setNumComments={setNumComments}
                 numComments={numComments}
+                offset={offset}
+                setOffset={setOffset}
               />
             )}
             {showComment && (
