@@ -38,6 +38,7 @@ const Content = styled.div`
     text-align: left;
     font-size: 1.6rem;
     color: ${(props) => props.theme.primaryText};
+    margin-bottom: 8px;
   }
 `;
 

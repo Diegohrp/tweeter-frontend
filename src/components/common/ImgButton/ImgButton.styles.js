@@ -17,7 +17,9 @@ const PhotoButton = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    font-size: 2rem;
+    svg {
+      font-size: 2rem;
+    }
   }
   label.gray {
     color: ${(props) => props.theme.placeholderColor};

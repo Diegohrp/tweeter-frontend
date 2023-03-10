@@ -27,6 +27,10 @@ const CommentPrompt = styled.div`
     left: 12px;
     font-size: 1.4rem;
     color: ${(props) => props.theme.placeholderColor};
+    @media (max-width: 290px) {
+      font-size: 1.2rem;
+      left: 8px;
+    }
   }
 `;
 
@@ -36,11 +40,11 @@ const SendButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin: 0 12px 8px 0;
+  margin: 0 12px 8px 0px;
   color: ${(props) => props.theme.primaryText};
   &:disabled {
     color: ${(props) => props.theme.placeholderColor};

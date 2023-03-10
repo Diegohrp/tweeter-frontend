@@ -38,7 +38,8 @@ const Button = styled.button`
     background-color: transparent;
     color: ${(props) => props.theme.placeholderColor};
   }
-  @media (min-width: 700px) {
+  @media (min-width: 900px) {
+    width: 25%;
     span {
       display: block;
       margin-left: 12px;

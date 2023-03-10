@@ -6,4 +6,13 @@
   padding-bottom: 8px;
   font-size: 1.4rem;
   border-radius: 8px;
+  
+}
+
+@media (max-width:290px) {
+  .editor{
+    padding-left: 0px;
+    padding-right: 5px;
+    width: 70%;
+  }
 }
