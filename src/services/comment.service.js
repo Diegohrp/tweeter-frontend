@@ -19,4 +19,15 @@ async function loadComments(postId, limit, offset) {
   return data;
 }
 
-export {makeComment, loadComments};
+async function addLike(commentId) {
+  await axios.post(endPoints.comments.likeComment, {commentId}, headersJson);
+}
+
+async function removeLike(commentId) {
+  await axios.delete(
+    `${endPoints.comments.likeComment}/${commentId}`,
+    headersJson
+  );
+}
+
+export {makeComment, loadComments, addLike, removeLike};

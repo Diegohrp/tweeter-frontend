@@ -142,6 +142,7 @@ function Post(props) {
             {showComment && (
               <CommentsList
                 postId={props.postId}
+                postIndex={props.index}
                 retweet={props.retweetId}
                 offset={offset}
                 setOffset={setOffset}

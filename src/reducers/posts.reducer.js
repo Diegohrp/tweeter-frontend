@@ -43,6 +43,18 @@ const postsReducer = (state = initialState, action) => {
       };
       return {...state, home: newHomePosts};
 
+    case postActionTypes.setLikeComment:
+      currentPostIndex = action.payload.postIndex;
+      newHomePosts = [...state.home];
+      const comment =
+        newHomePosts[currentPostIndex].comments[action.payload.commentIndex];
+      console.log(comment);
+      newHomePosts[currentPostIndex].comments[action.payload.commentIndex] = {
+        ...comment,
+        num_likes: action.payload.num_likes,
+        liked: action.payload.liked,
+      };
+      return {...state, home: newHomePosts};
     default:
       return state;
   }

@@ -4,6 +4,7 @@ const postActionTypes = {
   cleanPosts: 'CLEAN_POSTS',
   loadPostComments: 'LOAD_POST_COMMENTS',
   setUserComment: 'SET_USER_COMMENT',
+  setLikeComment: 'SET_LIKE_COMMENT',
 };
 
 export {postActionTypes};

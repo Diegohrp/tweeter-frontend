@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {textFont, titleFont} from '../../../styles/GlobalStyles';
+import {titleFont} from '../../../styles/GlobalStyles';
 
 const CommentContainer = styled.article`
   width: 100%;
@@ -47,20 +47,20 @@ const Interactions = styled.div`
   align-items: center;
   font-size: 1.2rem;
   color: ${(props) => props.theme.secondaryText};
+  span {
+    margin-left: 5px;
+  }
   button {
-    margin-right: 20px;
-    display: flex;
-    width: 40px;
-    align-items: center;
-    justify-content: space-between;
-    border: none;
-    background-color: transparent;
-    font-size: 1.2rem;
-    cursor: pointer;
-    font-family: ${textFont};
-    color: ${(props) => props.theme.secondaryText};
+    width: auto;
+    justify-content: flex-start;
+    span {
+      font-size: 1.2rem;
+    }
     svg {
       font-size: 1.4rem;
+    }
+    &:hover {
+      background-color: transparent;
     }
   }
 `;

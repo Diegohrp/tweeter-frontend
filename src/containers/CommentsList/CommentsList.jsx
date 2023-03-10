@@ -13,7 +13,6 @@ import {Loading} from '../../components/Request/Loading/Loading';
 import {formatPostDate} from '../../utils/formatDate';
 
 function CommentsList({postId, retweet, offset, limit, setOffset}) {
-  /* console.log(retweet); */
   //Custom hook to make requsts
   const {
     state: {loading, response},
@@ -30,8 +29,6 @@ function CommentsList({postId, retweet, offset, limit, setOffset}) {
   );
 
   const comments = homePosts[currentPostIndex]?.comments;
-
-  //limit and offset for the request
 
   const requestComments = () => {
     getDataReques(() => loadComments(postId, limit, offset));
@@ -54,12 +51,15 @@ function CommentsList({postId, retweet, offset, limit, setOffset}) {
           {comments.map((comment) => (
             <CommentCard
               key={comment.id}
+              postIndex={currentPostIndex}
+              id={comment.id}
               author={`${comment.name} ${comment.last_name}`}
               userPhoto={comment.photo}
               content={comment.content}
               image={comment?.image}
               numLikes={comment.num_likes}
               date={formatPostDate(comment.created_at)}
+              liked={comment?.liked}
             />
           ))}
 

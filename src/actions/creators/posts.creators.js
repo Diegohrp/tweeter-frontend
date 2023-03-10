@@ -23,3 +23,8 @@ export const setUserCommentAction = (payload) => ({
   type: postActionTypes.setUserComment,
   payload,
 });
+
+export const setLikeCommentAction = (payload) => ({
+  type: postActionTypes.setLikeComment,
+  payload,
+});
