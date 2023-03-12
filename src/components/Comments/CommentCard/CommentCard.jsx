@@ -39,19 +39,19 @@ function CommentCard({
   //Redux dispatcher
   const dispatch = useDispatch();
 
-  const num_likes = useSelector(
-    (state) =>
-      state.posts.home[postIndex].comments[currentCommentIndex].num_likes
-  );
+  //format comment content
+  const formatText = () => {
+    return content.split(/\n|\r|\n\r/).map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
 
   const toggleLike = async () => {
     try {
-      if (liked) {
-        await removeLike(id);
-      } else {
-        await addLike(id);
-      }
-
+      liked ? await removeLike(id) : await addLike(id);
       dispatch(
         setLikeCommentAction({
           postIndex,
@@ -74,7 +74,7 @@ function CommentCard({
             <Link to="/login">{author}</Link>
             <span>{date}</span>
           </div>
-          <p>{content}</p>
+          <p>{formatText()}</p>
         </Content>
         {image && (
           <ImgContent>

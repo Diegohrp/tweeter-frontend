@@ -27,19 +27,17 @@ const PostCard = ({
   //Formats textt when there is a hashtag
   const printHashtags = (lineText) => {
     const hashtagRegex = /^#(\w+)*$/;
-    const lineTextArray = lineText
+    return lineText
       .split(' ')
-      .map((word) =>
-        hashtagRegex.test(word) ? (
-          <Link to={`/hashtags/${word.replace('#', '')}`}>{word}</Link>
-        ) : (
-          `${word} `
-        )
-      );
-
-    return lineTextArray.map((item, index) => (
-      <React.Fragment key={index}>{item}</React.Fragment>
-    ));
+      .map((word, index) => (
+        <React.Fragment key={index}>
+          {hashtagRegex.test(word) ? (
+            <Link to={`/hashtags/${word.replace('#', '')}`}>{word}</Link>
+          ) : (
+            `${word} `
+          )}
+        </React.Fragment>
+      ));
   };
 
   return (
