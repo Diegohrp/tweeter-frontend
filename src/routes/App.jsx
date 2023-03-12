@@ -8,6 +8,7 @@ import {Login} from '../pages/Login';
 import {Home} from '../pages/Home';
 import {Layout} from '../containers/Layout/Layout';
 import {PrivateRouteWrapper} from './PrivateRouteWrapper';
+import {Bookmarks} from '../pages/Bookmarks';
 
 function App() {
   return (
@@ -20,6 +21,15 @@ function App() {
             element={
               <PrivateRouteWrapper>
                 <Home />
+              </PrivateRouteWrapper>
+            }
+          />
+          <Route
+            exact
+            path="/bookmarks"
+            element={
+              <PrivateRouteWrapper>
+                <Bookmarks />
               </PrivateRouteWrapper>
             }
           />

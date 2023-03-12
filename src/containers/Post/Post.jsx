@@ -75,13 +75,10 @@ function Post(props) {
 
   const toggleBookMark = async () => {
     try {
-      if (saved) {
-        await removeBookmark(saved);
-        setSaved(null);
-      } else {
-        const bookmarkId = await addBookmark(props.postId);
-        setSaved(bookmarkId);
-      }
+      saved
+        ? await removeInteraction(props.postId, 'bookmarks')
+        : await addInteraction({postId: props.postId}, 'bookmarks');
+      setSaved(!saved);
     } catch (err) {
       console.error(err);
     }

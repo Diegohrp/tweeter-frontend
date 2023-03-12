@@ -1,5 +1,5 @@
 const postActionTypes = {
-  sethomePosts: 'GET_HOME_POSTS',
+  setPosts: 'SET_POSTS',
   setUserPost: 'SET_USER_POST',
   cleanPosts: 'CLEAN_POSTS',
   loadPostComments: 'LOAD_POST_COMMENTS',

@@ -10,7 +10,7 @@ import {useTheme} from 'styled-components';
 const routes = [
   {to: '/', Icon: MdHome, text: 'Home', privacy: 'P'},
   {to: '/login', Icon: MdExplore, text: 'Explore', privacy: 'P'},
-  {to: '/signup', Icon: MdBookmark, text: 'Bookmarks', privacy: 'P'},
+  {to: '/bookmarks', Icon: MdBookmark, text: 'Bookmarks', privacy: 'P'},
 ];
 
 function Layout({children}) {

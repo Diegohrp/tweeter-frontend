@@ -1,7 +1,7 @@
 import {postActionTypes} from '../types/posts.types';
 
-export const setHomePostsAction = (payload) => ({
-  type: postActionTypes.sethomePosts,
+export const setPostsAction = (payload) => ({
+  type: postActionTypes.setPosts,
   payload,
 });
 

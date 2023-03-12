@@ -11,8 +11,8 @@ const endPoints = {
   },
   posts: {
     post: `${API}/${VERSION}/posts`,
-    getHome: (limit, offset) =>
-      `${API}/${VERSION}/posts/home?limit=${limit}&offset=${offset}`,
+    getPosts: (limit, offset, route) =>
+      `${API}/${VERSION}/posts/${route}?limit=${limit}&offset=${offset}`,
     likePost: `${API}/${VERSION}/posts/like-post`,
     retweet: `${API}/${VERSION}/posts/retweets`,
     bookmarks: `${API}/${VERSION}/posts/bookmarks`,

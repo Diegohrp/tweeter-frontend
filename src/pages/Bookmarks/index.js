@@ -1,5 +1,4 @@
 import React from 'react';
-import {MakePost} from '@containers/MakePost/MakePost';
 import {PostsList} from '../../containers/PostsList/PostsList';
 import {getPosts} from '../../services/post.service';
 import {setPostsAction} from '../../actions/creators/posts.creators';
@@ -8,7 +7,7 @@ import {useScrollRequest} from '../../hooks/useScrollRequest';
 import {Main} from './styles';
 import {pages} from '../pages';
 
-function Home() {
+function Bookmarks() {
   const {limit, offset, setOffset, loading, onScroll} = useScrollRequest(
     getPosts,
     setPostsAction
@@ -16,7 +15,8 @@ function Home() {
 
   return (
     <Main onScroll={onScroll}>
-      <MakePost offset={offset} setOffset={setOffset} />
+      <h2>Bookmarks</h2>
+
       <PostsList
         page={pages.home}
         requestFn={() => getPosts(limit, 0, pages.home)}
@@ -30,4 +30,4 @@ function Home() {
   );
 }
 
-export {Home};
+export {Bookmarks};

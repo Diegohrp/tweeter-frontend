@@ -3,13 +3,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRequest} from '../../hooks/useRequest';
 import {PostsListContainer} from './PostsList.styles';
 import {Post} from '../Post/Post';
-import {setHomePostsAction} from '../../actions/creators/posts.creators';
+import {setPostsAction} from '../../actions/creators/posts.creators';
 import {Loading} from '@components/Request/Loading/Loading';
 import {formatPostDate} from '../../utils/formatDate';
 
-function PostsList({requestFn}) {
+function PostsList({requestFn, page}) {
   //Global state from redux and dispatcher
-  const homePosts = useSelector((state) => state.posts.home);
+  const homePosts = useSelector((state) => state.posts[page]);
   const dispatch = useDispatch();
   //Custom hook useRequest, rename response as list
   const {
@@ -21,7 +21,7 @@ function PostsList({requestFn}) {
     if (!list && homePosts.length === 0) {
       getDataReques(requestFn);
     } else if (list) {
-      dispatch(setHomePostsAction(list));
+      dispatch(setPostsAction(list));
     }
   }, [list]);
 

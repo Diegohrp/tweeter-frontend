@@ -7,9 +7,9 @@ async function sendPostData(body) {
   return data;
 }
 
-async function getHomePosts(limit, offset) {
+async function getPosts(limit, offset, route) {
   const {data} = await axios.get(
-    endPoints.posts.getHome(limit, offset),
+    endPoints.posts.getPosts(limit, offset, route),
     headersJson
   );
   return data;
@@ -32,28 +32,4 @@ async function removeInteraction(postId, interaction) {
   return data;
 }
 
-async function addBookmark(postId) {
-  const {data} = await axios.post(
-    `${endPoints.posts.bookmarks}`,
-    {postId},
-    headersJson
-  );
-  return data;
-}
-
-async function removeBookmark(bookmarkId) {
-  const {data} = await axios.delete(
-    `${endPoints.posts.bookmarks}/${bookmarkId}`,
-    headersJson
-  );
-  return data;
-}
-
-export {
-  sendPostData,
-  getHomePosts,
-  addInteraction,
-  removeInteraction,
-  addBookmark,
-  removeBookmark,
-};
+export {sendPostData, getPosts, addInteraction, removeInteraction};

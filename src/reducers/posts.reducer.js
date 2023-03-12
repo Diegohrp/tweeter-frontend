@@ -2,6 +2,7 @@ import {postActionTypes} from '../actions/types/posts.types';
 
 const initialState = {
   home: [],
+  bookmarks: [],
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -9,7 +10,7 @@ const postsReducer = (state = initialState, action) => {
   let newHomePosts;
 
   switch (action.type) {
-    case postActionTypes.sethomePosts:
+    case postActionTypes.setPosts:
       return {...state, home: [...state.home, ...action.payload]};
 
     case postActionTypes.setUserPost:
@@ -48,7 +49,7 @@ const postsReducer = (state = initialState, action) => {
       newHomePosts = [...state.home];
       const comment =
         newHomePosts[currentPostIndex].comments[action.payload.commentIndex];
-      console.log(comment);
+
       newHomePosts[currentPostIndex].comments[action.payload.commentIndex] = {
         ...comment,
         num_likes: action.payload.num_likes,
