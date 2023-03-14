@@ -3,5 +3,10 @@
 //Example: home:[],likes:[],tweets:[] etc
 export const pages = {
   home: 'home',
-  bookmarks: '',
+  bookmarks: {
+    yourTweets: {
+      route: 'bookmarks/your_tweets',
+      page: 'bookmarks_your_tweets',
+    },
+  },
 };

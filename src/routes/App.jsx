@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Outlet} from 'react-router-dom';
 import {Route} from 'react-router-dom';
 import {Routes} from 'react-router-dom';
 
@@ -17,25 +17,37 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/"
+            path="/home"
             element={
               <PrivateRouteWrapper>
-                <Home />
+                <Home page="home" route="home" />
               </PrivateRouteWrapper>
             }
           />
+
           <Route
-            exact
             path="/bookmarks"
             element={
               <PrivateRouteWrapper>
-                <Bookmarks />
+                <h2>BOOKMARKS</h2>
+                <Outlet />
               </PrivateRouteWrapper>
-            }
-          />
+            }>
+            <Route
+              path="your_tweets"
+              element={
+                <Bookmarks
+                  page="bookmarks_your_tweets"
+                  route="bookmarks/your_tweets"
+                />
+              }
+            />
+          </Route>
+
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/hashtags/:hash" element={<h2>HASHTAGS</h2>} />
+          <Route path="*" element={<h2>Not found</h2>} />
         </Routes>
       </Layout>
     </BrowserRouter>

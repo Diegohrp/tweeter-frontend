@@ -2,16 +2,22 @@ import {postActionTypes} from '../actions/types/posts.types';
 
 const initialState = {
   home: [],
-  bookmarks: [],
+  bookmarks_your_tweets: [],
 };
 
 const postsReducer = (state = initialState, action) => {
   let currentPostIndex;
   let newHomePosts;
+  let newState;
 
   switch (action.type) {
     case postActionTypes.setPosts:
-      return {...state, home: [...state.home, ...action.payload]};
+      newState = {...state};
+      newState[action.payload.page] = [
+        ...state[action.payload.page],
+        ...action.payload.data,
+      ];
+      return newState;
 
     case postActionTypes.setUserPost:
       return {...state, home: [action.payload, ...state.home]};

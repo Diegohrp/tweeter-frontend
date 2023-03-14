@@ -8,19 +8,18 @@ import {useScrollRequest} from '../../hooks/useScrollRequest';
 import {Main} from './styles';
 import {pages} from '../pages';
 
-function Home() {
+function Home({page, route}) {
   const {limit, offset, setOffset, loading, onScroll} = useScrollRequest(
     getPosts,
+    route,
+    page,
     setPostsAction
   );
 
   return (
     <Main onScroll={onScroll}>
       <MakePost offset={offset} setOffset={setOffset} />
-      <PostsList
-        page={pages.home}
-        requestFn={() => getPosts(limit, 0, pages.home)}
-      />
+      <PostsList page={page} requestFn={() => getPosts(limit, 0, route)} />
       {loading && (
         <div className="loader">
           <Loading />

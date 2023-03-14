@@ -21,7 +21,7 @@ function PostsList({requestFn, page}) {
     if (!list && homePosts.length === 0) {
       getDataReques(requestFn);
     } else if (list) {
-      dispatch(setPostsAction(list));
+      dispatch(setPostsAction({data: list, page}));
     }
   }, [list]);
 
