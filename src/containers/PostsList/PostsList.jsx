@@ -35,6 +35,7 @@ function PostsList({requestFn, page}) {
               key={`home-${post.who_retweeted ? 'retweet' : 'post'}-${post.id}${
                 post?.who_retweeted_id
               }`}
+              page={page}
               postId={post.id}
               authorId={post.user_id}
               author={`${post.name} ${post.last_name}`}

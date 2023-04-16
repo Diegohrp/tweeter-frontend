@@ -1,4 +1,5 @@
 import React from 'react';
+//styles
 import {
   Card,
   Author,
@@ -7,10 +8,9 @@ import {
   Details,
   Buttons,
 } from './PostCard.styles';
-
+//components
 import {SmallProfileImg} from '../../common/SmallProfileImg/SmallProfileImg';
 import {InteractionButton} from '../InteractionButton/InteractionButton';
-
 import {Link} from 'react-router-dom';
 
 const PostCard = ({
@@ -24,7 +24,7 @@ const PostCard = ({
   numRetweets,
   buttons,
 }) => {
-  //Formats textt when there is a hashtag
+  //Formats text when there is a hashtag
   const printHashtags = (lineText) => {
     const hashtagRegex = /^#(\w+)*$/;
     return lineText

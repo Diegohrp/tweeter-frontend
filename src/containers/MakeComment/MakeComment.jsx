@@ -14,18 +14,18 @@ import {SmallProfileImg} from '@components/common/SmallProfileImg/SmallProfileIm
 import {ImgButton} from '@components/common/ImgButton/ImgButton';
 import {ImgPreview} from '@components/common/ImgPreview/ImgPreview';
 import {Loading} from '../../components/Request/Loading/Loading';
-
+//Redux
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-
 //hooks
 import {useRequest} from '../../hooks/useRequest';
 //services
 import {makeComment} from '../../services/comment.service';
-
+//Actions
 import {setUserCommentAction} from '../../actions/creators/posts.creators';
 
 function MakeComment({
+  page,
   postId,
   retweet,
   numComments,
@@ -39,7 +39,7 @@ function MakeComment({
   const name = useSelector((state) => state.user.name);
   const last_name = useSelector((state) => state.user.lastName);
   const currentPostIndex = useSelector((state) =>
-    state.posts.home.findIndex(
+    state.posts[page].findIndex(
       (post) => post.id === postId && post.retweet_id === retweet
     )
   );
@@ -118,6 +118,7 @@ function MakeComment({
             photo: userPhoto,
           },
           currentPostIndex,
+          page,
         })
       );
       cleanComment();

@@ -18,7 +18,6 @@ function Bookmarks({page, route}) {
 
   return (
     <>
-      <Outlet />
       <Main onScroll={onScroll}>
         <PostsList page={page} requestFn={() => getPosts(limit, 0, route)} />
         {loading && (

@@ -20,6 +20,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setLikeCommentAction} from '../../../actions/creators/posts.creators';
 
 function CommentCard({
+  page,
   id,
   postIndex,
   author,
@@ -32,7 +33,7 @@ function CommentCard({
 }) {
   //Find the index of the current comment in the array comments[] of the current post
   const currentCommentIndex = useSelector((state) =>
-    state.posts.home[postIndex]?.comments.findIndex(
+    state.posts[page][postIndex]?.comments.findIndex(
       (comment) => comment.id === id
     )
   );
@@ -58,6 +59,7 @@ function CommentCard({
           commentIndex: currentCommentIndex,
           num_likes: liked ? numLikes - 1 : numLikes + 1,
           liked: !liked,
+          page,
         })
       );
     } catch (err) {
@@ -87,7 +89,6 @@ function CommentCard({
             text={liked ? 'Liked' : 'Like'}
             onClick={toggleLike}
           />
-
           <span>{`${numLikes} likes`}</span>
         </Interactions>
       </div>

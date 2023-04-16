@@ -8,7 +8,7 @@ function useScrollRequest(
   frontendPage,
   setDataAction
 ) {
-  const limit = 20;
+  const limit = 4;
   const [offset, setOffset] = React.useState(limit);
   const [endScroll, setEndScroll] = React.useState(false);
 

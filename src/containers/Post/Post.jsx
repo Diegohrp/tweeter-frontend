@@ -1,108 +1,88 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 //styles
 import {PostContainer, Retweeted} from './Post.styles';
 //containers
 import {MakeComment} from '@containers/MakeComment/MakeComment';
 import {PostCard} from '@components/Posts/PostCard/PostCard';
 import {CommentsList} from '../CommentsList/CommentsList';
-import {useObserver} from '../../hooks/useObserver';
-import {Link} from 'react-router-dom';
 //icons
 import {MdOutlineModeComment, MdOutlineCached} from 'react-icons/md';
 import {FiHeart, FiBookmark} from 'react-icons/fi';
 import {useSelector} from 'react-redux';
-//services
-import {
-  addInteraction,
-  removeInteraction,
-  addBookmark,
-  removeBookmark,
-} from '../../services/post.service';
+//hooks
+import {useObserver} from '../../hooks/useObserver';
+import {useToggleInteraction} from '../../hooks/useToggleInteraction';
 
 function Post(props) {
   //Global state fron redux to get the userId
   const userId = useSelector((state) => state.user.userId);
-
   //State to show or hide the makeComment component
   const [showComment, setShowComment] = React.useState(false);
-
-  //State to change the word and color in buttons
-  const [retweeted, setRetweeted] = React.useState(
-    props.whoRetweetedId === userId
-  );
-  const [liked, setLiked] = React.useState(props.liked);
-  const [saved, setSaved] = React.useState(props.saved);
-
-  //state to increment numLikes, numComments and numRetweets
-  const [numLikes, setNumLikes] = React.useState(props.numLikes);
-  const [numRetweets, setNumRetweets] = React.useState(props.numRetweets);
+  //state to increment numComments
   const [numComments, setNumComments] = React.useState(props.numComments);
+  //custom hook to use intersection observer and implement a lazy loading
+  const {element, show} = useObserver();
+  /*
+    Custom hook "useToggleInteraction"
+    inter: used to change the word and color in buttons and to decide if add/remove
+    the interaction.
+    num: Number of reactions (likes,retweets,bookmarks)
+    toogle: function to add/remove likes,retweets,bookmarks
+  */
+  const {
+    inter: liked,
+    num: numLikes,
+    toogle: toggleLike,
+  } = useToggleInteraction({
+    interaction: props.liked,
+    interactionName: 'likePost',
+    quantity: props.numLikes,
+  });
+
+  const {
+    inter: retweeted,
+    num: numRetweets,
+    toogle: toggleRetweet,
+  } = useToggleInteraction({
+    interaction: props.whoRetweetedId === userId,
+    interactionName: 'retweet',
+    quantity: props.numRetweets,
+  });
+
+  const {inter: saved, toogle: toggleBookMark} = useToggleInteraction({
+    interaction: props.saved,
+    interactionName: 'bookmarks',
+  });
 
   //Offset and limit to get comments
   const limit = 4;
   const [offset, setOffset] = React.useState(0);
 
-  //Make requests with the DB to add/remove a like, bookmark or retweet
-  const toggleLike = async () => {
-    try {
-      if (liked) {
-        await removeInteraction(props.postId, 'likePost');
-        setNumLikes(numLikes - 1);
-      } else {
-        await addInteraction({postId: props.postId}, 'likePost');
-        setNumLikes(numLikes + 1);
-      }
-      setLiked(!liked);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  const toggleRetweet = async () => {
-    try {
-      if (retweeted) {
-        await removeInteraction(props.postId, 'retweet');
-        setNumRetweets(numRetweets - 1);
-      } else {
-        await addInteraction({postId: props.postId}, 'retweet');
-        setNumRetweets(numRetweets + 1);
-      }
-      setRetweeted(!retweeted);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  const toggleBookMark = async () => {
-    try {
-      saved
-        ? await removeInteraction(props.postId, 'bookmarks')
-        : await addInteraction({postId: props.postId}, 'bookmarks');
-      setSaved(!saved);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const toogleCommentSection = () => {
-    setShowComment(!showComment);
-  };
-
   //interaction buttons
   const buttons = [
-    {icon: MdOutlineModeComment, txt: 'Comment', action: toogleCommentSection},
+    {
+      icon: MdOutlineModeComment,
+      txt: 'Comment',
+      action: () => setShowComment(!showComment),
+    },
     {
       icon: MdOutlineCached,
       txt: retweeted ? 'Retweeted' : 'Retweet',
-      action: toggleRetweet,
+      action: () => toggleRetweet(props.postId),
       disabled: props.authorId === userId,
     },
-    {icon: FiHeart, txt: liked ? 'Liked' : 'Like', action: toggleLike},
-    {icon: FiBookmark, txt: saved ? 'Saved' : 'Save', action: toggleBookMark},
+    {
+      icon: FiHeart,
+      txt: liked ? 'Liked' : 'Like',
+      action: () => toggleLike(props.postId),
+    },
+    {
+      icon: FiBookmark,
+      txt: saved ? 'Saved' : 'Save',
+      action: () => toggleBookMark(props.postId),
+    },
   ];
-
-  //custom hook to use intersection observer and implement a lazy loading
-  const {element, show} = useObserver();
 
   return (
     <>
@@ -128,6 +108,7 @@ function Post(props) {
             />
             {showComment && (
               <MakeComment
+                page={props.page}
                 postId={props.postId}
                 retweet={props.retweetId}
                 setNumComments={setNumComments}
@@ -138,8 +119,8 @@ function Post(props) {
             )}
             {showComment && (
               <CommentsList
+                page={props.page}
                 postId={props.postId}
-                postIndex={props.index}
                 retweet={props.retweetId}
                 offset={offset}
                 setOffset={setOffset}
