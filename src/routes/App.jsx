@@ -1,14 +1,14 @@
 import React from 'react';
-import {BrowserRouter, Outlet} from 'react-router-dom';
-import {Route} from 'react-router-dom';
-import {Routes} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import {SignUp} from '../pages/SignUp';
 import {Login} from '../pages/Login';
 import {Home} from '../pages/Home';
 import {Layout} from '../containers/Layout/Layout';
 import {PrivateRouteWrapper} from './PrivateRouteWrapper';
-import {Bookmarks} from '../pages/Bookmarks';
+import {Bookmarks} from '../pages/Bookmarks/bookmarks';
+import {BookmarksPage} from '../pages/Bookmarks';
+import {ExploreMenu} from '../components/common/ExploreMenu/ExploreMenu';
 
 function App() {
   return (
@@ -29,8 +29,7 @@ function App() {
             path="/bookmarks"
             element={
               <PrivateRouteWrapper>
-                <h2>BOOKMARKS</h2>
-                <Outlet />
+                <BookmarksPage />
               </PrivateRouteWrapper>
             }>
             <Route
@@ -38,8 +37,20 @@ function App() {
               element={
                 <Bookmarks
                   page="bookmarks_your_tweets"
-                  route="bookmarks/your_tweets"
+                  route="/bookmarks/your_tweets"
                 />
+              }
+            />
+            <Route
+              path="tweets"
+              element={
+                <Bookmarks page="bookmarks_tweets" route="/bookmarks/tweets" />
+              }
+            />
+            <Route
+              path="likes"
+              element={
+                <Bookmarks page="bookmarks_likes" route="/bookmarks/likes" />
               }
             />
           </Route>

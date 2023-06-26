@@ -8,9 +8,18 @@ const actionTypes = {
   onSuccess: 'SUCCESS',
   closeError: 'CLOSE_E',
   closeSuccess: 'CLOSE_S',
+  onReset: 'RESET',
+};
+const initialState = {
+  loading: false,
+  error: null,
+  response: null,
 };
 
 const reducerObj = (state, payload) => ({
+  [actionTypes.onReset]: {
+    ...initialState,
+  },
   [actionTypes.onLoading]: {
     ...state,
     error: null,
@@ -44,22 +53,20 @@ const reducer = (state, action) =>
     ? reducerObj(state, action.payload)[action.type]
     : null;
 
-const initialState = {
-  loading: false,
-  error: null,
-  response: null,
-};
-
-function useRequest() {
+function useRequest(init = initialState) {
   const reduxDispatch = useDispatch();
 
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, init);
 
   const closeErrorModal = () => {
     dispatch({type: actionTypes.closeError});
   };
   const closeSuccessModal = () => {
     dispatch({type: actionTypes.closeSuccess});
+  };
+
+  const reset = () => {
+    dispatch({type: actionTypes.onReset});
   };
 
   const parseError = (err) => {
@@ -99,6 +106,7 @@ function useRequest() {
 
   return {
     state,
+    reset,
     sendDataRequest,
     getDataReques,
     closeErrorModal,

@@ -1,6 +1,5 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-
 import {Header} from '@components/Navigation/Header/Header';
 import {Menu} from '@components/Navigation/Menu/Menu';
 import {MobileNavBar} from '@components/Navigation/MobileNavBar/MobileNavBar';
@@ -11,7 +10,7 @@ const routes = [
   {to: '/home', Icon: MdHome, text: 'Home', privacy: 'P'},
   {to: '/login', Icon: MdExplore, text: 'Explore', privacy: 'P'},
   {
-    to: '/bookmarks/your_tweets',
+    to: '/bookmarks',
     Icon: MdBookmark,
     text: 'Bookmarks',
     privacy: 'P',
@@ -25,10 +24,10 @@ function Layout({children}) {
   const [menu, setMenu] = React.useState(false);
   const theme = useTheme();
 
-  const markLink = ({isActive}) => ({
-    borderBottom: isActive ? `2px solid ${theme.brandColor}` : 'none',
-    color: isActive ? theme.brandColor : theme.secondaryText,
-  });
+  const markLink = ({isActive}) =>
+    isActive
+      ? {borderBottom: `2px solid ${theme.brandColor}`, color: theme.brandColor}
+      : {borderBottom: 'none', color: theme.secondaryText};
 
   const toggleMenu = () => {
     setMenu(!menu);

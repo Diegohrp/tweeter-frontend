@@ -3,6 +3,8 @@ import {postActionTypes} from '../actions/types/posts.types';
 const initialState = {
   home: [],
   bookmarks_your_tweets: [],
+  bookmarks_tweets: [],
+  bookmarks_likes: [],
 };
 
 const postsReducer = (state = initialState, action) => {

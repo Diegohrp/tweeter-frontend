@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 const Main = styled.main`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow-y: scroll;
   height: calc(100vh - 68.3px - 68.3px);
 

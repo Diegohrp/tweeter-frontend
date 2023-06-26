@@ -3,7 +3,7 @@ import {textFont, titleFont} from '@styles/GlobalStyles';
 import {GeneralButton} from '@styles/Generals/Button.styles';
 
 const MakePostContainer = styled.article`
-  margin: 20px auto;
+  margin: 20px 0;
   width: 95%;
   min-height: 155px;
   border-radius: 12px;
