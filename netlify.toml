@@ -3,6 +3,22 @@
   command = "npm run build"
 
 [[redirects]]
-from = "/*"
+from = "/home"
+to = "/index.html"
+status = 200
+
+from = "/bookmarks/*"
+to = "/index.html"
+status = 200
+
+from = "/signup"
+to = "/index.html"
+status = 200
+
+from = "/login"
+to = "/index.html"
+status = 200
+
+from = "/hashtags/*"
 to = "/index.html"
 status = 200
