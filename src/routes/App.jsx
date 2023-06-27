@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {HashRouter, Routes, Route} from 'react-router-dom';
 
 import {SignUp} from '../pages/SignUp';
 import {Login} from '../pages/Login';
@@ -12,7 +12,7 @@ import {ExploreMenu} from '../components/common/ExploreMenu/ExploreMenu';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Layout>
         <Routes>
           <Route
@@ -61,7 +61,7 @@ function App() {
           <Route path="*" element={<h2>Not found</h2>} />
         </Routes>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
