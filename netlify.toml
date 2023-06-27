@@ -8,6 +8,6 @@ to = "/index.html"
 status = 200
 
 [[redirects]]
-from = "/*/tweeter/api/*"
+from = "/https://tweeter-backend-production.up.railway.app/tweeter/api/*"
 to = "https://tweeter-backend-production.up.railway.app/tweeter/api/:splat"
 status = 200
