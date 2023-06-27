@@ -7,18 +7,22 @@ from = "/home"
 to = "/index.html"
 status = 200
 
+[[redirects]]
 from = "/bookmarks/*"
 to = "/index.html"
 status = 200
 
+[[redirects]]
 from = "/signup"
 to = "/index.html"
 status = 200
 
+[[redirects]]
 from = "/login"
 to = "/index.html"
 status = 200
 
+[[redirects]]
 from = "/hashtags/*"
 to = "/index.html"
 status = 200
