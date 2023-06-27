@@ -7,13 +7,12 @@ from = "/login"
 to = "/index.html"
 status = 200
 
-
 [[redirects]]
 from = "/home"
 to = "/index.html"
 status = 200
 
 [[redirects]]
-from = "/https://tweeter-backend-production.up.railway.app/tweeter/api/*"
+from = "/tweeter/api/*"
 to = "https://tweeter-backend-production.up.railway.app/tweeter/api/:splat"
 status = 200
