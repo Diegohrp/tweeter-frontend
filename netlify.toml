@@ -3,26 +3,11 @@
   command = "npm run build"
 
 [[redirects]]
-from = "/home"
+from = "/*"
 to = "/index.html"
 status = 200
 
 [[redirects]]
-from = "/bookmarks/*"
-to = "/index.html"
-status = 200
-
-[[redirects]]
-from = "/signup"
-to = "/index.html"
-status = 200
-
-[[redirects]]
-from = "/login"
-to = "/index.html"
-status = 200
-
-[[redirects]]
-from = "/hashtags/*"
-to = "/index.html"
+from = "/tweeter/api/*"
+to = "https://tweeter-backend-production.up.railway.app/tweeter/api/:splat"
 status = 200
