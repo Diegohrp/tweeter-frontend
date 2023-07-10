@@ -34,6 +34,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${textFont};
     background-color: ${(props) => props.theme.background};
    /*  color: ${(props) => props.theme.primaryText} */
+    overflow: hidden;
   }
 
 `;

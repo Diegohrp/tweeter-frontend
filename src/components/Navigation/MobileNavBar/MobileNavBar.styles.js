@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 const NavBar = styled.nav`
   width: 100%;
-  height: 68.31px;
+  height: 68.3px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   font-size: 3rem;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   background-color: ${(props) => props.theme.cards};
   a {

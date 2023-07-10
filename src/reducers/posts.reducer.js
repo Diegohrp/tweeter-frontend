@@ -1,10 +1,10 @@
 import {postActionTypes} from '../actions/types/posts.types';
 
 const initialState = {
-  home: [],
-  bookmarks_your_tweets: [],
-  bookmarks_tweets: [],
-  bookmarks_likes: [],
+  home: {posts: [], limit: 4, offset: 0, scroll: 0},
+  'bookmarks/your_tweets': {posts: [], limit: 4, offset: 0, scroll: 0},
+  'bookmarks/tweets': {posts: [], limit: 4, offset: 0, scroll: 0},
+  bookmarks_likes: {posts: [], limit: 4, offset: 0, scroll: 0},
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -15,12 +15,36 @@ const postsReducer = (state = initialState, action) => {
     //Adds posts to the state when the user first loads the page
     //or scrolls until reaches the bottom and a new request is made
     case postActionTypes.setPosts:
-      newPosts = [...state[action.payload.page], ...action.payload.data];
-      return {...state, [action.payload.page]: newPosts};
+      newPosts = [...state[action.payload.page].posts, ...action.payload.data];
+      return {
+        ...state,
+        [action.payload.page]: {
+          posts: newPosts,
+          limit: action.payload.limit,
+          offset: action.payload.offset,
+          scroll: state[action.payload.page].scroll,
+        },
+      };
+    //stores a new value of scrollTop for each page
+    case postActionTypes.setScroll:
+      return {
+        ...state,
+        [action.payload.page]: {
+          ...state[action.payload.page],
+          scroll: action.payload.scroll,
+        },
+      };
 
     //Adds post to the state when the user makes a new post in "home" page.
     case postActionTypes.setUserPost:
-      return {...state, home: [action.payload, ...state.home]};
+      return {
+        ...state,
+        home: {
+          posts: [action.payload.data, ...state.home.posts],
+          limit: action.payload.limit,
+          offset: action.payload.offset,
+        },
+      };
 
     //Cleans all data related to posts when the user logs out
     case postActionTypes.cleanPosts:

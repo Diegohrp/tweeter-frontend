@@ -6,10 +6,10 @@ function useScrollRequest(
   getDataService,
   backendRoute,
   frontendPage,
-  setDataAction
+  setDataAction,
+  limit,
+  offset
 ) {
-  const limit = 4;
-  const [offset, setOffset] = React.useState(limit);
   const [endScroll, setEndScroll] = React.useState(false);
 
   const {
@@ -21,26 +21,35 @@ function useScrollRequest(
 
   //Make a request when the end of the scroll has been reached.
   const onScroll = async (e) => {
-    //clientHeight: container height, what the user can see without scrolling
-    //scrollTop: How much height the user has scrolled
-    if (
-      e.target.clientHeight + e.target.scrollTop >= e.target.scrollHeight &&
-      !loading &&
-      !endScroll
-    ) {
-      setEndScroll(true);
-      await getDataReques(() => getDataService(limit, offset, backendRoute));
-      setOffset(offset + limit);
+    //Prevents that a request is made when the user loads a new page and has scrolled in the previous page
+    if (offset > 0) {
+      //clientHeight: container height, what the user can see without scrolling
+      //scrollTop: How much height the user has scrolled
+      if (
+        e.target.clientHeight + e.target.scrollTop >= e.target.scrollHeight &&
+        !loading &&
+        !endScroll
+      ) {
+        setEndScroll(true);
+        await getDataReques(() => getDataService(limit, offset, backendRoute));
+        setEndScroll(false);
+      }
     }
   };
   React.useEffect(() => {
     if (response) {
-      dispatch(setDataAction({data: response, page: frontendPage}));
-      setEndScroll(false);
+      dispatch(
+        setDataAction({
+          data: response,
+          page: frontendPage,
+          limit,
+          offset: limit + offset,
+        })
+      );
     }
   }, [response]);
 
-  return {limit, offset, setOffset, loading, onScroll};
+  return {loading, onScroll};
 }
 
 export {useScrollRequest};

@@ -6,8 +6,8 @@ const Aside = styled.aside`
   display: grid;
   justify-self: center;
   margin-bottom: 20px;
+
   nav {
-    margin-top: 20px;
     height: 220px;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
@@ -42,6 +42,7 @@ const Aside = styled.aside`
     nav {
       width: 100%;
       max-width: 300px;
+      position: fixed;
     }
   }
 `;

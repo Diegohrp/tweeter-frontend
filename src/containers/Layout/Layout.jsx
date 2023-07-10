@@ -1,10 +1,11 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Header} from '@components/Navigation/Header/Header';
 import {Menu} from '@components/Navigation/Menu/Menu';
 import {MobileNavBar} from '@components/Navigation/MobileNavBar/MobileNavBar';
 import {MdHome, MdExplore, MdBookmark} from 'react-icons/md';
 import {useTheme} from 'styled-components';
+import {setScrollAction} from '../../actions/creators/posts.creators';
 
 const routes = [
   {to: '/home', Icon: MdHome, text: 'Home', privacy: 'P'},
@@ -17,9 +18,20 @@ const routes = [
   },
 ];
 
-function Layout({children}) {
+function Layout({children, scrollRef, currentPage}) {
   //Global state from redux to render the component if the user is auth
   const userAuth = useSelector((state) => state.user.isAuth);
+  //Updates the scrollTop in the global state when the user changes the page
+  const dispatch = useDispatch();
+
+  const saveLastScroll = () => {
+    dispatch(
+      setScrollAction({
+        page: currentPage,
+        scroll: scrollRef.current.scrollTop,
+      })
+    );
+  };
 
   const [menu, setMenu] = React.useState(false);
   const theme = useTheme();
@@ -36,10 +48,19 @@ function Layout({children}) {
   if (userAuth) {
     return (
       <>
-        <Header toggleMenu={toggleMenu} routes={routes} markLink={markLink} />
+        <Header
+          toggleMenu={toggleMenu}
+          routes={routes}
+          markLink={markLink}
+          setScroll={saveLastScroll}
+        />
         {menu && <Menu />}
         {children}
-        <MobileNavBar routes={routes} markLink={markLink} />
+        <MobileNavBar
+          routes={routes}
+          markLink={markLink}
+          setScroll={saveLastScroll}
+        />
       </>
     );
   }

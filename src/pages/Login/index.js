@@ -78,7 +78,7 @@ function Login() {
       //A token was received, so change the global state (from redux) isAuth to true
       dispatch(authUserAction(true));
       //Redirect user to home
-      navigate('/');
+      navigate('/home');
     }
   }, [response]);
 

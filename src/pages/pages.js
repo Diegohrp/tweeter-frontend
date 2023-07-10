@@ -2,11 +2,8 @@
 //the redux state array where we'll be adding and getting posts
 //Example: home:[],likes:[],tweets:[] etc
 export const pages = {
+  //{frontendPage:backendRoute}
   home: 'home',
-  bookmarks: {
-    yourTweets: {
-      route: 'bookmarks/your_tweets',
-      page: 'bookmarks_your_tweets',
-    },
-  },
+  'bookmarks/your_tweets': 'bookmarks/your_tweets',
+  'bookmarks/tweets': 'bookmarks/tweets',
 };

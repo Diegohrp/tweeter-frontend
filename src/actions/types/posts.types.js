@@ -5,6 +5,7 @@ const postActionTypes = {
   loadPostComments: 'LOAD_POST_COMMENTS',
   setUserComment: 'SET_USER_COMMENT',
   setLikeComment: 'SET_LIKE_COMMENT',
+  setScroll: 'SET_SCROLL',
 };
 
 export {postActionTypes};

@@ -28,12 +28,12 @@ function Post(props) {
     inter: used to change the word and color in buttons and to decide if add/remove
     the interaction.
     num: Number of reactions (likes,retweets,bookmarks)
-    toogle: function to add/remove likes,retweets,bookmarks
+    toggle: function to add/remove likes,retweets,bookmarks
   */
   const {
     inter: liked,
     num: numLikes,
-    toogle: toggleLike,
+    toggle: toggleLike,
   } = useToggleInteraction({
     interaction: props.liked,
     interactionName: 'likePost',
@@ -43,14 +43,14 @@ function Post(props) {
   const {
     inter: retweeted,
     num: numRetweets,
-    toogle: toggleRetweet,
+    toggle: toggleRetweet,
   } = useToggleInteraction({
     interaction: props.whoRetweetedId === userId,
     interactionName: 'retweet',
     quantity: props.numRetweets,
   });
 
-  const {inter: saved, toogle: toggleBookMark} = useToggleInteraction({
+  const {inter: saved, toggle: toggleBookMark} = useToggleInteraction({
     interaction: props.saved,
     interactionName: 'bookmarks',
   });
@@ -97,38 +97,37 @@ function Post(props) {
         </Retweeted>
       )}
       <PostContainer ref={element}>
-        {show && (
-          <>
-            <PostCard
-              buttons={buttons}
-              {...props}
-              numLikes={numLikes}
-              numRetweets={numRetweets}
+        <>
+          <PostCard
+            show={show}
+            buttons={buttons}
+            {...props}
+            numLikes={numLikes}
+            numRetweets={numRetweets}
+            numComments={numComments}
+          />
+          {showComment && (
+            <MakeComment
+              page={props.page}
+              postId={props.postId}
+              retweet={props.retweetId}
+              setNumComments={setNumComments}
               numComments={numComments}
+              offset={offset}
+              setOffset={setOffset}
             />
-            {showComment && (
-              <MakeComment
-                page={props.page}
-                postId={props.postId}
-                retweet={props.retweetId}
-                setNumComments={setNumComments}
-                numComments={numComments}
-                offset={offset}
-                setOffset={setOffset}
-              />
-            )}
-            {showComment && (
-              <CommentsList
-                page={props.page}
-                postId={props.postId}
-                retweet={props.retweetId}
-                offset={offset}
-                setOffset={setOffset}
-                limit={limit}
-              />
-            )}
-          </>
-        )}
+          )}
+          {showComment && (
+            <CommentsList
+              page={props.page}
+              postId={props.postId}
+              retweet={props.retweetId}
+              offset={offset}
+              setOffset={setOffset}
+              limit={limit}
+            />
+          )}
+        </>
       </PostContainer>
     </>
   );

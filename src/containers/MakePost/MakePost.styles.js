@@ -5,7 +5,7 @@ import {GeneralButton} from '@styles/Generals/Button.styles';
 const MakePostContainer = styled.article`
   margin: 20px 0;
   width: 95%;
-  min-height: 155px;
+  height: auto;
   border-radius: 12px;
   padding: 11px 14px 15.5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);

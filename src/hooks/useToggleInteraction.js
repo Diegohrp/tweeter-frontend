@@ -6,7 +6,7 @@ function useToggleInteraction({interaction, interactionName, quantity = 0}) {
   const [num, setNum] = React.useState(quantity);
 
   //Makes a request with the DB to add/remove a like, bookmark or retweet
-  const toogle = async (postId) => {
+  const toggle = async (postId) => {
     try {
       if (inter) {
         await removeInteraction(postId, interactionName);
@@ -21,7 +21,7 @@ function useToggleInteraction({interaction, interactionName, quantity = 0}) {
     }
   };
 
-  return {inter, num, toogle};
+  return {inter, num, toggle};
 }
 
 export {useToggleInteraction};

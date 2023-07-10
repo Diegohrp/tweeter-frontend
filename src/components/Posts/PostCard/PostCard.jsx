@@ -14,6 +14,7 @@ import {InteractionButton} from '../InteractionButton/InteractionButton';
 import {Link} from 'react-router-dom';
 
 const PostCard = ({
+  show,
   author,
   userPhoto,
   date,
@@ -43,7 +44,7 @@ const PostCard = ({
   return (
     <Card>
       <Author>
-        <SmallProfileImg image={userPhoto} />
+        {show && <SmallProfileImg image={userPhoto} />}
         <div>
           <h2>{author}</h2>
           <span>{date}</span>
@@ -57,7 +58,7 @@ const PostCard = ({
           </React.Fragment>
         ))}
       </TextContent>
-      {imgContent && (
+      {imgContent && show && (
         <ImgContent>
           <img src={imgContent} alt="post image" />
         </ImgContent>

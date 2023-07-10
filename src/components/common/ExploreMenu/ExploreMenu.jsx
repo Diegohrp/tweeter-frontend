@@ -1,15 +1,10 @@
 import React from 'react';
-import {Navigate, NavLink, useLocation} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {useTheme} from 'styled-components';
 import {Aside} from './ExploreMenu.styles';
 
 const ExploreMenu = ({pages}) => {
-  const location = useLocation();
   const theme = useTheme();
-
-  if (location.pathname === '/bookmarks') {
-    return <Navigate to={pages[0].path} />;
-  }
 
   const currentPage = ({isActive}) =>
     isActive

@@ -27,7 +27,11 @@ const privacyIds = {
   'People you follow': 2,
 };
 
-function MakePost({offset, setOffset}) {
+function MakePost() {
+  //limit and offset from redux
+  const offset = useSelector((state) => state.posts.home.offset);
+  const limit = useSelector((state) => state.posts.home.limit);
+
   //user photo image from redux
   const userPhoto = useSelector((state) => state.user.photo);
   //userId from redux
@@ -128,21 +132,24 @@ function MakePost({offset, setOffset}) {
     if (response) {
       dispatch(
         SetUserPostAction({
-          id: response.insertId,
-          name: userName,
-          last_name: userLastName,
-          photo: userPhoto,
-          created_at: null,
-          content: response.content,
-          num_likes: 0,
-          num_comments: 0,
-          num_retweets: 0,
-          privacy_id: response.privacy_id,
-          image: response?.image,
+          data: {
+            id: response.insertId,
+            name: userName,
+            last_name: userLastName,
+            photo: userPhoto,
+            created_at: null,
+            content: response.content,
+            num_likes: 0,
+            num_comments: 0,
+            num_retweets: 0,
+            privacy_id: response.privacy_id,
+            image: response?.image,
+          },
+          limit,
+          offset: limit + offset,
         })
       );
       cleanTweet();
-      setOffset(offset + 1);
     }
   }, [response]);
 

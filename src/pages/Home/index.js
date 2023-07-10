@@ -9,22 +9,22 @@ import {Main} from './styles';
 import {pages} from '../pages';
 
 function Home({page, route}) {
-  const {limit, offset, setOffset, loading, onScroll} = useScrollRequest(
+  /*const {limit, offset, setOffset, loading, onScroll} = useScrollRequest(
     getPosts,
     route,
     page,
     setPostsAction
-  );
+  );*/
 
   return (
-    <Main onScroll={onScroll}>
-      <MakePost offset={offset} setOffset={setOffset} />
-      <PostsList page={page} requestFn={() => getPosts(limit, 0, route)} />
-      {loading && (
+    <Main>
+      <MakePost />
+      <PostsList page={page} route={route} requestFn={getPosts} />
+      {/*loading && (
         <div className="loader">
           <Loading />
         </div>
-      )}
+      )*/}
     </Main>
   );
 }

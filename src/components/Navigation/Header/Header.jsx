@@ -21,7 +21,7 @@ import profileTemporal from '@images/profile-default.svg';
 //This component gets the img URL for the SmallImg component
 //and adds the data to the global state
 
-const Header = ({toggleMenu, routes, markLink}) => {
+const Header = ({toggleMenu, routes, markLink, setScroll}) => {
   //custom hook to make a request
   const {
     state: {response},
@@ -56,7 +56,7 @@ const Header = ({toggleMenu, routes, markLink}) => {
       <nav>
         <ul>
           {routes.map((route) => (
-            <li key={route.to}>
+            <li key={route.to} onClick={setScroll}>
               <NavLink to={route.to} style={markLink}>
                 {route.text}
               </NavLink>

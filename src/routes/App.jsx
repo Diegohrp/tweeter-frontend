@@ -1,22 +1,20 @@
 import React from 'react';
-import {HashRouter, Routes, Route} from 'react-router-dom';
-
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {SignUp} from '../pages/SignUp';
 import {Login} from '../pages/Login';
 import {Home} from '../pages/Home';
-import {Layout} from '../containers/Layout/Layout';
+import {InfiniteScroll} from '../containers/Layout/InfiniteScroll';
 import {PrivateRouteWrapper} from './PrivateRouteWrapper';
 import {Bookmarks} from '../pages/Bookmarks/bookmarks';
 import {BookmarksPage} from '../pages/Bookmarks';
-import {ExploreMenu} from '../components/common/ExploreMenu/ExploreMenu';
+import {pages} from '../pages/pages';
 
 function App() {
   return (
-    <HashRouter>
-      <Layout>
+    <BrowserRouter>
+      <InfiniteScroll>
         <Routes>
           <Route
-            exact
             path="/home"
             element={
               <PrivateRouteWrapper>
@@ -36,15 +34,15 @@ function App() {
               path="your_tweets"
               element={
                 <Bookmarks
-                  page="bookmarks_your_tweets"
-                  route="/bookmarks/your_tweets"
+                  page="bookmarks/your_tweets"
+                  route="bookmarks/your_tweets"
                 />
               }
             />
             <Route
               path="tweets"
               element={
-                <Bookmarks page="bookmarks_tweets" route="/bookmarks/tweets" />
+                <Bookmarks page="bookmarks/tweets" route="bookmarks/tweets" />
               }
             />
             <Route
@@ -60,8 +58,8 @@ function App() {
           <Route exact path="/hashtags/:hash" element={<h2>HASHTAGS</h2>} />
           <Route path="*" element={<h2>Not found</h2>} />
         </Routes>
-      </Layout>
-    </HashRouter>
+      </InfiniteScroll>
+    </BrowserRouter>
   );
 }
 

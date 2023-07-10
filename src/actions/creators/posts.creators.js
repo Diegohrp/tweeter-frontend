@@ -28,3 +28,8 @@ export const setLikeCommentAction = (payload) => ({
   type: postActionTypes.setLikeComment,
   payload,
 });
+
+export const setScrollAction = (payload) => ({
+  type: postActionTypes.setScroll,
+  payload,
+});

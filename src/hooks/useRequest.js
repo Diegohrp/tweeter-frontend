@@ -100,6 +100,7 @@ function useRequest(init = initialState) {
       const res = await request();
       dispatch({type: actionTypes.onSuccess, payload: res});
     } catch (err) {
+      console.error(err);
       dispatch({type: actionTypes.onError, payload: parseError(err)});
     }
   };
