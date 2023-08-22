@@ -2,15 +2,14 @@ import React, {useRef} from 'react';
 import {useScrollRequest} from '../../hooks/useScrollRequest';
 import {Loading} from '../../components/Request/Loading/Loading';
 import {useLocation} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import {getPosts} from '../../services/post.service';
 import {setPostsAction} from '../../actions/creators/posts.creators';
-import {pages} from '../../pages/pages';
 import {Layout} from './Layout';
 
 const InfiniteScroll = ({children}) => {
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
-  const backendRoute = pages[currentPage];
 
   //limit and offset from redux
   const limit = useSelector((state) => state.posts[currentPage]?.limit);
@@ -22,7 +21,6 @@ const InfiniteScroll = ({children}) => {
 
   const {loading, onScroll} = useScrollRequest(
     getPosts,
-    backendRoute,
     currentPage,
     setPostsAction,
     limit,

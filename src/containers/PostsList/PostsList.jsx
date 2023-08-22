@@ -6,8 +6,15 @@ import {Post} from '../Post/Post';
 import {setPostsAction} from '../../actions/creators/posts.creators';
 import {Loading} from '@components/Request/Loading/Loading';
 import {formatPostDate} from '../../utils/formatDate';
+import {useLocation} from 'react-router-dom';
 
-function PostsList({requestFn, page, route}) {
+function PostsList({requestFn}) {
+  const location = useLocation();
+  //removes the "/" from the pathname of the current location
+  //page is part of a backend endpoint route
+  //page is also used as a key for redux states
+  const page = location.pathname.slice(1);
+
   //Global state from redux and dispatcher
   const offset = useSelector((state) => state.posts[page].offset);
   const limit = useSelector((state) => state.posts[page].limit);
@@ -25,7 +32,7 @@ function PostsList({requestFn, page, route}) {
   const makeFirstRequest = async () => {
     //It's the first time the componet renders, makes a request to get the posts.
     if (!list && homePosts.length === 0) {
-      await getDataReques(() => requestFn(limit, offset, route));
+      await getDataReques(() => requestFn(limit, offset, page));
     } else if (list && !homePosts.length) {
       dispatch(
         setPostsAction({
@@ -36,6 +43,7 @@ function PostsList({requestFn, page, route}) {
           scroll: 0,
         })
       );
+      reset();
     }
   };
 

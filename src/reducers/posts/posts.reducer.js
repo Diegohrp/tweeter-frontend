@@ -1,10 +1,13 @@
-import {postActionTypes} from '../actions/types/posts.types';
+import {postActionTypes} from '../../actions/types/posts.types';
+import {setNewPostsList, loadComments} from './cases';
+
+const initialStatePosts = {posts: [], limit: 4, offset: 0, scroll: 0};
 
 const initialState = {
-  home: {posts: [], limit: 4, offset: 0, scroll: 0},
-  'bookmarks/your_tweets': {posts: [], limit: 4, offset: 0, scroll: 0},
-  'bookmarks/tweets': {posts: [], limit: 4, offset: 0, scroll: 0},
-  bookmarks_likes: {posts: [], limit: 4, offset: 0, scroll: 0},
+  home: initialStatePosts,
+  'bookmarks/your_tweets': initialStatePosts,
+  'bookmarks/tweets': initialStatePosts,
+  'bookmarks/likes': initialStatePosts,
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -15,16 +18,8 @@ const postsReducer = (state = initialState, action) => {
     //Adds posts to the state when the user first loads the page
     //or scrolls until reaches the bottom and a new request is made
     case postActionTypes.setPosts:
-      newPosts = [...state[action.payload.page].posts, ...action.payload.data];
-      return {
-        ...state,
-        [action.payload.page]: {
-          posts: newPosts,
-          limit: action.payload.limit,
-          offset: action.payload.offset,
-          scroll: state[action.payload.page].scroll,
-        },
-      };
+      return setNewPostsList(state, action.payload);
+
     //stores a new value of scrollTop for each page
     case postActionTypes.setScroll:
       return {
@@ -52,17 +47,7 @@ const postsReducer = (state = initialState, action) => {
 
     //Loads the comments from a specific post at the specific page
     case postActionTypes.loadPostComments:
-      currentPostIndex = action.payload.currentPostIndex;
-      newPosts = [...state[action.payload.page]];
-
-      newPosts[currentPostIndex] = {
-        ...newPosts[currentPostIndex],
-        comments: [
-          ...(newPosts[currentPostIndex].comments || []),
-          ...action.payload.comments,
-        ],
-      };
-      return {...state, [action.payload.page]: newPosts};
+      return loadComments(state, action.payload);
 
     //Adds a comment to the specific post at the specific page
     case postActionTypes.setUserComment:

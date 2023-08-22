@@ -27,7 +27,7 @@ function CommentsList({page, postId, retweet, offset, limit, setOffset}) {
   const dispatch = useDispatch();
 
   //global states from redux
-  const posts = useSelector((state) => state.posts[page]);
+  const posts = useSelector((state) => state.posts[page].posts);
   const currentPostIndex = posts.findIndex(
     (post) => post.id === postId && post.retweet_id === retweet
   );

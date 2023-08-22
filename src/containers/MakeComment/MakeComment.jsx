@@ -39,7 +39,7 @@ function MakeComment({
   const name = useSelector((state) => state.user.name);
   const last_name = useSelector((state) => state.user.lastName);
   const currentPostIndex = useSelector((state) =>
-    state.posts[page].findIndex(
+    state.posts[page].posts.findIndex(
       (post) => post.id === postId && post.retweet_id === retweet
     )
   );
