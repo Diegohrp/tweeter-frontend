@@ -12,9 +12,11 @@ export function setNewPostsList(state, payload) {
   };
 }
 
+const getNewList = (state, page) => [...state[page].posts];
+
 export function loadComments(state, payload) {
   const {currentPostIndex, page, comments} = payload;
-  const newPostsList = [...state[page].posts];
+  const newPostsList = getNewList(state, page);
   const currentPost = newPostsList[currentPostIndex];
 
   newPostsList[currentPostIndex] = {
@@ -25,4 +27,30 @@ export function loadComments(state, payload) {
   return {...state, [page]: {...state[page], posts: newPostsList}};
 }
 
-function getCurrentPost({index, posts}) {}
+export function addComment(state, payload) {
+  const {currentPostIndex, page, comment} = payload;
+  const newPostsList = getNewList(state, page);
+  const currentPost = newPostsList[currentPostIndex];
+
+  newPostsList[currentPostIndex] = {
+    ...currentPost,
+    comments: [comment, ...currentPost.comments],
+  };
+
+  return {...state, [page]: {...state[page], posts: newPostsList}};
+}
+
+export function addLikeToComment(state, payload) {
+  const {page, postIndex, commentIndex, num_likes, liked} = payload;
+  const newPostsList = getNewList(state, page);
+  const currentPost = newPostsList[postIndex];
+  const comment = currentPost.comments[commentIndex];
+
+  currentPost.comments[commentIndex] = {
+    ...comment,
+    num_likes,
+    liked,
+  };
+
+  return {...state, [page]: {...state[page], posts: newPostsList}};
+}

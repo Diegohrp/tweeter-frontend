@@ -33,10 +33,11 @@ function CommentCard({
 }) {
   //Find the index of the current comment in the array comments[] of the current post
   const currentCommentIndex = useSelector((state) =>
-    state.posts[page][postIndex]?.comments.findIndex(
+    state.posts[page].posts[postIndex]?.comments.findIndex(
       (comment) => comment.id === id
     )
   );
+
   //Redux dispatcher
   const dispatch = useDispatch();
 

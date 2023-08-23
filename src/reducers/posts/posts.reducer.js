@@ -1,5 +1,10 @@
 import {postActionTypes} from '../../actions/types/posts.types';
-import {setNewPostsList, loadComments} from './cases';
+import {
+  setNewPostsList,
+  loadComments,
+  addComment,
+  addLikeToComment,
+} from './cases';
 
 const initialStatePosts = {posts: [], limit: 4, offset: 0, scroll: 0};
 
@@ -51,20 +56,12 @@ const postsReducer = (state = initialState, action) => {
 
     //Adds a comment to the specific post at the specific page
     case postActionTypes.setUserComment:
-      currentPostIndex = action.payload.currentPostIndex;
-      newPosts = [...state[action.payload.page]];
-      newPosts[currentPostIndex] = {
-        ...newPosts[currentPostIndex],
-        comments: [
-          action.payload.comment,
-          ...newPosts[currentPostIndex].comments,
-        ],
-      };
-      return {...state, [action.payload.page]: newPosts};
+      return addComment(state, action.payload);
 
     //Adds/removes like from a post coment at a specific page
     case postActionTypes.setLikeComment:
-      currentPostIndex = action.payload.postIndex;
+      return addLikeToComment(state, action.payload);
+    /* currentPostIndex = action.payload.postIndex;
       newPosts = [...state[action.payload.page]];
       const comment =
         newPosts[currentPostIndex].comments[action.payload.commentIndex];
@@ -74,7 +71,7 @@ const postsReducer = (state = initialState, action) => {
         num_likes: action.payload.num_likes,
         liked: action.payload.liked,
       };
-      return {...state, [action.payload.page]: newPosts};
+      return {...state, [action.payload.page]: newPosts}; */
 
     default:
       return state;
