@@ -55,11 +55,12 @@ function PostsList({requestFn}) {
     <PostsListContainer>
       {loading && <Loading />}
       {!loading &&
-        homePosts.map((post) => (
+        homePosts.map((post, index) => (
           <Post
             key={`home-${post.who_retweeted ? 'retweet' : 'post'}-${post.id}${
               post?.who_retweeted_id
             }`}
+            postIndex={index}
             page={page}
             postId={post.id}
             authorId={post.user_id}

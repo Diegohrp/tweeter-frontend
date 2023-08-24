@@ -5,6 +5,11 @@ export const setPostsAction = (payload) => ({
   payload,
 });
 
+export const setPostInteractionAction = (payload) => ({
+  type: postActionTypes.setPostInteraction,
+  payload,
+});
+
 export const SetUserPostAction = (payload) => ({
   type: postActionTypes.setUserPost,
   payload,

@@ -15,10 +15,10 @@ async function getPosts(limit, offset, route) {
   return data;
 }
 
-async function addInteraction(body, interaction) {
+async function addInteraction(postId, interaction) {
   const {data} = await axios.post(
     endPoints.posts[interaction],
-    body,
+    {postId},
     headersJson
   );
   return data;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {titleFont} from '../../../styles/GlobalStyles';
 const StyledHeader = styled.header`
-  position: sticky;
+  position: fixed;
   top: 0;
   background-color: ${(props) => props.theme.cards};
   width: 100%;

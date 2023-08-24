@@ -54,3 +54,16 @@ export function addLikeToComment(state, payload) {
 
   return {...state, [page]: {...state[page], posts: newPostsList}};
 }
+
+export function addInteraction(state, payload) {
+  //interaction: {name,numKey}, example: {name:"liked",numKey:"num_likes"}
+  const {page, postIndex, interaction, interactionValue, quantity} = payload;
+  const newPostsList = getNewList(state, page);
+  const currentPost = newPostsList[postIndex];
+  newPostsList[postIndex] = {
+    ...currentPost,
+    [interaction.key]: interactionValue, //truly or falsy
+    [interaction.numKey]: quantity, //num of likes,bookmarks or retweets
+  };
+  return {...state, [page]: {...state[page], posts: newPostsList}};
+}

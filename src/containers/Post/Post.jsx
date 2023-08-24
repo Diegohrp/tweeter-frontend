@@ -25,34 +25,38 @@ function Post(props) {
   const {element, show} = useObserver();
   /*
     Custom hook "useToggleInteraction"
-    inter: used to change the word and color in buttons and to decide if add/remove
-    the interaction.
+    interaction.key: the name of the interaction in the redux state and Post props
+    interaction.numKey: the name of the key for the num of any reaction in the redux state and Post props
     num: Number of reactions (likes,retweets,bookmarks)
     toggle: function to add/remove likes,retweets,bookmarks
+    liked,saved and who_retweeted_id are props, and they are modified by redux.
+    They are global states to persist the change in the button when the user changes the page and then returns.
   */
-  const {
-    inter: liked,
-    num: numLikes,
-    toggle: toggleLike,
-  } = useToggleInteraction({
-    interaction: props.liked,
-    interactionName: 'likePost',
+  const {toggle: toggleLike} = useToggleInteraction({
+    interaction: {key: 'liked', numKey: 'num_likes'},
+    interValue: props.liked,
     quantity: props.numLikes,
+    route: 'likePost',
+    page: props.page,
+    postIndex: props.postIndex,
   });
 
-  const {
-    inter: retweeted,
-    num: numRetweets,
-    toggle: toggleRetweet,
-  } = useToggleInteraction({
-    interaction: props.whoRetweetedId === userId,
-    interactionName: 'retweet',
+  const {toggle: toggleRetweet} = useToggleInteraction({
+    interaction: {key: 'who_retweeted_id', numKey: 'num_retweets'},
+    interValue: props.whoRetweetedId,
     quantity: props.numRetweets,
+    route: 'retweet',
+    page: props.page,
+    postIndex: props.postIndex,
   });
 
-  const {inter: saved, toggle: toggleBookMark} = useToggleInteraction({
-    interaction: props.saved,
-    interactionName: 'bookmarks',
+  const {toggle: toggleBookMark} = useToggleInteraction({
+    interaction: {key: 'saved', numKey: ''},
+    interValue: props.saved,
+    quantity: 0,
+    route: 'bookmarks',
+    page: props.page,
+    postIndex: props.postIndex,
   });
 
   //Offset and limit to get comments
@@ -68,25 +72,25 @@ function Post(props) {
     },
     {
       icon: MdOutlineCached,
-      txt: retweeted ? 'Retweeted' : 'Retweet',
+      txt: props.whoRetweetedId ? 'Retweeted' : 'Retweet',
       action: () => toggleRetweet(props.postId),
       disabled: props.authorId === userId,
     },
     {
       icon: FiHeart,
-      txt: liked ? 'Liked' : 'Like',
+      txt: props.liked ? 'Liked' : 'Like',
       action: () => toggleLike(props.postId),
     },
     {
       icon: FiBookmark,
-      txt: saved ? 'Saved' : 'Save',
+      txt: props.saved ? 'Saved' : 'Save',
       action: () => toggleBookMark(props.postId),
     },
   ];
 
   return (
     <>
-      {props.whoRetweeted && (
+      {props.whoRetweeted && props.whoRetweetedId != 0 && (
         <Retweeted>
           <Link to="">
             <MdOutlineCached />
@@ -102,8 +106,8 @@ function Post(props) {
             show={show}
             buttons={buttons}
             {...props}
-            numLikes={numLikes}
-            numRetweets={numRetweets}
+            numLikes={props.numLikes}
+            numRetweets={props.numRetweets}
             numComments={numComments}
           />
           {showComment && (
