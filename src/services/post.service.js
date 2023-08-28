@@ -7,9 +7,10 @@ async function sendPostData(body) {
   return data;
 }
 
-async function getPosts(limit, offset, route) {
+async function getPosts(limit, offset, route, filter = '') {
+  //console.log(endPoints.posts.getPosts(limit, offset, route, filter));
   const {data} = await axios.get(
-    endPoints.posts.getPosts(limit, offset, route),
+    endPoints.posts.getPosts(limit, offset, route, filter),
     headersJson
   );
   return data;

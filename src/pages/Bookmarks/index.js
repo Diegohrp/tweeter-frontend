@@ -1,7 +1,7 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom';
 import {ExploreMenu} from '../../components/common/ExploreMenu/ExploreMenu';
-import {Main} from './styles';
+import {Main} from '../../styles/Generals/Main';
 import {useLocation, Navigate} from 'react-router-dom';
 
 function BookmarksPage() {
@@ -24,12 +24,14 @@ function BookmarksPage() {
     },
   ];
 
-  return (
-    <Main>
-      <ExploreMenu pages={bookmarksPages} />
-      <Outlet />
-    </Main>
-  );
+  if (location.pathname !== '/bookmarks') {
+    return (
+      <Main>
+        <ExploreMenu pages={bookmarksPages} />
+        <Outlet />
+      </Main>
+    );
+  }
 }
 
 export {BookmarksPage};

@@ -19,6 +19,11 @@ export const cleanPostsAction = () => ({
   type: postActionTypes.cleanPosts,
 });
 
+export const cleanPostsFromPageAction = (payload) => ({
+  type: postActionTypes.cleanPostsFromPage,
+  payload,
+});
+
 export const loadPostCommentsAction = (payload) => ({
   type: postActionTypes.loadPostComments,
   payload,

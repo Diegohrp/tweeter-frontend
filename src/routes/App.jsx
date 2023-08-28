@@ -7,6 +7,8 @@ import {InfiniteScroll} from '../containers/Layout/InfiniteScroll';
 import {PrivateRouteWrapper} from './PrivateRouteWrapper';
 import {Bookmarks} from '../pages/Bookmarks/bookmarks';
 import {BookmarksPage} from '../pages/Bookmarks';
+import {ExplorePage} from '../pages/Explore';
+import {Explore} from '../pages/Explore/explore';
 
 function App() {
   return (
@@ -32,6 +34,19 @@ function App() {
             <Route path="your_tweets" element={<Bookmarks />} />
             <Route path="tweets" element={<Bookmarks />} />
             <Route path="likes" element={<Bookmarks />} />
+          </Route>
+
+          <Route
+            path="/explore"
+            element={
+              <PrivateRouteWrapper>
+                <ExplorePage />
+              </PrivateRouteWrapper>
+            }>
+            <Route path="top" element={<Explore />} />
+            <Route path="latest" element={<Explore />} />
+            <Route path="people" element={<Explore />} />
+            <Route path="media" element={<Explore />} />
           </Route>
 
           <Route exact path="/signup" element={<SignUp />} />

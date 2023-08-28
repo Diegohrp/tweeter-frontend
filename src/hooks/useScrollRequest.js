@@ -2,7 +2,14 @@ import React from 'react';
 import {useRequest} from './useRequest';
 import {useDispatch} from 'react-redux';
 
-function useScrollRequest(getDataService, page, setDataAction, limit, offset) {
+function useScrollRequest(
+  getDataService,
+  page,
+  setDataAction,
+  limit,
+  offset,
+  filter
+) {
   const [endScroll, setEndScroll] = React.useState(false);
 
   const {
@@ -24,7 +31,7 @@ function useScrollRequest(getDataService, page, setDataAction, limit, offset) {
         !endScroll
       ) {
         setEndScroll(true);
-        await getDataReques(() => getDataService(limit, offset, page));
+        await getDataReques(() => getDataService(limit, offset, page, filter));
         setEndScroll(false);
       }
     }

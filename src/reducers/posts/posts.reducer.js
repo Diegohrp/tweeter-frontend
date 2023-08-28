@@ -14,6 +14,10 @@ const initialState = {
   'bookmarks/your_tweets': initialStatePosts,
   'bookmarks/tweets': initialStatePosts,
   'bookmarks/likes': initialStatePosts,
+  'explore/top': initialStatePosts,
+  'explore/latest': initialStatePosts,
+  'explore/people': initialStatePosts,
+  'explore/media': initialStatePosts,
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -47,6 +51,17 @@ const postsReducer = (state = initialState, action) => {
     //Cleans all data related to posts when the user logs out
     case postActionTypes.cleanPosts:
       return initialState;
+
+    case postActionTypes.cleanPostsFromPage:
+      return {
+        ...state,
+        [action.payload.page]: {
+          posts: action.payload.data,
+          limit: action.payload.limit,
+          offset: action.payload.offset,
+          scroll: 0,
+        },
+      };
 
     case postActionTypes.setPostInteraction:
       return addInteraction(state, action.payload);

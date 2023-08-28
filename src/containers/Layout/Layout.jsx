@@ -9,7 +9,7 @@ import {setScrollAction} from '../../actions/creators/posts.creators';
 
 const routes = [
   {to: '/home', Icon: MdHome, text: 'Home', privacy: 'P'},
-  {to: '/login', Icon: MdExplore, text: 'Explore', privacy: 'P'},
+  {to: '/explore', Icon: MdExplore, text: 'Explore', privacy: 'P'},
   {
     to: '/bookmarks',
     Icon: MdBookmark,

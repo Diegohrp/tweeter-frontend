@@ -31,7 +31,7 @@ function PostsList({requestFn}) {
 
   const makeFirstRequest = async () => {
     //It's the first time the componet renders, makes a request to get the posts.
-    if (!list && homePosts.length === 0) {
+    if (!list && !homePosts.length) {
       await getDataReques(() => requestFn(limit, offset, page));
     } else if (list && !homePosts.length) {
       dispatch(
@@ -43,13 +43,18 @@ function PostsList({requestFn}) {
           scroll: 0,
         })
       );
-      reset();
     }
   };
 
   React.useEffect(() => {
+    //When the user navigate to another page that belongs to the same branch
+    //cleans the previous data in the state from useRequest
+    reset();
+  }, [page]);
+
+  React.useEffect(() => {
     makeFirstRequest();
-  }, [list, page]);
+  }, [list]);
 
   return (
     <PostsListContainer>

@@ -10,6 +10,8 @@ import {Layout} from './Layout';
 const InfiniteScroll = ({children}) => {
   const location = useLocation();
   const currentPage = location.pathname.slice(1);
+  //the query parameter for the searchs in "explore"
+  const filter = location.search;
 
   //limit and offset from redux
   const limit = useSelector((state) => state.posts[currentPage]?.limit);
@@ -24,7 +26,8 @@ const InfiniteScroll = ({children}) => {
     currentPage,
     setPostsAction,
     limit,
-    offset
+    offset,
+    filter
   );
   //Updates the scroll position when the user changes of page
   React.useEffect(() => {

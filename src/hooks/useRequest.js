@@ -18,7 +18,9 @@ const initialState = {
 
 const reducerObj = (state, payload) => ({
   [actionTypes.onReset]: {
-    ...initialState,
+    loading: false,
+    error: null,
+    response: null,
   },
   [actionTypes.onLoading]: {
     ...state,
