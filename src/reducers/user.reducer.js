@@ -7,6 +7,8 @@ const initialState = {
   lastName: null,
   photo: null,
   isAuth: Cookies.get('token') ? true : false,
+
+  'explore/people': {users: [], limit: 10, offset: 0, scroll: 0},
 };
 
 const userReducer = (state = initialState, action) => {
@@ -17,6 +19,18 @@ const userReducer = (state = initialState, action) => {
       return {...state, isAuth: action.payload};
     case userActionTypes.logoutUser:
       return {...state, ...initialState, isAuth: false};
+
+    case userActionTypes.setExploredUsers:
+      return {
+        ...state,
+        'explore/people': {
+          users: [...state['explore/people'].users, ...action.payload.data],
+          limit: action.payload.limit,
+          offset: action.payload.offset,
+          scroll: action.payload.scroll,
+        },
+      };
+
     default:
       return state;
   }

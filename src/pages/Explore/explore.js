@@ -8,6 +8,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {cleanPostsFromPageAction} from '../../actions/creators/posts.creators';
 import {Loader} from '../../components/Request/Loading/Loading.styles';
+import {UsersList} from '../../containers/UsersList/UsersList';
 
 function Explore() {
   const [filter, setFilter] = React.useState('');
@@ -18,7 +19,9 @@ function Explore() {
 
   const page = location.pathname.slice(1);
 
-  const limit = useSelector((state) => state.posts[page].limit);
+  const limit = useSelector(
+    (state) => state.posts[page]?.limit || state.user[page]?.limit
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +54,11 @@ function Explore() {
         <GeneralButton type="submit">Search</GeneralButton>
       </SearchBar>
       {loading && <Loader />}
-      <PostsList requestFn={getPosts} />
+      {page === 'explore/people' ? (
+        <UsersList />
+      ) : (
+        <PostsList requestFn={getPosts} />
+      )}
     </>
   );
 }

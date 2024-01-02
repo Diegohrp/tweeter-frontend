@@ -17,4 +17,12 @@ async function getBasicUserInfo() {
   return data;
 }
 
-export {createAccount, login, getBasicUserInfo};
+async function getUsers(limit, offset, page, filter = '') {
+  const {data} = await axios.get(
+    endPoints.users.explore({limit, offset}),
+    headersJson
+  );
+  return data;
+}
+
+export {createAccount, login, getBasicUserInfo, getUsers};

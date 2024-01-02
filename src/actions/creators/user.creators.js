@@ -13,3 +13,8 @@ export const authUserAction = (payload) => ({
 export const logoutUserAction = () => ({
   type: userActionTypes.logoutUser,
 });
+
+export const setExploredUsersAction = (payload) => ({
+  type: userActionTypes.setExploredUsers,
+  payload,
+});

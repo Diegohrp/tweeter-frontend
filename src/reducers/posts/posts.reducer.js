@@ -16,7 +16,6 @@ const initialState = {
   'bookmarks/likes': initialStatePosts,
   'explore/top': initialStatePosts,
   'explore/latest': initialStatePosts,
-  'explore/people': initialStatePosts,
   'explore/media': initialStatePosts,
 };
 

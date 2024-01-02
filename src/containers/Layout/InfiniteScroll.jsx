@@ -6,6 +6,8 @@ import {useSelector} from 'react-redux';
 import {getPosts} from '../../services/post.service';
 import {setPostsAction} from '../../actions/creators/posts.creators';
 import {Layout} from './Layout';
+import {setExploredUsersAction} from '../../actions/creators/user.creators';
+import {getUsers} from '../../services/user.service';
 
 const InfiniteScroll = ({children}) => {
   const location = useLocation();
@@ -14,17 +16,28 @@ const InfiniteScroll = ({children}) => {
   const filter = location.search;
 
   //limit and offset from redux
-  const limit = useSelector((state) => state.posts[currentPage]?.limit);
-  const offset = useSelector((state) => state.posts[currentPage]?.offset);
+  const limit = useSelector(
+    (state) =>
+      /* state.posts[currentPage]?.limit || */ state.user[currentPage]?.limit
+  );
+  const offset = useSelector(
+    (state) =>
+      /* state.posts[currentPage]?.offset || */ state.user[currentPage]?.offset
+  );
+
+  console.log({currentPage, limit, offset});
   const scrollState =
-    useSelector((state) => state.posts[currentPage]?.scroll) || 0;
+    useSelector(
+      (state) =>
+        state.posts[currentPage]?.scroll || state.user[currentPage]?.scroll
+    ) || 0;
 
   const scrollRef = useRef(null);
 
   const {loading, onScroll} = useScrollRequest(
-    getPosts,
+    currentPage.includes('people') ? getUsers : getPosts,
     currentPage,
-    setPostsAction,
+    currentPage.includes('people') ? setExploredUsersAction : setPostsAction,
     limit,
     offset,
     filter
