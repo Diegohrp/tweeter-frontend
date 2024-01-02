@@ -3,9 +3,7 @@ import {PostsListContainer} from '../PostsList/PostsList.styles';
 import {textFont} from '../../styles/GlobalStyles';
 import {GeneralButton} from '../../styles/Generals/Button.styles';
 
-const Container = styled(PostsListContainer)`
-  align-items: center;
-`;
+const Container = styled(PostsListContainer)``;
 
 const List = styled.section`
   width: 100%;

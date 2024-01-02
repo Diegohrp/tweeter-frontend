@@ -19,7 +19,7 @@ async function getBasicUserInfo() {
 
 async function getUsers(limit, offset, page, filter = '') {
   const {data} = await axios.get(
-    endPoints.users.explore({limit, offset}),
+    endPoints.users.explore({limit, offset, filter}),
     headersJson
   );
   return data;

@@ -17,15 +17,13 @@ const InfiniteScroll = ({children}) => {
 
   //limit and offset from redux
   const limit = useSelector(
-    (state) =>
-      /* state.posts[currentPage]?.limit || */ state.user[currentPage]?.limit
+    (state) => state.posts[currentPage]?.limit || state.user[currentPage]?.limit
   );
   const offset = useSelector(
     (state) =>
-      /* state.posts[currentPage]?.offset || */ state.user[currentPage]?.offset
+      state.posts[currentPage]?.offset || state.user[currentPage]?.offset
   );
 
-  console.log({currentPage, limit, offset});
   const scrollState =
     useSelector(
       (state) =>

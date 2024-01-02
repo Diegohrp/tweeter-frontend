@@ -18,3 +18,8 @@ export const setExploredUsersAction = (payload) => ({
   type: userActionTypes.setExploredUsers,
   payload,
 });
+
+export const cleanUsersFromPage = (payload) => ({
+  type: userActionTypes.cleanUsersFromPage,
+  payload,
+});

@@ -5,8 +5,10 @@ const endPoints = {
   users: {
     signup: `${API}/${VERSION}/users/signup`,
     basicInfo: `${API}/${VERSION}/users/basic-info`,
-    explore: ({limit, offset}) =>
-      `${API}/${VERSION}/users/explore?limit=${limit}&offset=${offset}`,
+    explore: ({limit, offset, filter}) =>
+      `${API}/${VERSION}/users/explore${
+        filter ? filter + '&' : '?'
+      }limit=${limit}&offset=${offset}`,
   },
   auth: {
     login: `${API}/${VERSION}/auth/login`,

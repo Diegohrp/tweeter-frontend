@@ -31,6 +31,16 @@ const userReducer = (state = initialState, action) => {
         },
       };
 
+    case userActionTypes.cleanUsersFromPage:
+      return {
+        ...state,
+        'explore/people': {
+          users: action.payload.data,
+          limit: action.payload.limit,
+          offset: action.payload.offset,
+        },
+      };
+
     default:
       return state;
   }

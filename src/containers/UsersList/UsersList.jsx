@@ -26,7 +26,6 @@ const UsersList = () => {
     if (!usersList.length && !list) {
       await getDataReques(() => getUsers(limit, offset, ''));
     } else if (!usersList.length && list.length) {
-      console.log('Entró');
       dispatch(
         setExploredUsersAction({
           data: list,
@@ -40,8 +39,6 @@ const UsersList = () => {
   React.useEffect(() => {
     makeFirstRequest();
   }, [list]);
-
-  console.log(list);
 
   return (
     <Container>

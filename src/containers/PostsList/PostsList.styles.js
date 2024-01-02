@@ -5,7 +5,8 @@ const PostsListContainer = styled.section`
   width: 95%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
+  padding-bottom: 60px;
   @media (min-width: 700px) {
     width: 50%;
     grid-column: 2 / 3;

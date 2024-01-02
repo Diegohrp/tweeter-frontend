@@ -9,6 +9,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {cleanPostsFromPageAction} from '../../actions/creators/posts.creators';
 import {Loader} from '../../components/Request/Loading/Loading.styles';
 import {UsersList} from '../../containers/UsersList/UsersList';
+import {getUsers} from '../../services/user.service';
+import {cleanUsersFromPage} from '../../actions/creators/user.creators';
 
 function Explore() {
   const [filter, setFilter] = React.useState('');
@@ -25,11 +27,22 @@ function Explore() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (filter) {
-      navigate(`${location.pathname}?filter=${filter}`);
-      setLoading(true);
+    if (!filter) return;
+
+    navigate(`${location.pathname}?filter=${filter}`);
+    setLoading(true);
+
+    if (page.includes('people')) {
+      const data = await getUsers(limit, 0, page, `?filter=${filter}`);
+      dispatch(
+        cleanUsersFromPage({
+          data,
+          limit,
+          offset: 10,
+        })
+      );
+    } else {
       const data = await getPosts(limit, 0, page, `?filter=${filter}`);
-      setLoading(false);
       dispatch(
         cleanPostsFromPageAction({
           page,
@@ -39,6 +52,7 @@ function Explore() {
         })
       );
     }
+    setLoading(false);
   };
 
   return (
