@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const PostContainer = styled.section`
   width: 100%;
-  min-height: 155px;
   margin-bottom: 24px;
   padding-bottom: 15px;
   border-radius: 8px;

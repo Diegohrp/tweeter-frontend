@@ -68,13 +68,13 @@ const UsersList = () => {
                 </div>
                 <div>
                   <FollowButton type="button">
-                    {following && (
+                    {!following && (
                       <>
                         <IoMdPersonAdd />
                         Follow
                       </>
                     )}
-                    {!following && 'Following'}
+                    {following && 'Following'}
                   </FollowButton>
                 </div>
               </UserCard>
