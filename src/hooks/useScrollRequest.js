@@ -21,6 +21,8 @@ function useScrollRequest(
 
   //Make a request when the end of the scroll has been reached.
   const onScroll = async (e) => {
+    console.log('On scroll');
+    console.log({offset});
     //Prevents that a request is made when the user loads a new page and has scrolled in the previous page
     if (offset > 0) {
       //clientHeight: container height, what the user can see without scrolling

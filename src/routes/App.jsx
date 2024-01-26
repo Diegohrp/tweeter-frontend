@@ -9,6 +9,7 @@ import {Bookmarks} from '../pages/Bookmarks/bookmarks';
 import {BookmarksPage} from '../pages/Bookmarks';
 import {ExplorePage} from '../pages/Explore';
 import {Explore} from '../pages/Explore/explore';
+import {Profile} from '../pages/Profile';
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/hashtags/:hash" element={<h2>HASHTAGS</h2>} />
+
+          <Route exact path="/profile" element={<Profile />} />
+
           <Route path="*" element={<h2>Not found</h2>} />
         </Routes>
       </InfiniteScroll>

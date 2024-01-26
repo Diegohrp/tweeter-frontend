@@ -4,8 +4,8 @@ import {useRequest} from '../../hooks/useRequest';
 import {getUsers} from '../../services/user.service';
 import {useSelector, useDispatch} from 'react-redux';
 import {SmallProfileImg} from '../../components/common/SmallProfileImg/SmallProfileImg';
-import {IoMdPersonAdd} from 'react-icons/io';
-import {Container, List, UserCard, FollowButton} from './UsersList.styles';
+import {Container, List, UserCard} from './UsersList.styles';
+import {FollowButton} from '../../components/FollowButton/FollowButton';
 import {Loading} from '../../components/Request/Loading/Loading';
 
 const UsersList = () => {
@@ -67,15 +67,7 @@ const UsersList = () => {
                   </div>
                 </div>
                 <div>
-                  <FollowButton type="button">
-                    {!following && (
-                      <>
-                        <IoMdPersonAdd />
-                        Follow
-                      </>
-                    )}
-                    {following && 'Following'}
-                  </FollowButton>
+                  <FollowButton following={following} />
                 </div>
               </UserCard>
             )

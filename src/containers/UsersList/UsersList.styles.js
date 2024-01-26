@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import {PostsListContainer} from '../PostsList/PostsList.styles';
 import {textFont} from '../../styles/GlobalStyles';
-import {GeneralButton} from '../../styles/Generals/Button.styles';
 
 const Container = styled(PostsListContainer)``;
 
@@ -41,15 +40,4 @@ const UserCard = styled.article`
   }
 `;
 
-const FollowButton = styled(GeneralButton)`
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  svg {
-    font-size: 1.5rem;
-    margin-right: 5px;
-  }
-`;
-
-export {Container, List, UserCard, FollowButton};
+export {Container, List, UserCard};

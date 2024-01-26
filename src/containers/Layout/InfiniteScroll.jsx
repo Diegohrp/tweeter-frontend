@@ -33,9 +33,9 @@ const InfiniteScroll = ({children}) => {
   const scrollRef = useRef(null);
 
   const {loading, onScroll} = useScrollRequest(
-    currentPage.includes('people') ? getUsers : getPosts,
+    !currentPage.includes('people') ? getPosts : getUsers,
     currentPage,
-    currentPage.includes('people') ? setExploredUsersAction : setPostsAction,
+    !currentPage.includes('people') ? setPostsAction : setExploredUsersAction,
     limit,
     offset,
     filter
