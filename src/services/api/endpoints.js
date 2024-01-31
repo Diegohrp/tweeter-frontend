@@ -9,6 +9,7 @@ const endPoints = {
       `${API}/${VERSION}/users/explore${
         filter ? filter + '&' : '?'
       }limit=${limit}&offset=${offset}`,
+    profile: ({profileId}) => `${API}/${VERSION}/users/profile/${profileId}`,
   },
   auth: {
     login: `${API}/${VERSION}/auth/login`,
