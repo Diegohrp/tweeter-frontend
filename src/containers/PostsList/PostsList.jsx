@@ -8,12 +8,17 @@ import {Loading} from '@components/Request/Loading/Loading';
 import {formatPostDate} from '../../utils/formatDate';
 import {useLocation} from 'react-router-dom';
 
-function PostsList({requestFn}) {
+function PostsList({requestFn, className = ''}) {
   const location = useLocation();
   //removes the "/" from the pathname of the current location
   //page is part of a backend endpoint route
   //page is also used as a key for redux states
-  const page = location.pathname.slice(1);
+  let page = location.pathname.slice(1);
+  const route = page;
+
+  if (page.includes('profile')) {
+    page = page.slice(0, page.lastIndexOf('/'));
+  }
 
   //Global state from redux and dispatcher
   const offset = useSelector((state) => state.posts[page].offset);
@@ -32,7 +37,7 @@ function PostsList({requestFn}) {
   const makeFirstRequest = async () => {
     //It's the first time the componet renders, makes a request to get the posts.
     if (!list && !homePosts.length) {
-      await getDataReques(() => requestFn(limit, offset, page));
+      await getDataReques(() => requestFn(limit, offset, route));
     } else if (list && !homePosts.length) {
       dispatch(
         setPostsAction({
@@ -57,7 +62,7 @@ function PostsList({requestFn}) {
   }, [list]);
 
   return (
-    <PostsListContainer>
+    <PostsListContainer className={className}>
       {loading && <Loading />}
       {!loading &&
         homePosts.map((post, index) => (

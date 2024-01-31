@@ -8,7 +8,8 @@ function useScrollRequest(
   setDataAction,
   limit,
   offset,
-  filter
+  filter,
+  profileId
 ) {
   const [endScroll, setEndScroll] = React.useState(false);
 
@@ -21,8 +22,6 @@ function useScrollRequest(
 
   //Make a request when the end of the scroll has been reached.
   const onScroll = async (e) => {
-    console.log('On scroll');
-    console.log({offset});
     //Prevents that a request is made when the user loads a new page and has scrolled in the previous page
     if (offset > 0) {
       //clientHeight: container height, what the user can see without scrolling
@@ -33,7 +32,8 @@ function useScrollRequest(
         !endScroll
       ) {
         setEndScroll(true);
-        await getDataReques(() => getDataService(limit, offset, page, filter));
+        const route = profileId ? `${page}/${profileId}` : page;
+        await getDataReques(() => getDataService(limit, offset, route, filter));
         setEndScroll(false);
       }
     }

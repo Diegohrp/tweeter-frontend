@@ -3,14 +3,52 @@ import {titleFont} from '../../styles/GlobalStyles';
 
 const Main = styled.main`
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  height: calc(100vh - 68.3px - 68.3px);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 300px 1fr 300px;
+  gap: 20px;
+
+  aside {
+    margin-top: 230px;
+  }
+
+  section:last-child {
+    grid-row: 3;
+  }
+
+  @media (min-width: 700px) {
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 400px 2fr;
+    height: calc(100vh);
+
+    align-items: flex-start;
+    section:first-child {
+      grid-column: 1 / 3;
+    }
+    aside {
+      grid-row: 2 / 4;
+      height: 100%;
+      margin-top: 0px;
+      position: relative;
+
+      nav {
+        position: absolute;
+        top: 20px;
+        left: 21%;
+      }
+    }
+    .list {
+      width: 87%;
+      align-items: center;
+    }
+  }
 `;
 
-const ProfileContainer = styled.section`
+const ProfileCover = styled.section`
   width: 100%;
   position: relative;
+  grid-row: 1;
 `;
 const CoverImg = styled.figure`
   width: 100%;
@@ -23,7 +61,7 @@ const CoverImg = styled.figure`
 `;
 
 const ProfileCard = styled.article`
-  width: 80%;
+  width: 95%;
   min-height: 247px;
   display: flex;
   flex-direction: column;
@@ -35,22 +73,19 @@ const ProfileCard = styled.article`
   background-color: ${(props) => props.theme.cards};
   position: absolute;
   bottom: -225px;
-  left: 10%;
+  left: 2.5%;
   z-index: 2;
-  @media (min-width: 900px) {
+  @media (min-width: 700px) {
     display: grid;
     grid-template-columns: 175px 4fr 0.5fr;
-    width: 80%;
+    width: 90%;
+    left: 5%;
     min-height: 163px;
     bottom: -125px;
     flex-direction: row;
     justify-items: flex-end;
     align-items: flex-start;
     padding-top: 20px;
-  }
-  @media (min-width: 1100px) {
-    width: 68%;
-    left: 16%;
   }
 
   figure {
@@ -67,7 +102,7 @@ const ProfileCard = styled.article`
       height: 100%;
       border-radius: 8px;
     }
-    @media (min-width: 900px) {
+    @media (min-width: 700px) {
       left: 15px;
       top: -60px;
     }
@@ -114,7 +149,7 @@ const ProfileCard = styled.article`
         max-height: 96px;
       }
     }
-    @media (min-width: 900px) {
+    @media (min-width: 700px) {
       grid-column: 2;
       justify-self: start;
       text-align: left;
@@ -136,4 +171,4 @@ const ProfileCard = styled.article`
   }
 `;
 
-export {CoverImg, Main, ProfileCard, ProfileContainer};
+export {CoverImg, Main, ProfileCard, ProfileCover};

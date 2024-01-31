@@ -9,7 +9,8 @@ import {Bookmarks} from '../pages/Bookmarks/bookmarks';
 import {BookmarksPage} from '../pages/Bookmarks';
 import {ExplorePage} from '../pages/Explore';
 import {Explore} from '../pages/Explore/explore';
-import {Profile} from '../pages/Profile';
+import {ProfilePage} from '../pages/Profile';
+import {Profile} from '../pages/Profile/profile';
 
 function App() {
   return (
@@ -54,7 +55,12 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/hashtags/:hash" element={<h2>HASHTAGS</h2>} />
 
-          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/profile" element={<ProfilePage />}>
+            <Route path="tweets/:userId" element={<Profile />} />
+            <Route path="retweets/:userId" element={<Profile />} />
+            <Route path="media/:userId" element={<Profile />} />
+            <Route path="likes/:userId" element={<Profile />} />
+          </Route>
 
           <Route path="*" element={<h2>Not found</h2>} />
         </Routes>

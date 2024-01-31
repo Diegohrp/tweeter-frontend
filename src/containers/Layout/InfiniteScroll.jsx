@@ -11,7 +11,13 @@ import {getUsers} from '../../services/user.service';
 
 const InfiniteScroll = ({children}) => {
   const location = useLocation();
-  const currentPage = location.pathname.slice(1);
+  let currentPage = location.pathname.slice(1);
+  let profileId = 0;
+
+  if (currentPage.includes('profile')) {
+    profileId = currentPage.slice(currentPage.lastIndexOf('/') + 1);
+    currentPage = currentPage.slice(0, currentPage.lastIndexOf('/'));
+  }
   //the query parameter for the searchs in "explore"
   const filter = location.search;
 
@@ -38,7 +44,8 @@ const InfiniteScroll = ({children}) => {
     !currentPage.includes('people') ? setPostsAction : setExploredUsersAction,
     limit,
     offset,
-    filter
+    filter,
+    profileId
   );
   //Updates the scroll position when the user changes of page
   React.useEffect(() => {

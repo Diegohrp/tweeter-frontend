@@ -17,6 +17,10 @@ const initialState = {
   'explore/top': initialStatePosts,
   'explore/latest': initialStatePosts,
   'explore/media': initialStatePosts,
+  'profile/tweets': initialStatePosts,
+  'profile/retweets': initialStatePosts,
+  'profile/media': initialStatePosts,
+  'profile/likes': initialStatePosts,
 };
 
 const postsReducer = (state = initialState, action) => {
