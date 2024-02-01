@@ -7,9 +7,14 @@ import {getPosts} from '../../services/post.service';
 import {useLocation} from 'react-router-dom';
 import {getProfileInfo} from '../../services/user.service';
 import defaultImg from '../../assets/img/profile-default.svg';
+import {useDispatch} from 'react-redux';
+import {cleanPostsFromPageAction} from '../../actions/creators/posts.creators';
 
 const Profile = () => {
+  const dispatch = useDispatch();
+
   const location = useLocation();
+  const page = location.pathname.slice(1, location.pathname.lastIndexOf('/'));
   const profileId = location.pathname.split('/').at(-1);
   const [profile, setProfile] = React.useState(null);
 
@@ -37,7 +42,7 @@ const Profile = () => {
   };
   React.useEffect(() => {
     handleRequest();
-  }, []);
+  }, [profileId, page]);
 
   return (
     <>

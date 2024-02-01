@@ -11,11 +11,12 @@ import {
 //components
 import {SmallProfileImg} from '../../common/SmallProfileImg/SmallProfileImg';
 import {InteractionButton} from '../InteractionButton/InteractionButton';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 const PostCard = ({
   show,
   author,
+  authorId,
   userPhoto,
   date,
   textContent,
@@ -44,9 +45,11 @@ const PostCard = ({
   return (
     <Card>
       <Author>
-        {show && <SmallProfileImg image={userPhoto} />}
+        {show && <SmallProfileImg userId={authorId} image={userPhoto} />}
         <div>
-          <h2>{author}</h2>
+          <NavLink to={`/profile/tweets/${authorId}`}>
+            <h2>{author}</h2>
+          </NavLink>
           <span>{date}</span>
         </div>
       </Author>

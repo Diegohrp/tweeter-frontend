@@ -43,3 +43,8 @@ export const setScrollAction = (payload) => ({
   type: postActionTypes.setScroll,
   payload,
 });
+
+export const setFirstProfilePosts = (payload) => ({
+  type: postActionTypes.setFirstProfilePosts,
+  payload,
+});

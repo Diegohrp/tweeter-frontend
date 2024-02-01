@@ -55,7 +55,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/hashtags/:hash" element={<h2>HASHTAGS</h2>} />
 
-          <Route exact path="/profile" element={<ProfilePage />}>
+          <Route path="/profile" element={<ProfilePage />}>
             <Route path="tweets/:userId" element={<Profile />} />
             <Route path="retweets/:userId" element={<Profile />} />
             <Route path="media/:userId" element={<Profile />} />

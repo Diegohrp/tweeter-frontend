@@ -68,6 +68,7 @@ function useRequest(init = initialState) {
   };
 
   const reset = () => {
+    console.log('Reset por cambio de página');
     dispatch({type: actionTypes.onReset});
   };
 

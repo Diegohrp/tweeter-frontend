@@ -70,7 +70,7 @@ const Header = ({toggleMenu, routes, markLink, setScroll}) => {
           <img src={response?.photo || profileTemporal} alt="profile image" />
         </button>
 
-        <SmallProfileImg image={response?.photo} />
+        <SmallProfileImg userId={response?.id} image={response?.photo} />
         <p>{`${response?.name} ${response?.last_name}`}</p>
         <button className="desktop" onClick={toggleMenu}>
           <MdArrowDropDown />

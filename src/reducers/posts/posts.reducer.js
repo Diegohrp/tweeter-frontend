@@ -30,6 +30,16 @@ const postsReducer = (state = initialState, action) => {
     case postActionTypes.setPosts:
       return setNewPostsList(state, action.payload);
 
+    case postActionTypes.setFirstProfilePosts:
+      return {
+        ...state,
+        [action.payload.page]: {
+          posts: action.payload.data,
+          limit: action.payload.limit,
+          offset: action.payload.offset,
+        },
+      };
+
     //stores a new value of scrollTop for each page
     case postActionTypes.setScroll:
       return {

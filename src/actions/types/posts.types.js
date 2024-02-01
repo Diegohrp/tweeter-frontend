@@ -8,6 +8,7 @@ const postActionTypes = {
   setLikeComment: 'SET_LIKE_COMMENT',
   setScroll: 'SET_SCROLL',
   setPostInteraction: 'SET_INTERACTION',
+  setFirstProfilePosts: 'SET_FIRST_PROFILE_POSTS',
 };
 
 export {postActionTypes};

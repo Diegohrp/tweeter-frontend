@@ -3,10 +3,10 @@ import {SmallProfile} from './SmallProfileImg.styles';
 import profileImg from '@images/profile-default.svg';
 import {Link} from 'react-router-dom';
 
-function SmallProfileImg({image}) {
+function SmallProfileImg({image, userId}) {
   return (
     <SmallProfile>
-      <Link to="/login">
+      <Link to={`/profile/tweets/${userId}`}>
         <img src={image || profileImg} alt="user image" />
       </Link>
     </SmallProfile>

@@ -18,9 +18,12 @@ const Author = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 17.5px;
-    h2 {
-      font-size: 1.6rem;
-      color: ${(props) => props.theme.titlesColor};
+    a {
+      text-decoration: none;
+      h2 {
+        font-size: 1.6rem;
+        color: ${(props) => props.theme.titlesColor};
+      }
     }
     span {
       font-size: 1.2rem;

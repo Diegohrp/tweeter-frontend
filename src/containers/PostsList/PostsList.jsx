@@ -3,7 +3,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRequest} from '../../hooks/useRequest';
 import {PostsListContainer} from './PostsList.styles';
 import {Post} from '../Post/Post';
-import {setPostsAction} from '../../actions/creators/posts.creators';
+import {
+  setFirstProfilePosts,
+  setPostsAction,
+  cleanPostsFromPageAction,
+} from '../../actions/creators/posts.creators';
 import {Loading} from '@components/Request/Loading/Loading';
 import {formatPostDate} from '../../utils/formatDate';
 import {useLocation} from 'react-router-dom';
@@ -15,6 +19,8 @@ function PostsList({requestFn, className = ''}) {
   //page is also used as a key for redux states
   let page = location.pathname.slice(1);
   const route = page;
+
+  console.log(route);
 
   if (page.includes('profile')) {
     page = page.slice(0, page.lastIndexOf('/'));
@@ -33,6 +39,21 @@ function PostsList({requestFn, className = ''}) {
     reset,
     getDataReques,
   } = useRequest();
+
+  const makeFirstRequestProfile = async () => {
+    if (!list) {
+      await getDataReques(() => requestFn(limit, 0, route));
+    } else {
+      dispatch(
+        setFirstProfilePosts({
+          data: list,
+          page,
+          limit,
+          offset: limit,
+        })
+      );
+    }
+  };
 
   const makeFirstRequest = async () => {
     //It's the first time the componet renders, makes a request to get the posts.
@@ -58,7 +79,11 @@ function PostsList({requestFn, className = ''}) {
   }, [page]);
 
   React.useEffect(() => {
-    makeFirstRequest();
+    if (page.includes('profile')) {
+      makeFirstRequestProfile();
+    } else {
+      makeFirstRequest();
+    }
   }, [list]);
 
   return (
