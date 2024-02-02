@@ -42,7 +42,7 @@ const Profile = () => {
   };
   React.useEffect(() => {
     handleRequest();
-  }, [profileId, page, following]);
+  }, [profileId, page]);
 
   return (
     <>
@@ -53,7 +53,11 @@ const Profile = () => {
           </CoverImg>
           <ProfileCard>
             <figure>
-              <img src={profile.photo || defaultImg} alt="Profile image" />
+              <img
+                src={profile.photo || defaultImg}
+                alt="Profile image"
+                title={profile.username}
+              />
             </figure>
 
             <section>

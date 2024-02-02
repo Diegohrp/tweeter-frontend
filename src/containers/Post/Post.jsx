@@ -92,7 +92,7 @@ function Post(props) {
     <>
       {props.whoRetweeted && props.whoRetweetedId != 0 && (
         <Retweeted>
-          <Link to="">
+          <Link to={`/profile/tweets/${props.whoRetweetedId}`}>
             <MdOutlineCached />
             {`${
               props.whoRetweetedId === userId ? 'You' : props.whoRetweeted

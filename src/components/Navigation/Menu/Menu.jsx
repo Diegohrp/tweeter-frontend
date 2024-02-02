@@ -27,12 +27,12 @@ function Menu() {
     <MenuContainer>
       <ul>
         <li>
-          <Link to="/login">
+          <Link to="/home">
             <IoPersonCircleSharp /> My Profile
           </Link>
         </li>
         <li>
-          <Link to="/login">
+          <Link to="/home">
             <MdGroup /> My Followers
           </Link>
         </li>

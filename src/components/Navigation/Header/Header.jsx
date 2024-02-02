@@ -48,10 +48,12 @@ const Header = ({toggleMenu, routes, markLink, setScroll}) => {
 
   return (
     <StyledHeader>
-      <picture>
-        <source media="(min-width:900px)" srcSet={logoDesktopImg} />
-        <img alt="brand logo" src={logoMobileImg} />
-      </picture>
+      <NavLink to="/home">
+        <picture>
+          <source media="(min-width:900px)" srcSet={logoDesktopImg} />
+          <img alt="brand logo" src={logoMobileImg} />
+        </picture>
+      </NavLink>
 
       <nav>
         <ul>
