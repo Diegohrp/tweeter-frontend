@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 import {setExploredUsersAction} from '../../actions/creators/user.creators';
 import {useRequest} from '../../hooks/useRequest';
 import {getUsers} from '../../services/user.service';
@@ -57,9 +58,11 @@ const UsersList = () => {
             }) => (
               <UserCard key={id}>
                 <div>
-                  <SmallProfileImg image={photo} />
+                  <SmallProfileImg image={photo} userId={id} />
                   <div>
-                    <p>{username}</p>
+                    <NavLink to={`/profile/tweets/${id}`}>
+                      <p>{username}</p>
+                    </NavLink>
                     <p>
                       {name} {last_name}
                     </p>

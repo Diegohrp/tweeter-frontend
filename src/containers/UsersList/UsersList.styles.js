@@ -26,6 +26,9 @@ const UserCard = styled.article`
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      a {
+        text-decoration: none;
+      }
       p {
         font-size: 1.2rem;
         font-family: ${textFont};
