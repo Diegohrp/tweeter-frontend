@@ -41,6 +41,28 @@ const userReducer = (state = initialState, action) => {
         },
       };
 
+    case userActionTypes.updateFollow:
+      const usersList = [...state['explore/people'].users];
+      const index = usersList.findIndex(
+        (item) => item.id === action.payload.followingId
+      );
+
+      if (index !== -1) {
+        usersList[index] = {
+          ...usersList[index],
+          following: action.payload.following,
+          num_followers:
+            usersList[index].num_followers + action.payload.numFollowers,
+        };
+
+        return {
+          ...state,
+          'explore/people': {...state['explore/people'], users: [...usersList]},
+        };
+      }
+
+      return state;
+
     default:
       return state;
   }

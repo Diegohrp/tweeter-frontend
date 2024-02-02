@@ -4,6 +4,7 @@ const userActionTypes = {
   logoutUser: 'LOGOUT',
   setExploredUsers: 'SET_EXPLORED_USERS',
   cleanUsersFromPage: 'CLEAN_USERS_FROM_PAGE',
+  updateFollow: 'UPDATE_FOLLOW',
 };
 
 export {userActionTypes};

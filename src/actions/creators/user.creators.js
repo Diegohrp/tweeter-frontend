@@ -23,3 +23,8 @@ export const cleanUsersFromPage = (payload) => ({
   type: userActionTypes.cleanUsersFromPage,
   payload,
 });
+
+export const updateFollowAction = (payload) => ({
+  type: userActionTypes.updateFollow,
+  payload,
+});

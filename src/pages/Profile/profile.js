@@ -7,16 +7,14 @@ import {getPosts} from '../../services/post.service';
 import {useLocation} from 'react-router-dom';
 import {getProfileInfo} from '../../services/user.service';
 import defaultImg from '../../assets/img/profile-default.svg';
-import {useDispatch} from 'react-redux';
-import {cleanPostsFromPageAction} from '../../actions/creators/posts.creators';
-
+import {useSelector} from 'react-redux';
 const Profile = () => {
-  const dispatch = useDispatch();
-
+  const currentUserId = useSelector((state) => state.user.userId);
   const location = useLocation();
   const page = location.pathname.slice(1, location.pathname.lastIndexOf('/'));
   const profileId = location.pathname.split('/').at(-1);
   const [profile, setProfile] = React.useState(null);
+  const [following, setFollowing] = React.useState(false);
 
   const profilePages = [
     {
@@ -39,10 +37,11 @@ const Profile = () => {
   const handleRequest = async () => {
     const data = await getProfileInfo({profileId});
     setProfile(data);
+    setFollowing(data.following);
   };
   React.useEffect(() => {
     handleRequest();
-  }, [profileId, page]);
+  }, [profileId, page, following]);
 
   return (
     <>
@@ -75,10 +74,14 @@ const Profile = () => {
               </main>
             </section>
 
-            <FollowButton
-              following={profile.following}
-              style={{height: '40px', width: '100px'}}
-            />
+            {currentUserId !== profile.id && (
+              <FollowButton
+                followingId={profile.id}
+                following={following}
+                setFollowing={setFollowing}
+                style={{height: '40px', width: '100px'}}
+              />
+            )}
           </ProfileCard>
         </ProfileCover>
       )}

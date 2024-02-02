@@ -33,4 +33,15 @@ async function getUsers(limit, offset, page, filter = '') {
   return data;
 }
 
-export {createAccount, login, getBasicUserInfo, getUsers, getProfileInfo};
+async function followUser({followingId}) {
+  await axios.post(endPoints.users.follow, {followingId}, headersJson);
+}
+
+export {
+  createAccount,
+  login,
+  getBasicUserInfo,
+  getUsers,
+  getProfileInfo,
+  followUser,
+};

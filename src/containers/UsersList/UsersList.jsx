@@ -67,7 +67,7 @@ const UsersList = () => {
                   </div>
                 </div>
                 <div>
-                  <FollowButton following={following} />
+                  <FollowButton followingId={id} following={following} />
                 </div>
               </UserCard>
             )

@@ -20,8 +20,6 @@ function PostsList({requestFn, className = ''}) {
   let page = location.pathname.slice(1);
   const route = page;
 
-  console.log(route);
-
   if (page.includes('profile')) {
     page = page.slice(0, page.lastIndexOf('/'));
   }
