@@ -7,6 +7,7 @@ import {getPosts} from '../../services/post.service';
 import {useLocation} from 'react-router-dom';
 import {getProfileInfo} from '../../services/user.service';
 import defaultImg from '../../assets/img/profile-default.svg';
+import coverImg from '../../assets/img/cover-img.jpg';
 import {useSelector} from 'react-redux';
 const Profile = () => {
   const currentUserId = useSelector((state) => state.user.userId);
@@ -48,11 +49,7 @@ const Profile = () => {
       {profile && (
         <ProfileCover>
           <CoverImg>
-            <img
-              src="https://images.unsplash.com/photo-1682686579688-c2ba945eda0e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Cover image"
-              title="Cover image"
-            />
+            <img src={coverImg} alt="Cover image" title="Cover image" />
           </CoverImg>
           <ProfileCard>
             <figure>
