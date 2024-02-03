@@ -161,7 +161,7 @@ function MakePost() {
           <h2>Tweet something</h2>
         </div>
         <div className="post-content">
-          <SmallProfileImg image={userPhoto} />
+          <SmallProfileImg image={userPhoto} userId={userId} />
           <PostTextContent>
             <span
               id="post-input-placeholder"
