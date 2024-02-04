@@ -48,6 +48,23 @@ const MenuContainer = styled.article`
         background-color: ${(props) => props.theme.background};
       }
     }
+    li:last-child {
+      display: flex;
+      justify-content: center;
+      a {
+        p {
+          margin-right: 5px;
+          &::after {
+            content: '@Diegohrp';
+            color: ${(props) => props.theme.brandColor};
+          }
+        }
+      }
+
+      @media (min-width: 700px) {
+        display: none;
+      }
+    }
     span {
       width: 100%;
       height: 1px;

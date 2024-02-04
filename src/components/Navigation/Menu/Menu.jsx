@@ -42,6 +42,11 @@ function Menu() {
             <MdLogout /> Logout
           </button>
         </li>
+        <li>
+          <a target="blank" href="https://www.linkedin.com/in/diego-hp/">
+            <p>Developed by </p>
+          </a>
+        </li>
       </ul>
     </MenuContainer>
   );

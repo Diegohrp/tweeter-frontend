@@ -6,6 +6,7 @@ import {MobileNavBar} from '@components/Navigation/MobileNavBar/MobileNavBar';
 import {MdHome, MdExplore, MdBookmark} from 'react-icons/md';
 import {useTheme} from 'styled-components';
 import {setScrollAction} from '../../actions/creators/posts.creators';
+import {Footer} from '../../components/Footer/Footer';
 
 const routes = [
   {to: '/home', Icon: MdHome, text: 'Home', privacy: 'P'},
@@ -61,6 +62,7 @@ function Layout({children, scrollRef, currentPage}) {
           markLink={markLink}
           setScroll={saveLastScroll}
         />
+        <Footer />
       </>
     );
   }
