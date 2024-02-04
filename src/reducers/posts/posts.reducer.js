@@ -7,7 +7,7 @@ import {
   addInteraction,
 } from './cases';
 
-const initialStatePosts = {posts: [], limit: 4, offset: 0, scroll: 0};
+const initialStatePosts = {posts: [], limit: 15, offset: 0, scroll: 0};
 
 const initialState = {
   home: initialStatePosts,
