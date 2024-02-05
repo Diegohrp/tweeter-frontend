@@ -23,7 +23,7 @@ It's designed to emulate some of Twitter's core functionalities, offering a dyna
 
 ## Demo
 
-The application is deployed on Netlify.
+The application is deployed on [Netlify](tubular-syrniki-a4621a.netlify.app/home)
 
 **User Account Management**
 - Create a new account and log in.
